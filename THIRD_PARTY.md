@@ -19,6 +19,14 @@ repository. Those inputs and generated firmware remain outside the public tree.
   `libsel`; fetched at the pinned revision, not bundled.
 * GNU binutils: GPL-3.0-or-later and component notices; fetched from GNU and
   verified by archive hash, not bundled.
+* [naturarum/dn2-cfw](https://github.com/naturarum/dn2-cfw): GPL-2.0-or-later.
+  The experimental source-store audit adapts its store-tracing method; recovery
+  check categories also credit its brick-check research. Notices, pinned source
+  revision and GPL text are retained under `research/audits`.
+* [complex-ping/digitone-2-modding-skill](https://github.com/complex-ping/digitone-2-modding-skill):
+  MIT, copyright 2026 Julian Kominiak. Its SHARC-rule research informed the
+  experimental instruction checker; the pinned revision and full MIT notice
+  remain in `research/audits/dn2_sharc_rules.py`.
 
 Exact revisions and provenance manifests are under `port/tools`. Compatibility
 addresses, hashes and instruction-boundary metadata accompany extraction

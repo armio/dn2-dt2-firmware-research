@@ -1,0 +1,116 @@
+{
+  "native_allocator_config_address": "0x4029EB9C",
+  "reset_stack_top": "0x48000000",
+  "heap_regions": [
+    {
+      "start": "0x4464abf0",
+      "end": "0x4664abf0"
+    },
+    {
+      "start": "0x445a1e40",
+      "end": "0x445e1e40"
+    },
+    {
+      "start": "0x4664abf0",
+      "end": "0x4664ac48"
+    }
+  ],
+  "task_stacks": [
+    {
+      "start": "0x4058bf38",
+      "end": "0x4058cf38",
+      "argument_bytes_address": "0x40001130",
+      "call": "0x40001148"
+    },
+    {
+      "start": "0x4058d658",
+      "end": "0x4058de58",
+      "argument_bytes_address": "0x40002c0a",
+      "call": "0x40002c22"
+    },
+    {
+      "start": "0x4059da34",
+      "end": "0x405c5a34",
+      "argument_bytes_address": "0x4002e8e8",
+      "call": "0x4002e902"
+    },
+    {
+      "start": "0x40385e9c",
+      "end": "0x40389e9c",
+      "argument_bytes_address": "0x400cea86",
+      "call": "0x400cea9e"
+    },
+    {
+      "start": "0x4243c954",
+      "end": "0x42440954",
+      "argument_bytes_address": "0x400cebb4",
+      "call": "0x400cebcc"
+    },
+    {
+      "start": "0x42438900",
+      "end": "0x4243c900",
+      "argument_bytes_address": "0x400cf0f2",
+      "call": "0x400cf108"
+    },
+    {
+      "start": "0x42c41624",
+      "end": "0x42c45624",
+      "argument_bytes_address": "0x400d37fa",
+      "call": "0x400d3812"
+    },
+    {
+      "start": "0x445e67b8",
+      "end": "0x445ee7b8",
+      "argument_bytes_address": "0x40122116",
+      "call": "0x40122130"
+    },
+    {
+      "start": "0x445ef474",
+      "end": "0x445f7474",
+      "argument_bytes_address": "0x40122516",
+      "call": "0x40122530"
+    },
+    {
+      "start": "0x44617484",
+      "end": "0x4461b484",
+      "argument_bytes_address": "0x4012b87a",
+      "call": "0x4012b892"
+    },
+    {
+      "start": "0x4461ebc8",
+      "end": "0x44622bc8",
+      "argument_bytes_address": "0x40131986",
+      "call": "0x4013199e"
+    },
+    {
+      "start": "0x44635a68",
+      "end": "0x4463da68",
+      "argument_bytes_address": "0x40133306",
+      "call": "0x40133320"
+    },
+    {
+      "start": "0x4462ca68",
+      "end": "0x44634a68",
+      "argument_bytes_address": "0x4013338e",
+      "call": "0x401333a8"
+    },
+    {
+      "start": "0x44623a68",
+      "end": "0x4462ba68",
+      "argument_bytes_address": "0x40133422",
+      "call": "0x4013343c"
+    },
+    {
+      "start": "0x42c69224",
+      "end": "0x42c6d224",
+      "argument_bytes_address": "0x400f25fa",
+      "call": "0x400f2614"
+    },
+    {
+      "start": "0x42c6d278",
+      "end": "0x42c71278",
+      "argument_bytes_address": "0x400f2712",
+      "call": "0x400f272c"
+    }
+  ]
+}

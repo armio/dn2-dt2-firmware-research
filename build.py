@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce exact T1E2 locally; never connect to or flash a device."""
+"""Reproduce T1E2 (stable) or R003 (experimental) locally; never flash a device."""
 import argparse
 import hashlib
 import json
@@ -16,7 +16,8 @@ ROOT = Path(__file__).resolve().parent
 
 def build(args):
     private = inputs(args.dn2, args.dt2, args.sample_bank)
-    release = json.loads((ROOT/'releases/t1e2.json').read_text())
+    stable = json.loads((ROOT/'releases/t1e2.json').read_text())
+    release = json.loads((ROOT/'releases'/f'{args.target.lower()}.json').read_text())
     paths = json.loads(args.toolchain.read_text())
     if 'binutils_prefix' not in paths:
         raise ValueError('Missing binutils_prefix; rerun port/tools/bootstrap.py')
@@ -34,7 +35,7 @@ def build(args):
             raise ValueError('--work must be outside the source repository')
         work.mkdir(parents=True, exist_ok=False)
     else:
-        work = Path(tempfile.mkdtemp(prefix='dn2-t1e2-'))
+        work = Path(tempfile.mkdtemp(prefix=f'dn2-{args.target.lower()}-'))
     print(f'Private build directory: {work}', flush=True)
     dnfw = ROOT/'port/tools/dnfw/src'
 
@@ -75,22 +76,32 @@ def build(args):
         '--digikit', paths['digikit'], '--binutils-prefix', paths['binutils_prefix'])
     main = work/'main/result/main-os.bin'
     dsp = work/'dsp/section_7.bin'
+    for path, expected in ((main, stable['outputs']['main_sha256']),
+                           (dsp, stable['outputs']['dsp_sha256'])):
+        if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+            raise ValueError(f'Stable section hash mismatch: {path}')
+    if args.target == 'R003':
+        run('06-Experimental-Recorder rebuilding', 'port/recorder/build.py',
+            '--stable-work', work, '--work', work/'recorder',
+            '--toolchain', args.toolchain.resolve())
+        main = work/'recorder/main/main-os.bin'
+        dsp = work/'recorder/dsp/section_7.bin'
     for path, expected in ((main, release['outputs']['main_sha256']),
                            (dsp, release['outputs']['dsp_sha256'])):
         if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
-            raise ValueError(f'Final section hash mismatch: {path}')
-    result = work/'T1E2.syx'
-    print('06-Packaging exact T1E2', flush=True)
-    with (work/'06-packaging.log').open('w') as log:
+            raise ValueError(f'{args.target} final section hash mismatch: {path}')
+    result = work/f'{args.target}.syx'
+    print(f'Packaging exact {args.target}', flush=True)
+    with (work/'packaging.log').open('w') as log:
         subprocess.run([paths['container_tool'], '-i', str(private['dn2']),
                         '-c', '3', str(main), '-c', '7', str(dsp), '-o', str(result)],
                        stdout=log, stderr=subprocess.STDOUT, check=True)
     verify(result, {'bytes': release['outputs']['sysex_bytes'],
-                    'sha256': release['outputs']['sysex_sha256']}, 'T1E2 output')
+                    'sha256': release['outputs']['sysex_sha256']}, f'{args.target} output')
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open('xb') as target, result.open('rb') as source:
         shutil.copyfileobj(source, target)
-    print(f'Exact T1E2 verified: {out}')
+    print(f'Exact {args.target} verified: {out}')
     print(f'SHA-256: {release["outputs"]["sysex_sha256"]}')
     print(f'Private intermediate files and logs retained at {work}')
 
@@ -99,6 +110,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('dn2', 'dt2', 'sample-bank', 'out'):
         parser.add_argument('--'+name, type=Path, required=True)
+    parser.add_argument('--target', choices=('T1E2', 'R003'), default='T1E2',
+                        help='T1E2 remains the stable default; R003 adds experimental Recorder support')
     parser.add_argument('--toolchain', type=Path, default=ROOT/'.toolchain/paths.json')
     parser.add_argument('--work', type=Path, help='Fresh directory outside the source tree; default: system temporary directory')
     args = parser.parse_args()

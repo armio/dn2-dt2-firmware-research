@@ -1,12 +1,17 @@
 # Source-only publication
 
-This repository is intended to reproduce T1E2 from three privately supplied
-inputs identified in `releases/t1e2.json`. It does not distribute those inputs
+This repository reproduces stable T1E2 and experimental R003 from three privately
+supplied inputs identified in their `releases/` manifests. It does not distribute those inputs
 or any generated firmware. The original sample bank is required for exact
 reproduction; arbitrary replacement audio will not match the release hash.
 That bank is a private project test asset, not Digitakt II factory content or
 an export obtainable from a Digitakt II. See [sample loading](samples.md) for
 the separate workflow of importing playable samples after installation.
+
+Experimental recipes and research checks do not promote a build to stable.
+Publish validation summaries with their limits, not private hardware captures
+or generated receipts. R003 hardware trim comparison and endurance remain
+pending; T1E2 retains its stable designation.
 
 Publish original build/adaptor source, extraction and relocation recipes,
 factual address metadata, dependency pins, synthetic tests and research notes.

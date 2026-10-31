@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate private T1E2 build inputs without modifying or copying them."""
+"""Validate shared private T1E2/R003 inputs without modifying or copying them."""
 import argparse
 import hashlib
 import json

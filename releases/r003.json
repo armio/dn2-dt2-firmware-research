@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "build": "R003",
+  "status": "experimental",
+  "date": "2026-10-31",
+  "stable_baseline": "T1E2",
+  "inputs": {
+    "dn2": {
+      "description": "Official Digitone II OS 1.11 SysEx",
+      "bytes": 2389280,
+      "sha256": "2af43e65e3d8390b41c9f66222620f8cce027d73ed87db00c80b440f628472e0"
+    },
+    "dt2": {
+      "description": "Official Digitakt II OS 1.16 SysEx",
+      "bytes": 1880864,
+      "sha256": "278541e466edcd77d6b3e018a91fb90185932d3c7de224dd3e68294dddf3a9ec"
+    },
+    "sample_bank": {
+      "description": "Original private project test bank with three sample slots; not Digitakt II factory content; not distributed",
+      "bytes": 47104,
+      "sha256": "bef6175add1febd8dbfed8a01a387e2e94f794144bc4f5db298a3f9c0c438b0e"
+    }
+  },
+  "outputs": {
+    "main_sha256": "d40f7aedf48ecd31de0fdb179dc73184fc2a3c0641242d4976a37a94dbe7ff67",
+    "expanded_main_sha256": "361a78f26ed4bc1fc688ca6d0b0ef489282f6b92a96ad3c029b0dfbb33e9b57b",
+    "dsp_sha256": "c03f91a0ebda33b22a2c71432ccba4069d9155523d7ebe1751b0bfc4fedfcda8",
+    "sysex_sha256": "eb3030563bb863df771980cbba46f981511935ccf5e89fb2ae668ff90edbd169",
+    "sysex_bytes": 2585376
+  },
+  "machines": [
+    "ONESHOT",
+    "WERP",
+    "STRETCH",
+    "REPITCH",
+    "GRID",
+    "SLICE"
+  ],
+  "usb": {
+    "capture_channels": 42,
+    "return_channels": 2,
+    "sample_rate": 48000,
+    "valid_bits": 24,
+    "stereo_pairs": [
+      "MAIN",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15",
+      "T16",
+      "DELAY",
+      "REVERB",
+      "CHORUS",
+      "INPUT"
+    ]
+  },
+  "changes": [
+    "Recorder capture, trimming, audition, normalization, saving and assignment workflow",
+    "Third VOICE page opens Recorder; retained-take bounds survive reopening",
+    "Separate MAIN-tail packing prevents unread-input overlap in the conditional OS loader",
+    "Recorder control snapshot and shared-reply ownership; scalar acknowledgments avoid adjacent USB sample writes"
+  ],
+  "validation": {
+    "hardware_confirmed": [
+      "Normal boot and stock audio",
+      "Stereo MAIN recording",
+      "Saving and complete file readback",
+      "Recorder reopening with retained waveform bounds"
+    ],
+    "offline_checked": [
+      "Native dual-loader execution and selected startup helpers",
+      "Recorder and sampler instruction-execution fixtures",
+      "Scalar/SIMD adapter boundaries"
+    ],
+    "pending": [
+      "Hardware trimmed-file comparison and final reopen",
+      "Power-cycle persistence",
+      "Long-duration USB and dense-pattern endurance"
+    ],
+    "audit_status": "review",
+    "notes": "No hard audit failures; SHARC instruction interpretation and source-store coverage reviews remain. This is not a stable designation."
+  },
+  "source_reproduction": {
+    "verified_on": "2026-10-31",
+    "platform": "macOS, Python 3.12",
+    "method": "Clean staged-source export; pinned public toolchain; three validated private inputs; complete stable baseline and Recorder rebuild",
+    "exact_main_dsp_and_sysex": true
+  }
+}

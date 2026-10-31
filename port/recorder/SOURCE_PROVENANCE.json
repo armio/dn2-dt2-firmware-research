@@ -1,0 +1,110 @@
+{
+  "schema": "r003-recorder-source-v1",
+  "sources": [
+    {
+      "source": "scripts/prepare_dn2_recorder_runtime.py",
+      "sha256": "c79e622c59e037c9014daa3886348624a85129bc1130da909b6954f1be4ed13c"
+    },
+    {
+      "source": "scripts/build_dt2_recording_save.py",
+      "sha256": "15b5866a0a65ae56ccfb80ba48532076dedb025165f9d04bc8278688370ea9fa"
+    },
+    {
+      "source": "scripts/build_dt2_recording_settings.py",
+      "sha256": "33e576fc3ca1fb14b2699c8d409b6e2f07f9f06152ce49812eb468a6d453d0d7"
+    },
+    {
+      "source": "scripts/build_dt2_recording_transport.py",
+      "sha256": "2e5188e5de7d156ea6d1955bbf4a0ae0c351071003468b5596a9bbaeb2ac53cf"
+    },
+    {
+      "source": "scripts/build_dt2_recorder_ui.py",
+      "sha256": "be881754afd6fbc9f116bbf4c3cde9b86d08a2c1a680f1c19b682ac813d7cbd5"
+    },
+    {
+      "source": "scripts/build_dt2_recorder_fonts.py",
+      "sha256": "72d36556852345a354a2f6fc023ca74ca330c5681ebb5b1568180b699fb8f866"
+    },
+    {
+      "source": "scripts/build_dt2_recorder_tempo.py",
+      "sha256": "6f72cee9dc9afaa7f06bb2bc0f60f7346ad2e85fd500de9c9b5f87e916580ce5"
+    },
+    {
+      "source": "scripts/build_dn2_recorder_persistence.py",
+      "sha256": "1c4c3e616bb971a82546bd8b72d6f2a0b3f8163a7535c6d0d377216f6f10e9df"
+    },
+    {
+      "source": "scripts/build_dt2_recording_input.py",
+      "sha256": "8079c2561cd1f6c12eebf128b48fa96cc75c16d5d7d01b0e118583358978c013"
+    },
+    {
+      "source": "scripts/build_dt2_usb_reply_guard.py",
+      "sha256": "2fd5f4102a50277b15392152fdd274edbf15b132339fbbd538e250cb7fc9c5c1"
+    },
+    {
+      "source": "scripts/build_dt2_recorder_reply_ownership.py",
+      "sha256": "4583175cced7a177e62ec4ec1dbf81f59a8cb3d1d6336d2c4f34adf667b5d7cb"
+    },
+    {
+      "source": "scripts/build_dt2_recorder_diagnostic_ownership.py",
+      "sha256": "f2baae0a9bc6d23cfcddb2c0a6ade364063049414a0c6f95026a5da1c4e80ef7"
+    },
+    {
+      "source": "scripts/build_dt2_recorder_control_snapshot.py",
+      "sha256": "8711e70046030af0fe3e78c3a95adca0bd8fb09183a43c6fd059cece9dfc9de3"
+    },
+    {
+      "source": "scripts/build_dn2_recovery_tail.py",
+      "sha256": "c697e3cc9b98b57c0b2341d13269b6937d3bebe772e8875cab9be9ec0ae314c1"
+    },
+    {
+      "source": "scripts/asm/dn2_recorder_route.S",
+      "sha256": "7a120a7f365bfbd7fb852d410d72ea7d64f49ef2e125b1314a2012da67780700"
+    },
+    {
+      "source": "scripts/asm/dn2_recorder_shortcuts.S",
+      "sha256": "4466e005f39a288f0db3dfefe548c98f3a8d8aff34ae542088b576ae7d682b66"
+    },
+    {
+      "source": "scripts/asm/dn2_recorder_persistence.S",
+      "sha256": "f7c09f78e99f98be89edcf7d001acb78a758cf1e1124462b393ce0fef4f4dbd6"
+    },
+    {
+      "source": "scripts/asm/dt2_recorder_filename_scan.S",
+      "sha256": "076cf101f7c6d68dbe9536527330b3e6dcf5dfbf04845a3ca02c7d15bd7061c9"
+    },
+    {
+      "source": "scripts/asm/dt2_recorder_assign_complete.S",
+      "sha256": "31494a3aa5f9200072939d5f109362e6345edf390daa6c26bd7b12f5872047f9"
+    },
+    {
+      "source": "output/dn2-research/recorder-stable-backport-20261031/main-src/build_main.py",
+      "sha256": "45d70a003e8367e4ee43bc663e9f25616cfdf001111b48e0f65ef3c215e15967"
+    },
+    {
+      "source": "output/dn2-research/recorder-stable-backport-20261031/main-src/build_r001_recorder_route.py",
+      "sha256": "9e0ce5c09e618328f2dc3156ac200247dc9627c2f32faf267a105c25599e1b42"
+    },
+    {
+      "source": "output/dn2-research/recorder-stable-backport-20261031/main-src/build_r001_recorder_shortcuts.py",
+      "sha256": "ff3db7b69059684619ab26c75e3b2b0f5fd19ef1ebf030ad42471a44283358b0"
+    },
+    {
+      "source": "output/dn2-research/recorder-stable-backport-20261031/dsp-src/build_recording_dsp.py",
+      "sha256": "9db4b998694e3a373501cf150abe2ac6271a1a126959ae0b3ca0de80f2382b73"
+    },
+    {
+      "source": "output/dn2-research/recorder-reopen-r002-20261031/src/build_main.py",
+      "sha256": "a30471a0453bdc15873d94637c03b74de841e27ec7f0e60d52d5bd7fc2d49ae5"
+    }
+  ],
+  "policy": "Original adapter/build source only. Donor instructions and assets are extracted from user-supplied official OS files during private builds.",
+  "metadata": [
+    {
+      "source": "output/dn2-research/combined-ram-ownership-20261008/result.json",
+      "published": "tree/output/dn2-research/combined-ram-ownership-20261008/result.json",
+      "fields": "heap region extents; task stack extents and argument/call addresses; allocator configuration address; reset stack top",
+      "policy": "Address-only subset; runtime logs and user-specific paths omitted."
+    }
+  ]
+}

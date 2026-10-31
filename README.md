@@ -5,6 +5,11 @@ designated stable on October 15, 2026. No firmware images or sample audio are
 distributed. The build extracts required Elektron code and assets from firmware
 you supply locally, assembles the adapters, and checks the complete output hash.
 
+**Experimental R003 adds recording and resampling**, including trimming,
+auditioning, saving and reopening Recorder. See the [R003 build and usage
+guide](docs/recorder.md). T1E2 remains the stable default; R003 validation is
+still in progress.
+
 **Build limitation:** exact T1E2 also requires a private project test-sample bank.
 This is **not Digitakt II factory content** and cannot be obtained by exporting
 samples from a Digitakt II. See [private inputs](#private-inputs) before building.
@@ -25,8 +30,9 @@ in that order. Individual tracks exclude shared effect returns.
 Already running this firmware? See [loading your own samples](docs/samples.md)
 for Transfer, +Drive, project loading and track assignment instructions.
 
-This is a version-specific port, not Elektron's source code. Later experimental
-Recorder changes and USB stress-test branches are outside this release. The
+This is a version-specific port, not Elektron's source code. Recorder is
+available only in the separate R003 target. Later USB stress-test branches are
+excluded from both targets. The
 stable designation records successful owner testing with USB streaming; it is
 not a claim that every workflow or long-running workload has been verified.
 
@@ -48,8 +54,8 @@ Without the exact bank, the current recipe cannot build T1E2. Arbitrary WAVs,
 an empty file, or samples uploaded through Transfer cannot replace it: the
 builder checks the bank's size and hash before building.
 
-A build without this dependency needs its own release and validation; no such
-build target is currently provided. The instructions for [loading playable
+A build without this dependency needs its own release and validation; neither
+T1E2 nor R003 currently provides that. The instructions for [loading playable
 samples](docs/samples.md) apply after installation and are a separate workflow.
 
 Check the inputs without changing them:
@@ -94,7 +100,16 @@ and tools built from the pinned public sources. All MAIN and DSP stage hashes
 matched. No historical firmware builds or private research checkout were used
 as build dependencies.
 
+To build experimental R003 instead, use the same command with `--target R003`
+and a different output filename. It rebuilds the stable baseline first, then
+applies the Recorder and startup changes. The same private inputs are required.
+
 ## Source and contributions
+
+[October 31 research update](docs/research/2026-10-31.md) documents Recorder
+verification, loader-overlap findings and remaining audit limits. Reusable
+offline checks and synthetic tests are described in the
+[audit guide](docs/research-audits.md).
 
 The port contains original adapters, extraction/relocation recipes and factual
 address metadata. Donor routines, fonts and graphics are extracted locally.
