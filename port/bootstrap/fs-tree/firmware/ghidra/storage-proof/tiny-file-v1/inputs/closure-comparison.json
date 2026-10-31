@@ -1,0 +1,156 @@
+{
+  "native_fs_functions_absent_current_map": [
+    {
+      "native": "0x401585e4",
+      "bytes": 66,
+      "name": "FUN_401585e4",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x4015bc8c",
+      "bytes": 42,
+      "name": "FUN_4015bc8c",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x4015832e",
+      "bytes": 96,
+      "name": "FUN_4015832e",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x40157f72",
+      "bytes": 216,
+      "name": "FUN_40157f72",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x4015838e",
+      "bytes": 422,
+      "name": "FUN_4015838e",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x4015bafc",
+      "bytes": 56,
+      "name": "FUN_4015bafc",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x40155ba8",
+      "bytes": 110,
+      "name": "FUN_40155ba8",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x40158626",
+      "bytes": 402,
+      "name": "FUN_40158626",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x4015b8a2",
+      "bytes": 156,
+      "name": "FUN_4015b8a2",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x4015ada6",
+      "bytes": 106,
+      "name": "FUN_4015ada6",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x4015ad56",
+      "bytes": 80,
+      "name": "FUN_4015ad56",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x4015a94c",
+      "bytes": 182,
+      "name": "FUN_4015a94c",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    },
+    {
+      "native": "0x4015bc64",
+      "bytes": 40,
+      "name": "FUN_4015bc64",
+      "classification": "Absent current67homeclosure; nativefilesystem helper/publicAPIcandidate foradditionalgraft."
+    }
+  ],
+  "existing_verified_retargets": [
+    {
+      "native": "0x400016d2",
+      "dn2": "0x400016d2"
+    },
+    {
+      "native": "0x40001164",
+      "dn2": "0x40001164"
+    },
+    {
+      "native": "0x400015a0",
+      "dn2": "0x400015a0"
+    },
+    {
+      "native": "0x400011a6",
+      "dn2": "0x400011a6"
+    },
+    {
+      "native": "0x401360ac",
+      "dn2": "0x40134490"
+    },
+    {
+      "native": "0x4012deda",
+      "dn2": "0x4012c59a"
+    },
+    {
+      "native": "0x4000141a",
+      "dn2": "0x4000141a"
+    },
+    {
+      "native": "0x4000157c",
+      "dn2": "0x4000157c"
+    },
+    {
+      "native": "0x40183aa8",
+      "dn2": "0x40178f0c"
+    },
+    {
+      "native": "0x40001896",
+      "dn2": "0x40001896"
+    },
+    {
+      "native": "0x400011ee",
+      "dn2": "0x400011ee"
+    },
+    {
+      "native": "0x4012e0c0",
+      "dn2": "0x4012c780"
+    },
+    {
+      "native": "0x4012d3ec",
+      "dn2": "0x4012baac"
+    },
+    {
+      "native": "0x40135ad8",
+      "dn2": "0x40133ebc"
+    },
+    {
+      "native": "0x40135df2",
+      "dn2": "0x401341d6"
+    },
+    {
+      "native": "0x40135cf4",
+      "dn2": "0x401340d8"
+    },
+    {
+      "native": "0x4018a59c",
+      "dn2": "0x4017ee50"
+    },
+    {
+      "native": "0x4018a498",
+      "dn2": "0x4017ed4c"
+    }
+  ]
+}

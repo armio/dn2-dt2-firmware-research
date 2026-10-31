@@ -1,0 +1,31 @@
+diff --git a/container.c b/container.c
+index 9afb5bd..1b91759 100644
+--- a/container.c
++++ b/container.c
+@@ -367,17 +367,23 @@ static size_t build_ele3(const bin_info *b, uint8_t *nc, size_t cap, const overr
+         if (section_bytes(c + (stored ? sec.offset : b->len), stored, ov, compressed, &sdata, &slen,
+                           &packed, level) < 0)
+             return (size_t)-1;
+-        if (!fits(cap, pos, slen) ||
++        /* Newly packed ELE3 sections include zero padding in the table length,
++         * while their stream header covers only the compressed bytes. DN2's
++         * stock sections use this four-byte alignment as well as the separate
++         * sixteen-byte alignment between sections. Preserve untouched bytes. */
++        size_t padded_len = packed ? align_up(slen, 4) : slen;
++        if (!fits(cap, pos, padded_len) ||
+             !fits(cap, ELE3_TABLE_OFF + (size_t)s * ELE3_ENTRY_SZ, ELE3_ENTRY_SZ)) {
+             free(packed);
+             return (size_t)-1;
+         }
+         memcpy(nc + pos, sdata, slen);
++        memset(nc + pos + slen, 0, padded_len - slen);
+         uint8_t *e = nc + ELE3_TABLE_OFF + s * ELE3_ENTRY_SZ;
+         wr32be(e + 4, (uint32_t)pos);
+-        wr32be(e + 8, (uint32_t)slen);
++        wr32be(e + 8, (uint32_t)padded_len);
+         free(packed);
+-        pos += slen;
++        pos += padded_len;
+     }
+     return pos;
+ }

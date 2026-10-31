@@ -1,0 +1,4 @@
+{
+  "format": "DN2SMP01 op=%08x stage=%08x result=%08x native_rc=%08x init=%08x mounted=%08x attempt=%08x id=%08x size=%08x wrote=%08x read=%08x offset=%08x eof=%08x closed=%08x p0=%08x p1=%08x p2=%08x p3=%08x\n",
+  "bank_sha256": "49f680159d2019f5e53e24b013177c5612ebabf5c7e4714ab6d9ef659afff542"
+}

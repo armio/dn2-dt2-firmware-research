@@ -1,0 +1,212 @@
+{
+  "dt2_main_sha256": "57bb4dfa8df07d846adc72fdb4fb0d3cd3c5680c524bf498338460207e008e7d",
+  "machines": [
+    {
+      "machine": "GRID",
+      "type": 4,
+      "selector": 4,
+      "parameters": [
+        {
+          "id": 239,
+          "address": "0x40212990",
+          "sha256": "92fe99ede97c7acc265b933fb33f50288be9aa68c3db8e612d88833306c93bea"
+        },
+        {
+          "id": 240,
+          "address": "0x402129cc",
+          "sha256": "233335044aa3e6bda18cc148a945e0862003f3ed2320dfb1ff2f54da2f2e2759"
+        },
+        null,
+        {
+          "id": 241,
+          "address": "0x40212a08",
+          "sha256": "28458522e4a355aac763e8ce012f56b2d3f5f66e2c07348163a0ee298ca4279c"
+        },
+        {
+          "id": 242,
+          "address": "0x40212a44",
+          "sha256": "aa3e92ad72e332035bf53b94cba15e48bdbb1ebf60c13d478f214c36ea19b26c"
+        },
+        {
+          "id": 243,
+          "address": "0x40212a80",
+          "sha256": "2b155798e77a74aa18af9cbaec6e21a548a767aeaad67a95be3213b8bf0f082e"
+        },
+        {
+          "id": 244,
+          "address": "0x40212abc",
+          "sha256": "f3c5a8486999923247817064545bf99dd3c227e8c55c86b8af47f5febf9f302c"
+        },
+        {
+          "id": 245,
+          "address": "0x40212af8",
+          "sha256": "8466fe6676a8cbfe30781ea5815b6b8114ce9aed9dcaf95d4a1c77b8e87f1908"
+        }
+      ]
+    },
+    {
+      "machine": "REPITCH",
+      "type": 3,
+      "selector": 3,
+      "parameters": [
+        null,
+        {
+          "id": 231,
+          "address": "0x402127b0",
+          "sha256": "5bad79a27d26d3e028206eb7a9a705093ea3578189d04ce204a2823a1fe227ec"
+        },
+        null,
+        {
+          "id": 232,
+          "address": "0x402127ec",
+          "sha256": "8e5df8f3c9cbc7e5dc373506e199a082e5f3cb4ca12f5cc7085f0815e7e74d2f"
+        },
+        {
+          "id": 233,
+          "address": "0x40212828",
+          "sha256": "6e8e134b3277e0f730a8fdaaecf87bfc808ea2fa75364bce351785d9dbc3bffa"
+        },
+        {
+          "id": 234,
+          "address": "0x40212864",
+          "sha256": "0a0e71d3b218985bf8ecb507979787a21b5639d6c74989a126f21d10ffad95a7"
+        },
+        {
+          "id": 235,
+          "address": "0x402128a0",
+          "sha256": "9bf63dc6e2ead58f485aed01719ca307d7eed830b54afeeebeaeea57feca9d6e"
+        },
+        {
+          "id": 236,
+          "address": "0x402128dc",
+          "sha256": "d5b1ff8f6fcaa740b06fed39a90da4ca3f57a02d40c1a8670b1113812f444f61"
+        }
+      ]
+    },
+    {
+      "machine": "SLICE",
+      "type": 6,
+      "selector": 5,
+      "parameters": [
+        {
+          "id": 248,
+          "address": "0x40212bac",
+          "sha256": "97492c79aed4a52d49fdb22d05619405c1c7e58736a5d2a77410f1a589652b03"
+        },
+        {
+          "id": 249,
+          "address": "0x40212be8",
+          "sha256": "b6e65df3acf3c877f0748f9244a04326a3c92742ba411b77741e014737cee415"
+        },
+        null,
+        {
+          "id": 251,
+          "address": "0x40212c60",
+          "sha256": "bad001e9d1bed7477a170d308299bf8f44ef90cc52363f8b0d15439c0fe6d77b"
+        },
+        {
+          "id": 252,
+          "address": "0x40212c9c",
+          "sha256": "0b12ae7a2191efe9a673c6dd1f289debf5b167b2c54ee92adcc630dd0c30df54"
+        },
+        {
+          "id": 253,
+          "address": "0x40212cd8",
+          "sha256": "394fcb3913dc53fb972879e7e9af68fd8fdbc1890dce65e621c9a65b036d6759"
+        },
+        null,
+        {
+          "id": 254,
+          "address": "0x40212d14",
+          "sha256": "7ec46ccaba3cbf7093bb014f3b5232bde8f88d6d7e436740b730e095619459df"
+        }
+      ]
+    },
+    {
+      "machine": "WERP",
+      "type": 1,
+      "selector": 1,
+      "parameters": [
+        {
+          "id": 212,
+          "address": "0x4021233c",
+          "sha256": "0ec193fcfb350b9271ed886d940c20257b103da8120c034a4e9fe8d466db711a"
+        },
+        {
+          "id": 213,
+          "address": "0x40212378",
+          "sha256": "a415d86db9852e66ba3a03829aceacd963d2a38fb1990ab107c8d960f508fff8"
+        },
+        null,
+        {
+          "id": 214,
+          "address": "0x402123b4",
+          "sha256": "bdc2ca31d99d677c8568be2d8dfc292222fe30ac8b706d295dcff5cf2e4f81bd"
+        },
+        {
+          "id": 215,
+          "address": "0x402123f0",
+          "sha256": "6e564140af00d84c3cf5d8d39f4eb0b4df945e853fc5db7a116b04e49b79e2d3"
+        },
+        {
+          "id": 216,
+          "address": "0x4021242c",
+          "sha256": "810d421a37f39f525eb44aef551fb9aa037c0a79ee6f7d72f5a36f6794652bfc"
+        },
+        {
+          "id": 217,
+          "address": "0x40212468",
+          "sha256": "571073e1f53014b3dc1eb7c0a04bd704ba3ef1d70321ea027f05afa0d4db0a6b"
+        },
+        {
+          "id": 218,
+          "address": "0x402124a4",
+          "sha256": "4d4bfef0eafb4114401b95790a32ad2ff158637217b7f437e2ff3f50be478cf3"
+        }
+      ]
+    },
+    {
+      "machine": "STRETCH",
+      "type": 2,
+      "selector": 2,
+      "parameters": [
+        {
+          "id": 221,
+          "address": "0x40212558",
+          "sha256": "be97bc4c329f9958c3ff01e0be7f246577d7fdba407512b2efdddb968c4f7c96"
+        },
+        {
+          "id": 222,
+          "address": "0x40212594",
+          "sha256": "a5b81af2f4fbbc4db39b144816353274010e9386bf26b68faff38c78f0678263"
+        },
+        null,
+        {
+          "id": 223,
+          "address": "0x402125d0",
+          "sha256": "ccbfdf0684ddb2e7455908faf1f34302fecc253fee697bf20a6f75893c94391b"
+        },
+        {
+          "id": 224,
+          "address": "0x4021260c",
+          "sha256": "b149c0d912bc69b51e6aae5592f1d29959deb6dab494645c5b1ad40366ddde0d"
+        },
+        {
+          "id": 225,
+          "address": "0x40212648",
+          "sha256": "e4bafb2974be906ee02a5e356c6ddccb155fe3ab94395be611b9659242e501cb"
+        },
+        {
+          "id": 226,
+          "address": "0x40212684",
+          "sha256": "8440ac6b92f9b0b76822f99714b297ca025dd314a3c6d9660a4563396f56ea9e"
+        },
+        {
+          "id": 227,
+          "address": "0x402126c0",
+          "sha256": "ab696b8e6da0cb722cce9da79241263e1e04eda143f73903831773e4ff78a630"
+        }
+      ]
+    }
+  ]
+}

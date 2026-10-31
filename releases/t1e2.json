@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "build": "T1E2",
+  "stable_designation": "2026-10-15",
+  "inputs": {
+    "dn2": {
+      "description": "Official Digitone II OS 1.11 SysEx",
+      "bytes": 2389280,
+      "sha256": "2af43e65e3d8390b41c9f66222620f8cce027d73ed87db00c80b440f628472e0"
+    },
+    "dt2": {
+      "description": "Official Digitakt II OS 1.16 SysEx",
+      "bytes": 1880864,
+      "sha256": "278541e466edcd77d6b3e018a91fb90185932d3c7de224dd3e68294dddf3a9ec"
+    },
+    "sample_bank": {
+      "description": "Original private three-slot sample bank; not distributed",
+      "bytes": 47104,
+      "sha256": "bef6175add1febd8dbfed8a01a387e2e94f794144bc4f5db298a3f9c0c438b0e"
+    }
+  },
+  "outputs": {
+    "main_sha256": "4f2cea43e6a70ae922dc58ac7c02cfb91f72fdeaa4b4146ba72e2007a2c39f96",
+    "dsp_sha256": "409811b1776c9a2cf1c73e5fce2f5dbcf7378c9fd6f835f45ba1a0e97c1a3cc3",
+    "sysex_sha256": "c79c42d2e044bb1142b575f7b62e2a0d7aeb68179fdea333217c17bb03f2ec8b",
+    "sysex_bytes": 2537120
+  },
+  "machines": ["ONESHOT", "WERP", "STRETCH", "REPITCH", "GRID", "SLICE"],
+  "usb": {
+    "capture_channels": 42,
+    "return_channels": 2,
+    "sample_rate": 48000,
+    "valid_bits": 24,
+    "stereo_pairs": ["MAIN", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "DELAY", "REVERB", "CHORUS", "INPUT"]
+  },
+  "validation_scope": "Owner-designated stable after a successful same-pattern USB-streaming trial; broad GUI coverage and endurance were not separately established. Later experimental Recorder changes are excluded.",
+  "source_reproduction": {
+    "verified_on": "2026-10-31",
+    "platform": "macOS, Python 3.12",
+    "method": "Clean staged-source export, fresh Python environment, pinned tools fetched and built from public sources, three validated private inputs",
+    "exact_main_dsp_and_sysex": true
+  }
+}

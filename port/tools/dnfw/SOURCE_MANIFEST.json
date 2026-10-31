@@ -1,0 +1,302 @@
+{
+  "snapshot": "V7 research source used by T1E2",
+  "upstream": "https://github.com/angellinares/dn2_firmware_explore",
+  "comparison_commit": "249876bbd4cd85e06c345a5639596aa2e58e1aac",
+  "files": [
+    {
+      "path": "src/dnfw/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/codec/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/codec/aplib.py",
+      "sha256": "7b30461ea6d6b4e338608f820854bcfffe7825c191bc48ad023c22ef1c364136",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/codec/aplibpack.py",
+      "sha256": "c7915bc6db77f3ee000579a7e82956c9a2b0bafb3959ac1955b9924f70d35aec",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/codec/limits.py",
+      "sha256": "f16cb15eaff9153e9315ba140a988f8b7591d7681516968b096004a9bfb8c970",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/codec/profile.py",
+      "sha256": "de651eea29fcce5f9ba85d4525a2b75994d6793e34c3b8a95bc9f3cade41e15b",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/container/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/container/ele3.py",
+      "sha256": "420908240a3054345419a2813d34c3e4b951043dfe7969a44c98e9c01efb62e1",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/container/section.py",
+      "sha256": "9b11cf42d28204d1d4bf812f9cd6927c003da14e9bd91b4dcc6867eb0741725d",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/firmware/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/firmware/build.py",
+      "sha256": "5944e89a45a4c9f2893d50f60e321a8ab962f8273f14c7699d77ca01ec5235c5",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/firmware/load.py",
+      "sha256": "9ceddb8d5412d164c7cc5b1a992df8cc1f4fcf0f2533f096dcc1452e9965ef82",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/firmware/model.py",
+      "sha256": "9e6d5e4b9e322a0957f44d59a000ac7ed65a655c7e1040d54e85a20d809ecfc3",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/firmware/verify.py",
+      "sha256": "f170e8e0be12a57a4a0759a42bfc8333af67feac8f54550e86ad29483e248d25",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/image/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/image/bootstream.py",
+      "sha256": "8aba00e3e5d0710a9f821df792a96cf2906bf11e16c60eecd18064a6fffe3e90",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/image/coldfire.py",
+      "sha256": "ef9b4911d4b4bd3637c8f6064c1bb63f00eed60c1793e53c431648702e68c0e6",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/image/sharc_object.py",
+      "sha256": "fabab2d4682e8e0110ed07952120a3a0eed22973ad0c387e8b0512ff19c2a49e",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/integrity/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/integrity/checksum.py",
+      "sha256": "2a2ddfd92c089ce7ad2a2fce2d3743b5eb3985a5ec0400ff44f84b1eb7fa97d7",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/integrity/digest.py",
+      "sha256": "eeb91bd756687e5e071da5e061db020ed823dee0e20fab1c70e58063455ff0d0",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/integrity/keyderive.py",
+      "sha256": "2289ccba8d33ace22bef10cd19345f3a9e97de5763bb9aa5dba6797ea924fceb",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/oneshot/__init__.py",
+      "sha256": "c9459ad74f981f97eaf231faad63ae71f95061c7beb51157879bb8a8fb8c3cce",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/oneshot/bank.py",
+      "sha256": "3416e956dda6b37ca43795956039f028594d3212833617648603d14fb6b8f9b6",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/oneshot/build.py",
+      "sha256": "9fd5b51e8a64deb3dd84db4f800692ccfafc40e970e97848efe373abec5459ec",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/oneshot/coldfire.py",
+      "sha256": "2fb8b726cca3a44ad7150a3bf30484b2758b5be17e5ec27708ff5ffb552c63f2",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/oneshot/params.py",
+      "sha256": "99f025a0a1f805f79bdac110c0a19fce9a79e896c63e1e90fe62aee6ea86d80e",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/oneshot/record.py",
+      "sha256": "77a801d7b376f22b8ce62959690fc736ae4923c59287780727a8fcd5585ac4ee",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/oneshot/samples.py",
+      "sha256": "e1a277139e82a113c772df46e6eca52e0e44e683475d6265d03f4562a3523b9e",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/patch/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/patch/area.py",
+      "sha256": "85058b8e3973acaeac30d9179356864a2c2c9635a833106304f6a870d1752ec0",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/patch/assemble.py",
+      "sha256": "11ad85081e4bc74d8f7c5dc39cb62b1b4d1e8774f35b08926dc5866de692a8b5",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/patch/cave.py",
+      "sha256": "c748edc60d03cbe0f06db1c4b4d451059c624af8fdabacd8a27a2d3de96d7648",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/patch/cbuild.py",
+      "sha256": "73e81aee7eb3c8a54340479ee45eb80a0dc2ed8486e873331bacf2a22514fbb0",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/patch/coldfire.py",
+      "sha256": "1c65b4ca47f58d5993a5315635241bfaec600f08c0c627adb5f3548b7fabfb83",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/patch/loader.py",
+      "sha256": "ee72d2aaf1fe15618f09321fb44103d1bb1ba3de29cceaa8b7c56b0e1cf830af",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/patch/paramtable.py",
+      "sha256": "f0b81fc022a8504458ec88ffd38f01396cb84298c375e0d3dd2c7967e1d00075",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/syx/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/syx/checksum.py",
+      "sha256": "6dfcdf919ae2a9bda36a10e911a231322d54e78cd69724dd36279b2a266c669b",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/syx/encode87.py",
+      "sha256": "0299e0cca13525eaa9faeeb21fc409561e16865d2f6341f37abacc20540216e3",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/syx/frame.py",
+      "sha256": "d98af1221e12305999dc0f4f8e86cfb39ea08eba1d06e3117bd8d290dcb52239",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/syx/transport.py",
+      "sha256": "c43e56d687efe768d76aead1b96a011dac824da2f4cd520e6f314d128617a78a",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/transplant/__init__.py",
+      "sha256": "a9fbe0774bda2bb738c15e1bd80110d6a2e913b48357cbcf4d8c7f110c12e7c5",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/transplant/cfplan.py",
+      "sha256": "a0c49653d294685724fb2a26557062d130d19bc55fa57db3ffb0d587350b5ea7",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/transplant/cfspec.py",
+      "sha256": "67f4427b48c469ca69b669d8365e23392a8716cab6bc652b6242f97cbca43f32",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/transplant/oneshot_cf.py",
+      "sha256": "8ce612b7a3f23a43e013843a7fdb86ffa6936eb70fd306396410d008afbf9c10",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/transplant/oneshot_dt2.py",
+      "sha256": "66af935b57f282f1a6a401d1398988a24dba5ca870460f188eb122514576fd9f",
+      "matches_upstream_249876": false
+    },
+    {
+      "path": "src/dnfw/transplant/plan.py",
+      "sha256": "3da6aef6c4216c544f44eb8839037cfdbf192ae0f1cbfb81a26690d6e804b07a",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/transplant/sharc.py",
+      "sha256": "e1f58d8199bcb6669f2508e7981136b724424693a77e5d5abfce2f6a6e5b2937",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "src/dnfw/transplant/spec.py",
+      "sha256": "004f1f6c56f52a832523d9795d40fe8563279b1c2022b135eea35ac796443d1b",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "csrc/usbprobe/data.S",
+      "sha256": "9dfba3706b0ebe00c72736d68da78ae3cc34cf863b875f9cd0ec6d73eef3f1d1",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "csrc/usbprobe/dn2_111.inc",
+      "sha256": "5ab7d138596a095647f71bcee966f45ee69cf07e96d18ef239fef87e2ee54290",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "csrc/usbprobe/ext.S",
+      "sha256": "a8a6bde9216c93450cc9ce18b21656d250f147f0a93f19332e0e4d1c521af97b",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "csrc/usbprobe/layout.inc",
+      "sha256": "fe2b500a77c256f5cc91993f9fb9bf33d16c76d8845e13c4d8bcbbb4949c309f",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "csrc/usbprobe/probe.S",
+      "sha256": "ae1263d4b478ee981846b4f7a994b71a317b2f756035939ef263571248b9a0dc",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "csrc/usbprobe/timing.S",
+      "sha256": "d35c666b50960ffc7acdb2e0965b542d68b4584bd0f867099008e74b52b17486",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "csrc/usbprobe/usbprobe.S",
+      "sha256": "266a08f9234857f83ceda153461ff8787ec34282edb50b4438047c4886f00522",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "csrc/runtime/loader.S",
+      "sha256": "2c63316388ae3995f0d41a02a01e59982f5cb265871421ff00840e6a4a92fd6e",
+      "matches_upstream_249876": true
+    },
+    {
+      "path": "csrc/include/dn2_111.h",
+      "sha256": "a08cfde9c8e04a0b5d5a1e7aeb888d5781455800def79953a3ecc7f4d7dda493",
+      "matches_upstream_249876": true
+    }
+  ]
+}

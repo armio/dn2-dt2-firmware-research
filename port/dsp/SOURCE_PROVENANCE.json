@@ -1,0 +1,363 @@
+[
+  {
+    "source": "scripts/build_dt2_sampler_dsp.py",
+    "sha256": "8174a31216525002dae41b0a95b4a6e22bf72bb4a6df888cf34741473f21f366",
+    "mode": "original source",
+    "published_sha256": "8174a31216525002dae41b0a95b4a6e22bf72bb4a6df888cf34741473f21f366"
+  },
+  {
+    "source": "scripts/build_dt2_sampler_frame_bridge.py",
+    "sha256": "75be3d34f17e46b624a65177f05b50c1691935a5ee842d0f9656bead824d319e",
+    "mode": "original source",
+    "published_sha256": "75be3d34f17e46b624a65177f05b50c1691935a5ee842d0f9656bead824d319e"
+  },
+  {
+    "source": "scripts/build_dt2_sampler_dispatch.py",
+    "sha256": "94c27d7c3de1488ed98f97223b466dbc6a050f54f84e8ead8561b9725e940398",
+    "mode": "original source",
+    "published_sha256": "94c27d7c3de1488ed98f97223b466dbc6a050f54f84e8ead8561b9725e940398"
+  },
+  {
+    "source": "scripts/build_dt2_pcm_receiver.py",
+    "sha256": "f4d49b618283350caba5a02d3a0180caa2969d8d274658e4d8c64d2d5be04554",
+    "mode": "original source",
+    "published_sha256": "f4d49b618283350caba5a02d3a0180caa2969d8d274658e4d8c64d2d5be04554"
+  },
+  {
+    "source": "scripts/build_dt2_pcm_receiver_startup.py",
+    "sha256": "6169133a043d6b3e18ad0d0c93225bd40baab8be9eccbeb86a100ed8d0641dfd",
+    "mode": "original source",
+    "published_sha256": "6169133a043d6b3e18ad0d0c93225bd40baab8be9eccbeb86a100ed8d0641dfd"
+  },
+  {
+    "source": "scripts/build_dt2_voice_samples.py",
+    "sha256": "3fdc1fee8fd62ce0565a6039750b1ea2bc42a95fad4a1c1815117d258fbc1974",
+    "mode": "original source",
+    "published_sha256": "3fdc1fee8fd62ce0565a6039750b1ea2bc42a95fad4a1c1815117d258fbc1974"
+  },
+  {
+    "source": "scripts/build_dt2_stereo_mixer.py",
+    "sha256": "b72775d769403964d1c9169b77874b40f5bca88f534ee68b01cfeb75adb46935",
+    "mode": "original source",
+    "published_sha256": "b72775d769403964d1c9169b77874b40f5bca88f534ee68b01cfeb75adb46935"
+  },
+  {
+    "source": "scripts/build_dt2_stereo_voices.py",
+    "sha256": "c8e15bb747e4ed5bf547472bd9c6c176143da72612267a753ed26fac1ab7114e",
+    "mode": "original source",
+    "published_sha256": "c8e15bb747e4ed5bf547472bd9c6c176143da72612267a753ed26fac1ab7114e"
+  },
+  {
+    "source": "scripts/build_dt2_stereo_pan.py",
+    "sha256": "8e31ec4995d2afa65ac0d712e3f76aac178292875b732c954328f28b92adf171",
+    "mode": "original source",
+    "published_sha256": "8e31ec4995d2afa65ac0d712e3f76aac178292875b732c954328f28b92adf171"
+  },
+  {
+    "source": "scripts/build_dt2_stereo_balance.py",
+    "sha256": "43159084b652a8b61fc8fbf68ad7c7365b2d59af05d646b4110fe9b7d866e8d6",
+    "mode": "original source",
+    "published_sha256": "43159084b652a8b61fc8fbf68ad7c7365b2d59af05d646b4110fe9b7d866e8d6"
+  },
+  {
+    "source": "scripts/build_dt2_output_hook.py",
+    "sha256": "31482dd3354407cb3aff0844b5678fa7e1d2cf139bb0d8bc7908391dc4a7efdb",
+    "mode": "original source",
+    "published_sha256": "31482dd3354407cb3aff0844b5678fa7e1d2cf139bb0d8bc7908391dc4a7efdb"
+  },
+  {
+    "source": "scripts/build_dt2_waveforms.py",
+    "sha256": "b22fde08470a41625c75d2077da87fdc66639eb94194ea38a431eeeebc2eec3c",
+    "mode": "original source",
+    "published_sha256": "b22fde08470a41625c75d2077da87fdc66639eb94194ea38a431eeeebc2eec3c"
+  },
+  {
+    "source": "scripts/build_dt2_waveform_transport.py",
+    "sha256": "ca5fb80219bfc0aba811ecd248612bf392a28fc50c3336e536777b7115cea1ae",
+    "mode": "original source",
+    "published_sha256": "ca5fb80219bfc0aba811ecd248612bf392a28fc50c3336e536777b7115cea1ae"
+  },
+  {
+    "source": "scripts/build_dt2_waveform_worker.py",
+    "sha256": "d71fe0a531ecca165d94ee089ae06b05a1fe7f394cc64eba06a7bbaaf2caf17d",
+    "mode": "original source",
+    "published_sha256": "d71fe0a531ecca165d94ee089ae06b05a1fe7f394cc64eba06a7bbaaf2caf17d"
+  },
+  {
+    "source": "scripts/build_dt2_waveform_length.py",
+    "sha256": "c4514408c7b54420be2954920937ccaaf3a9b58e254b7c60091fd214b28b416a",
+    "mode": "original source",
+    "published_sha256": "c4514408c7b54420be2954920937ccaaf3a9b58e254b7c60091fd214b28b416a"
+  },
+  {
+    "source": "scripts/build_dt2_waveform_analysis.py",
+    "sha256": "a4a7acffbf17bff1d946b05a653f9341c6660aa51eff27fd45f7dd225c6d56c9",
+    "mode": "original source",
+    "published_sha256": "a4a7acffbf17bff1d946b05a653f9341c6660aa51eff27fd45f7dd225c6d56c9"
+  },
+  {
+    "source": "scripts/build_dt2_sample_search.py",
+    "sha256": "0e1bf1d3c561f899b9744c5a0fc120284e35264e3528291e8b3b546715e0f6d8",
+    "mode": "original source",
+    "published_sha256": "0e1bf1d3c561f899b9744c5a0fc120284e35264e3528291e8b3b546715e0f6d8"
+  },
+  {
+    "source": "scripts/build_dt2_recording_rpc.py",
+    "sha256": "dd411f1dfc934e79e7eac077db6d1f1c6cb8be85cf04240f4b623cf919600c80",
+    "mode": "original source",
+    "published_sha256": "dd411f1dfc934e79e7eac077db6d1f1c6cb8be85cf04240f4b623cf919600c80"
+  },
+  {
+    "source": "scripts/build_dt2_sample_cursor_dsp.py",
+    "sha256": "60c714b39cd069d7ca9ffd3bde60c7a7b0f8baf1c75a440cf04aede036d4dc6a",
+    "mode": "original source",
+    "published_sha256": "60c714b39cd069d7ca9ffd3bde60c7a7b0f8baf1c75a440cf04aede036d4dc6a"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_startup_fix.py",
+    "sha256": "dc61f6677c5196d5904fd0179f23530d00ab43a65ff273d6b15bf845fc9635fd",
+    "mode": "original source with private reference path made repository-relative",
+    "published_sha256": "24ce2d46ff5b862b757d731bcd5bed60d0a41b27ea07e4c86c50726e7837586d"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_dma_l1.py",
+    "sha256": "2a1a169312740cc2d765bfe96a1dc544397bc723b37e0b84b6f38366ffa7b102",
+    "mode": "original source",
+    "published_sha256": "2a1a169312740cc2d765bfe96a1dc544397bc723b37e0b84b6f38366ffa7b102"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_playback_diagnostic.py",
+    "sha256": "c7607cdede7a5412a7473db8b63372d9ad0dc0d3429f509f77f85132006757a6",
+    "mode": "original source",
+    "published_sha256": "c7607cdede7a5412a7473db8b63372d9ad0dc0d3429f509f77f85132006757a6"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_render_diagnostic.py",
+    "sha256": "038ba979d607221bed8db09e0f50057f54f6ebaba881702581434a496771b7b6",
+    "mode": "original source",
+    "published_sha256": "038ba979d607221bed8db09e0f50057f54f6ebaba881702581434a496771b7b6"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_fatal_diagnostic.py",
+    "sha256": "00093462d90b6068cb55b751b7faf72e1cb3dcd33ca3a206463b6d28c8450c6b",
+    "mode": "original source",
+    "published_sha256": "00093462d90b6068cb55b751b7faf72e1cb3dcd33ca3a206463b6d28c8450c6b"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_code_diagnostic.py",
+    "sha256": "0606c7edf58701d068fc25d7ecb6ecdc94d509695b1992b1ce6497ed2091cb7b",
+    "mode": "original source",
+    "published_sha256": "0606c7edf58701d068fc25d7ecb6ecdc94d509695b1992b1ce6497ed2091cb7b"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_decimator_l2.py",
+    "sha256": "5755b86e994d2846442b5c916a12ef1987d8fd9feefd6c1da3f1745e41aec962",
+    "mode": "original source",
+    "published_sha256": "5755b86e994d2846442b5c916a12ef1987d8fd9feefd6c1da3f1745e41aec962"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_l1_code_fix.py",
+    "sha256": "8ad5c844ebf15b1bbb9ffe503e94d0e5682d8358cc181d30d4b9dbc581a73efe",
+    "mode": "original source",
+    "published_sha256": "8ad5c844ebf15b1bbb9ffe503e94d0e5682d8358cc181d30d4b9dbc581a73efe"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_stereo_rate_fix.py",
+    "sha256": "cccc4cc57e73d9c89cde390094d4598fa0bb9f04bf27677781d743dc2838e8bf",
+    "mode": "original source",
+    "published_sha256": "cccc4cc57e73d9c89cde390094d4598fa0bb9f04bf27677781d743dc2838e8bf"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_stretch_rate_fix.py",
+    "sha256": "69c4e3ebd78a96d9193db29542c195e09e9c07dc5873c93f045b96577c6ce97f",
+    "mode": "original source",
+    "published_sha256": "69c4e3ebd78a96d9193db29542c195e09e9c07dc5873c93f045b96577c6ce97f"
+  },
+  {
+    "source": "scripts/build_dt2_cursor_stop_fix.py",
+    "sha256": "eab9d3c1b122e0fe76ac0f6e9b779c7e82744cbadf364020d3d9827541db8ba8",
+    "mode": "original source",
+    "published_sha256": "eab9d3c1b122e0fe76ac0f6e9b779c7e82744cbadf364020d3d9827541db8ba8"
+  },
+  {
+    "source": "scripts/build_dt2_cursor_idle_stage_fix.py",
+    "sha256": "e80bd043eebeaaeeb2dcd8d2c51943b6fec0948fb6b1c05d1fdfddda535c696e",
+    "mode": "original source",
+    "published_sha256": "e80bd043eebeaaeeb2dcd8d2c51943b6fec0948fb6b1c05d1fdfddda535c696e"
+  },
+  {
+    "source": "scripts/build_dt2_preview_audio.py",
+    "sha256": "2d08cc22c2e15528dde0d5a4d182daaffb35f3e88f64187073e806f1e6d19cb4",
+    "mode": "original source",
+    "published_sha256": "2d08cc22c2e15528dde0d5a4d182daaffb35f3e88f64187073e806f1e6d19cb4"
+  },
+  {
+    "source": "scripts/build_dt2_cursor_release_floor_fix.py",
+    "sha256": "bf9e7fc4d84d2b5751f1d5f015f0b2de400f2c5fd68aa0d048543d017cf35d6a",
+    "mode": "original source",
+    "published_sha256": "bf9e7fc4d84d2b5751f1d5f015f0b2de400f2c5fd68aa0d048543d017cf35d6a"
+  },
+  {
+    "source": "scripts/build_dt2_sampler_start_fix.py",
+    "sha256": "5834d1e192a1994cb4a8fa672c96f121f3039aadc3a8ce3b643ada0baae6034d",
+    "mode": "original source",
+    "published_sha256": "5834d1e192a1994cb4a8fa672c96f121f3039aadc3a8ce3b643ada0baae6034d"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_block_timing.py",
+    "sha256": "1fbf471e90a99034bd48cbdd6ab60fc67f38591c2eec582d4df5d4127d6dc79e",
+    "mode": "original source",
+    "published_sha256": "1fbf471e90a99034bd48cbdd6ab60fc67f38591c2eec582d4df5d4127d6dc79e"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_timing_publication.py",
+    "sha256": "4976eae49972957ba279fea6951f8a359320e72f21be209a1ebaec5fc47dccf2",
+    "mode": "original source",
+    "published_sha256": "4976eae49972957ba279fea6951f8a359320e72f21be209a1ebaec5fc47dccf2"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_scheduler_backlog.py",
+    "sha256": "150f03d00161b8ab4b648fe9a5c750cac59df318efd06956b1c613398f8eebd6",
+    "mode": "original source",
+    "published_sha256": "150f03d00161b8ab4b648fe9a5c750cac59df318efd06956b1c613398f8eebd6"
+  },
+  {
+    "source": "scripts/build_dt2_dsp_output_deadline.py",
+    "sha256": "eee58fc895056835cddc53d666552b86fd9180b3b96eb1a29efd9ef13fc387c6",
+    "mode": "original source",
+    "published_sha256": "eee58fc895056835cddc53d666552b86fd9180b3b96eb1a29efd9ef13fc387c6"
+  },
+  {
+    "source": "scripts/build_dt2_codec_usb_capture.py",
+    "sha256": "a6edd87e921c8b1f42c8c7570e28ef808a241e4326713a3e24d810965589ba89",
+    "mode": "original source",
+    "published_sha256": "a6edd87e921c8b1f42c8c7570e28ef808a241e4326713a3e24d810965589ba89"
+  },
+  {
+    "source": "scripts/build_dt2_codec_usb_capture_fix.py",
+    "sha256": "b6fe959d4f485c1f7995efc2accf0d513bd18c7c656ec9a88776efdf744c5c3b",
+    "mode": "original source",
+    "published_sha256": "b6fe959d4f485c1f7995efc2accf0d513bd18c7c656ec9a88776efdf744c5c3b"
+  },
+  {
+    "source": "scripts/build_dt2_codec_delivery.py",
+    "sha256": "5bad8d358f6af53dc9b446d7237a2d2443bd2fee5de5bf87fbca8e8839d8cb73",
+    "mode": "original source",
+    "published_sha256": "5bad8d358f6af53dc9b446d7237a2d2443bd2fee5de5bf87fbca8e8839d8cb73"
+  },
+  {
+    "source": "scripts/build_dt2_codec_stage_commit.py",
+    "sha256": "9be59432e2c198ea4d1b721c081fd356d4e9329f91cc12c0aa906011ccaf8741",
+    "mode": "original source",
+    "published_sha256": "9be59432e2c198ea4d1b721c081fd356d4e9329f91cc12c0aa906011ccaf8741"
+  },
+  {
+    "source": "scripts/build_dt2_usb_multitrack_tap.py",
+    "sha256": "276ce04c8b0a4a2c6e7a572300c2c8d166b0c1dac323cce9bb2916f128362799",
+    "mode": "original source",
+    "published_sha256": "276ce04c8b0a4a2c6e7a572300c2c8d166b0c1dac323cce9bb2916f128362799"
+  },
+  {
+    "source": "scripts/build_dn2_right_engine.py",
+    "sha256": "ac826d3ea59e5b5ca076bcc9e8183811fa7b78999c947a0a9399d873a5145b46",
+    "mode": "original source",
+    "published_sha256": "ac826d3ea59e5b5ca076bcc9e8183811fa7b78999c947a0a9399d873a5145b46"
+  },
+  {
+    "source": "scripts/build_dn2_right_process.py",
+    "sha256": "e42c6fb170d7d444b7a8c825f40a25e542444fd6122fec132fffff162bfdcfe1",
+    "mode": "original source",
+    "published_sha256": "e42c6fb170d7d444b7a8c825f40a25e542444fd6122fec132fffff162bfdcfe1"
+  },
+  {
+    "source": "scripts/build_dn2_right_hooks.py",
+    "sha256": "afb0173908f256cddbdd9d51590a6bd007a88c4dd2c3c4b43df3d871bd363335",
+    "mode": "original source",
+    "published_sha256": "afb0173908f256cddbdd9d51590a6bd007a88c4dd2c3c4b43df3d871bd363335"
+  },
+  {
+    "source": "output/dn2-research/oneshot-live-controls-20261008/build.py",
+    "sha256": "1ca279dbec6a9e66cbe5489be74218e75f53ce57387710c995b8c7c424d0cfeb",
+    "mode": "original source",
+    "published_sha256": "1ca279dbec6a9e66cbe5489be74218e75f53ce57387710c995b8c7c424d0cfeb"
+  },
+  {
+    "source": "output/dn2-research/oneshot-live-level-20261008/build.py",
+    "sha256": "8110b60a040df15bc3ad61368e65dd056d510cd9fee3d350918d3ae954c80267",
+    "mode": "original source",
+    "published_sha256": "8110b60a040df15bc3ad61368e65dd056d510cd9fee3d350918d3ae954c80267"
+  },
+  {
+    "source": "output/dn2-research/oneshot-keyboard-dsp-v2-20261008/build.py",
+    "sha256": "012732273dc5e3e5e63b6cbe6e11ac14a45cfef8873a49bdf1ef17a611c6d5ef",
+    "mode": "original source",
+    "published_sha256": "012732273dc5e3e5e63b6cbe6e11ac14a45cfef8873a49bdf1ef17a611c6d5ef"
+  },
+  {
+    "source": "output/dn2-research/oneshot-native-bounds-dsp-v2-20261008/build.py",
+    "sha256": "a8332c0be189d6eec335599d6fa911d11e5be70d1ed99159c7740ba262776140",
+    "mode": "original source",
+    "published_sha256": "a8332c0be189d6eec335599d6fa911d11e5be70d1ed99159c7740ba262776140"
+  },
+  {
+    "source": "firmware/ghidra/storage-proof/bank-loader-v2/src/build_loader.py",
+    "sha256": "53921e3ef7c44907b38cd31ef361965c8968abf315807ca74ab14399bb76ed6d",
+    "mode": "original source",
+    "published_sha256": "53921e3ef7c44907b38cd31ef361965c8968abf315807ca74ab14399bb76ed6d"
+  },
+  {
+    "source": "firmware/ghidra/oneshot-proof/v7-source/csrc/oneshot/sharc/oneshot5.asm",
+    "sha256": "871961951a7536c266afadce9bf8e32337f1738dabe36039f9efa9e31d94b8d6",
+    "mode": "original source",
+    "published_sha256": "871961951a7536c266afadce9bf8e32337f1738dabe36039f9efa9e31d94b8d6"
+  },
+  {
+    "source": "firmware/ghidra/oneshot-proof/v7-source/scripts/gen_oneshot_sharc.py",
+    "sha256": "b5db4f15fcd1d9db78a740e3966f4c0afa1a2dc50902e32aef961f98b1ffce4a",
+    "mode": "original source",
+    "published_sha256": "b5db4f15fcd1d9db78a740e3966f4c0afa1a2dc50902e32aef961f98b1ffce4a"
+  },
+  {
+    "source": "scripts/build_dt2_werp_live.py",
+    "sha256": "db939804429e1a9aad28917ac7f4a82f06f769ad306cadd679bc5d08ab8e1e4b",
+    "mode": "dsp_source function only"
+  },
+  {
+    "source": "firmware/ghidra/oneshot-proof/v7-source/scripts/sharc_waverider_m3.py",
+    "sha256": "5748ff570bc2b753337b3612e79d9e7f2e66d11d4c53e87f0b9fb3d6df79ec6e",
+    "mode": "selected original functions adapted for build-only use",
+    "functions": [
+      "_selas",
+      "fix_shift_imm",
+      "_selas_line"
+    ]
+  },
+  {
+    "source": "firmware/ghidra/oneshot-proof/v7-source/scripts/sharc_waverider_render.py",
+    "sha256": "b5b280b3bf249b9bd2817e5163acf3ce9063cf3e0ab94f99ebc71513884f6b8b",
+    "mode": "selected original functions adapted for build-only use",
+    "functions": [
+      "Digikit (decoder-only adaptation)"
+    ]
+  },
+  {
+    "source": "output/dn2-research/oneshot-gui-dt2-20261008/widget-twins.json",
+    "sha256": "2b07b9be2fb68b5614ef1807e1734866efe3a83c24c8430292a454bfba6cdf61",
+    "mode": "address relocation metadata only"
+  },
+  {
+    "source": "output/dn2-research/oneshot-gui-navigation-20261008/control-twins.json",
+    "sha256": "2da93bf4604cc36c489b3fe2a78e82cda75c6f37b7de2ac4c96e1c5d9edac9c1",
+    "mode": "address relocation metadata only"
+  },
+  {
+    "source": "scripts/build_dn2_oneshot_keyboard_main.py",
+    "sha256": "d8eebad6bf693b625f87cda956bc7c85b383014f83fbf362ae5652c0952dc6c0",
+    "mode": "guarded tag/widget composition ported to main_baseline.py; packed-parent dependencies removed"
+  },
+  {
+    "source": "scripts/build_dn2_oneshot_native_bounds_main.py",
+    "sha256": "b66f3a68af59f0dd18740ee7846219c97924faa383ccf7e30cedb55fa24a4288",
+    "mode": "guarded tag/widget composition ported to main_baseline.py; packed-parent dependencies removed"
+  }
+]

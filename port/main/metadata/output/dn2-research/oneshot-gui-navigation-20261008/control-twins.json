@@ -1,0 +1,256 @@
+[
+  {
+    "dt2": "0x40069b8e",
+    "end": "0x40069dd8",
+    "size": 586,
+    "dn2_twins": [
+      "0x4006448a"
+    ],
+    "relocations": [
+      {
+        "instruction": "0x40069bd8",
+        "donor": "0x4003b548",
+        "offset": 76,
+        "dn2": "0x400372fe"
+      },
+      {
+        "instruction": "0x40069c1c",
+        "donor": "0x4005ab0e",
+        "offset": 144,
+        "dn2": "0x40055bba"
+      },
+      {
+        "instruction": "0x40069c3e",
+        "donor": "0x40226ed6",
+        "offset": 178,
+        "dn2": "0x40210429"
+      },
+      {
+        "instruction": "0x40069c44",
+        "donor": "0x40226ed6",
+        "offset": 184,
+        "dn2": "0x40210429"
+      },
+      {
+        "instruction": "0x40069c58",
+        "donor": "0x402a96a0",
+        "offset": 204,
+        "dn2": "0x402941d0"
+      },
+      {
+        "instruction": "0x40069c60",
+        "donor": "0x40113cf4",
+        "offset": 212,
+        "dn2": "0x40115668"
+      },
+      {
+        "instruction": "0x40069c72",
+        "donor": "0x44f360dc",
+        "offset": 230,
+        "dn2": "0x4464690c"
+      },
+      {
+        "instruction": "0x40069c7a",
+        "donor": "0x40113e88",
+        "offset": 238,
+        "dn2": "0x401157fc"
+      },
+      {
+        "instruction": "0x40069cac",
+        "donor": "0x4003b548",
+        "offset": 288,
+        "dn2": "0x400372fe"
+      },
+      {
+        "instruction": "0x40069d26",
+        "donor": "0x4003b524",
+        "offset": 410,
+        "dn2": "0x400372da"
+      },
+      {
+        "instruction": "0x40069d34",
+        "donor": "0x40240924",
+        "offset": 424,
+        "dn2": "0x40219c2d"
+      },
+      {
+        "instruction": "0x40069d3a",
+        "donor": "0x4023deb7",
+        "offset": 430,
+        "dn2": "0x402170b9"
+      },
+      {
+        "instruction": "0x40069d4c",
+        "donor": "0x402a6c30",
+        "offset": 448,
+        "dn2": "0x40291760"
+      },
+      {
+        "instruction": "0x40069d54",
+        "donor": "0x40113cf4",
+        "offset": 456,
+        "dn2": "0x40115668"
+      },
+      {
+        "instruction": "0x40069d70",
+        "donor": "0x40112ece",
+        "offset": 484,
+        "dn2": "0x40114842"
+      },
+      {
+        "instruction": "0x40069dc4",
+        "donor": "0x40112ece",
+        "offset": 568,
+        "dn2": "0x40114842"
+      }
+    ]
+  },
+  {
+    "dt2": "0x400c2d52",
+    "end": "0x400c2de6",
+    "size": 148,
+    "dn2_twins": [
+      "0x400bd30a"
+    ],
+    "relocations": [
+      {
+        "instruction": "0x400c2d74",
+        "donor": "0x40113e88",
+        "offset": 36,
+        "dn2": "0x401157fc"
+      },
+      {
+        "instruction": "0x400c2d7a",
+        "donor": "0x40114000",
+        "offset": 42,
+        "dn2": "0x40115974"
+      },
+      {
+        "instruction": "0x400c2d8e",
+        "donor": "0x44f367a0",
+        "offset": 62,
+        "dn2": "0x44646fd0"
+      },
+      {
+        "instruction": "0x400c2db2",
+        "donor": "0x44f363f8",
+        "offset": 98,
+        "dn2": "0x44646c28"
+      },
+      {
+        "instruction": "0x400c2dce",
+        "donor": "0x44f36e00",
+        "offset": 126,
+        "dn2": "0x44647630"
+      }
+    ]
+  },
+  {
+    "dt2": "0x400c1edc",
+    "end": "0x400c1f4c",
+    "size": 112,
+    "dn2_twins": [
+      "0x400bc50c"
+    ],
+    "relocations": [
+      {
+        "instruction": "0x400c1ef8",
+        "donor": "0x40114334",
+        "offset": 30,
+        "dn2": "0x40115ca8"
+      },
+      {
+        "instruction": "0x400c1f08",
+        "donor": "0x44f36cac",
+        "offset": 46,
+        "dn2": "0x446474dc"
+      },
+      {
+        "instruction": "0x400c1f1a",
+        "donor": "0x44f36fa0",
+        "offset": 64,
+        "dn2": "0x446477d0"
+      },
+      {
+        "instruction": "0x400c1f46",
+        "donor": "0x40113e88",
+        "offset": 108,
+        "dn2": "0x401157fc"
+      }
+    ]
+  },
+  {
+    "dt2": "0x400c7c32",
+    "end": "0x400c7d52",
+    "size": 288,
+    "dn2_twins": []
+  },
+  {
+    "dt2": "0x400c19be",
+    "end": "0x400c1a26",
+    "size": 104,
+    "dn2_twins": [
+      "0x400bbfee"
+    ],
+    "relocations": [
+      {
+        "instruction": "0x400c19f6",
+        "donor": "0x44f34fdc",
+        "offset": 58,
+        "dn2": "0x4464580c"
+      },
+      {
+        "instruction": "0x400c19fc",
+        "donor": "0x40114334",
+        "offset": 64,
+        "dn2": "0x40115ca8"
+      },
+      {
+        "instruction": "0x400c1a20",
+        "donor": "0x40113e88",
+        "offset": 100,
+        "dn2": "0x401157fc"
+      }
+    ]
+  },
+  {
+    "dt2": "0x400c654a",
+    "end": "0x400c65be",
+    "size": 116,
+    "dn2_twins": [
+      "0x400c08fc"
+    ],
+    "relocations": [
+      {
+        "instruction": "0x400c6562",
+        "donor": "0x40114358",
+        "offset": 26,
+        "dn2": "0x40115ccc"
+      },
+      {
+        "instruction": "0x400c6574",
+        "donor": "0x44f35150",
+        "offset": 44,
+        "dn2": "0x44645980"
+      },
+      {
+        "instruction": "0x400c658e",
+        "donor": "0x44f36690",
+        "offset": 70,
+        "dn2": "0x44646ec0"
+      },
+      {
+        "instruction": "0x400c65b8",
+        "donor": "0x40113e88",
+        "offset": 112,
+        "dn2": "0x401157fc"
+      }
+    ]
+  },
+  {
+    "dt2": "0x400c674c",
+    "end": "0x400c67c4",
+    "size": 120,
+    "dn2_twins": []
+  }
+]

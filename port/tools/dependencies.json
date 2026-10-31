@@ -1,0 +1,40 @@
+{
+  "digikit": {
+    "url": "https://github.com/m-dwyer/digikit.git",
+    "commit": "6f812e994ccc5ea939e86f0e5098d9dfab3b7eaf",
+    "license": "GPL-2.0-or-later",
+    "purpose": "SHARC instruction decoder and relocation checks",
+    "local_modifications": false
+  },
+  "selache": {
+    "url": "https://github.com/js216/selache.git",
+    "commit": "2b26d3b75c53063575bc5c820fa0d38879335187",
+    "license": "GPL-3.0-only; libsel is MIT",
+    "purpose": "Build selas, the SHARC+ assembler",
+    "local_modifications": false
+  },
+  "binutils": {
+    "url": "https://ftp.gnu.org/gnu/binutils/binutils-2.43.1.tar.xz",
+    "version": "2.43.1",
+    "sha256": "13f74202a3c4c51118b797a39ea4200d3f6cfbe224da6d1d95bb938480132dfd",
+    "license": "GPL-3.0-or-later and component notices",
+    "target": "m68k-linux-gnu",
+    "purpose": "ColdFire assembly, linking and inspection",
+    "local_modifications": false
+  },
+  "elektron-firmware-tool": {
+    "url": "https://github.com/mischa85/elektron-firmware-tool.git",
+    "commit": "a5bce9a6af644386d900924082993a805e812874",
+    "license": "MIT",
+    "source": "elektron-firmware-tool",
+    "local_modifications": "ELE3 four-byte section alignment; included as source and an attribution patch"
+  },
+  "dnfw": {
+    "url": "https://github.com/angellinares/dn2_firmware_explore.git",
+    "license": "AGPL-3.0-or-later; retained component notices also apply",
+    "source": "dnfw",
+    "comparison_commit": "249876bbd4cd85e06c345a5639596aa2e58e1aac",
+    "snapshot": "V7 research source used by T1E2; see dnfw/SOURCE_MANIFEST.json",
+    "local_modifications": "Additional ONESHOT modules and assembly-only loader; portability changes documented in dnfw/README.md"
+  }
+}

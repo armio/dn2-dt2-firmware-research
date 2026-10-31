@@ -1,0 +1,1326 @@
+[
+  {
+    "component": "sampler_table",
+    "script": "build_dt2_sampler_table.py",
+    "input": "oneshot-drive-v3-m3b-rev3-stackfix-20261009",
+    "output": "dt2-sampler-table-complete-records-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "a43ed6b1f5b548ad20dd079b74273be17a0c075b6abffedf86d5a2e55f8fc35d"
+  },
+  {
+    "component": "sampler_registration",
+    "script": "build_dt2_sampler_registration.py",
+    "input": "dt2-sampler-table-complete-records-20261009",
+    "output": "dt2-sampler-registration-v2-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "7b041b682624d1b6744d078e6b69abdcd707ad01a2348b856360396994c816f0"
+  },
+  {
+    "component": "sampler_runtime",
+    "script": "build_dt2_sampler_runtime.py",
+    "input": "dt2-sampler-registration-v2-20261009",
+    "output": "dt2-sampler-runtime-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "bc09972c147dc9714ff4533b90521956e1385ddb709ba972ffcb18651c32e639"
+  },
+  {
+    "component": "sampler_metadata",
+    "script": "build_dt2_sampler_metadata.py",
+    "input": "dt2-sampler-runtime-20261009",
+    "output": "dt2-sampler-metadata-v2-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "831d11a7a55e3fd2aec24e9b8d1393e6844de5d1782485af30068f91ef4d6b47"
+  },
+  {
+    "component": "werp_live",
+    "script": "build_dt2_werp_live.py",
+    "input": "dt2-sampler-metadata-v2-20261009",
+    "output": "dt2-werp-live-v3-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "e2b5ae894ed433c311b905fc0c5e60215436003b35cecb1ae38b2b25f3103f61"
+  },
+  {
+    "component": "sample_list",
+    "script": "build_dt2_sample_list.py",
+    "input": "dt2-werp-live-v3-20261009",
+    "output": "dt2-sample-list-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "16eeca8ebbcad0dcc2a1a86289f90438b817b04faddf21223acbe0f1a7214335"
+  },
+  {
+    "component": "sample_list_view",
+    "script": "build_dt2_sample_list_view.py",
+    "input": "dt2-sample-list-20261009",
+    "output": "dt2-sample-list-view-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "abbd22b51f74fb5070dd74c0e47fec0654c2ad7ace440ac550455ba7bbe90328"
+  },
+  {
+    "component": "browser_parameters",
+    "script": "build_dt2_browser_parameters.py",
+    "input": "dt2-sample-list-view-20261009",
+    "output": "dt2-browser-parameters-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "763553120dd9916024d1054b32abe628512d4bd131cdb7463733de9513f4e210"
+  },
+  {
+    "component": "pool_references",
+    "script": "build_dt2_pool_references.py",
+    "input": "dt2-browser-parameters-20261009",
+    "output": "dt2-pool-references-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "3d4d3ddd2a639bb2612864766532a04b2c3de0312099ecacefbce44068174029"
+  },
+  {
+    "component": "pool_lock_references",
+    "script": "build_dt2_pool_lock_references.py",
+    "input": "dt2-pool-references-20261009",
+    "output": "dt2-pool-lock-references-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "1fbddffc7e5973e8630bc64f9d1e3a0e19910049b339381e315155b939edcb6a"
+  },
+  {
+    "component": "drive_services",
+    "script": "build_dt2_drive_services.py",
+    "input": "dt2-pool-lock-references-20261009",
+    "output": "dt2-drive-services-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "67e2db7ae52800f17af3115264f607199f85faf31d9f09453b328aec8f0460fd"
+  },
+  {
+    "component": "directory_model",
+    "script": "build_dt2_directory_model.py",
+    "input": "dt2-drive-services-20261009",
+    "output": "dt2-directory-model-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "c99774323c0839da11c8e2fe33dff269c97bc3818bbe76fa57ad39b9ed6b2534"
+  },
+  {
+    "component": "browser_popup",
+    "script": "build_dt2_browser_popup.py",
+    "input": "dt2-directory-model-20261009",
+    "output": "dt2-browser-popup-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "f9185ea626b6d9ed07f0f8d36fe5a6478c5ebb1b0b6e931f6f6f95521d079fae"
+  },
+  {
+    "component": "sample_manager",
+    "script": "build_dt2_sample_manager.py",
+    "input": "dt2-browser-popup-20261009",
+    "output": "dt2-sample-manager-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "aac076620333d59f92420431baee93fcd81a8c32ce8ae6399970d358eff98cf2"
+  },
+  {
+    "component": "voice_page_route",
+    "script": "build_dn2_voice_page_route.py",
+    "input": "dt2-sample-manager-20261009",
+    "output": "dn2-voice-page-controller-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "fc1a2c508d0e5f66103f5c83707544b9f9d94e8de3f908f97b76851fdec6d14c"
+  },
+  {
+    "component": "sample_services",
+    "script": "build_dt2_sample_services.py",
+    "input": "dn2-voice-page-controller-20261009",
+    "output": "dt2-sample-services-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "4cf75471e28014ee1375ab190f9107493e7ffd44d8b4393b30c21a65ddeafd3a"
+  },
+  {
+    "component": "used_samples",
+    "script": "build_dt2_used_samples.py",
+    "input": "dt2-sample-services-20261009",
+    "output": "dt2-used-samples-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "ab41c77df7178741d32e1f9889f5533ea905ea93879af20cdb701c65d7484233"
+  },
+  {
+    "component": "project_sample_record",
+    "script": "build_dn2_project_sample_record.py",
+    "input": "dt2-used-samples-20261009",
+    "output": "dn2-project-sample-record-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "29c23874be6302bb9043362cf3ae1ca6db247ce5d70859ae4cff74a73f61d263"
+  },
+  {
+    "component": "project_sample_cache",
+    "script": "build_dn2_project_sample_cache.py",
+    "input": "dn2-project-sample-record-20261009",
+    "output": "dn2-project-sample-cache-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "452f95c607be6e2805b878b76c15257d44ccb3f818752808cfa975a59635066e"
+  },
+  {
+    "component": "project_sample_active",
+    "script": "build_dn2_project_sample_active.py",
+    "input": "dn2-project-sample-cache-20261009",
+    "output": "dn2-project-sample-active-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "00e28cb42a0f8f1a43c952c43aa009f94a3d7e0cc67d06ce6fadb55dc18c5836"
+  },
+  {
+    "component": "project_sample_clear",
+    "script": "build_dn2_project_sample_clear.py",
+    "input": "dn2-project-sample-active-20261009",
+    "output": "dn2-project-sample-lifecycle-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "2b986eaf2a37dbf5e96b5fdab2354fe6cd541d4be066105a117655e094379d2f"
+  },
+  {
+    "component": "project_sample_backup",
+    "script": "build_dn2_project_sample_backup.py",
+    "input": "dn2-project-sample-lifecycle-20261009",
+    "output": "dn2-project-sample-backup-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "58b809d01ebac61abd1740588412389896b2b70f8464daa48f6225c677c14799"
+  },
+  {
+    "component": "pcm_pages",
+    "script": "build_dt2_pcm_pages.py",
+    "input": "dn2-project-sample-backup-20261009",
+    "output": "dt2-pcm-pages-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "81a1a9a24b992362bda0e2262a6f62dc3ad2b94c765d4438619cc5d76aabe336"
+  },
+  {
+    "component": "sample_allocator",
+    "script": "build_dt2_sample_allocator.py",
+    "input": "dt2-pcm-pages-20261009",
+    "output": "dt2-sample-allocator-v2-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "3d1479c09824a4a2ca078d63badfbf557da2863916dd0b191db8f0d1e17b4dec"
+  },
+  {
+    "component": "sample_loader",
+    "script": "build_dt2_sample_loader.py",
+    "input": "dt2-sample-allocator-v2-20261009",
+    "output": "dt2-sample-loader-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "dd619f98a6637f2748aa65b0893f9a662ada45b10833011cba06f0ff41f8ab5b"
+  },
+  {
+    "component": "project_sample_load",
+    "script": "build_dn2_project_sample_load.py",
+    "input": "dt2-sample-loader-20261009",
+    "output": "dn2-project-sample-load-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "a4cddf0cd2baf845220b3722291472fa1b6e33dd39da43a2af58e5cda0f8c646"
+  },
+  {
+    "component": "sample_preview",
+    "script": "build_dt2_sample_preview.py",
+    "input": "dn2-project-sample-load-20261009",
+    "output": "dt2-sample-preview-20261009",
+    "argv": [
+      "--output",
+      "{out}"
+    ],
+    "main_sha256": "bafee19b2037e98942c255c09add6b2731897bbc2a9bb87657168fa54ba12f54"
+  },
+  {
+    "component": "waveform_rpc",
+    "script": "build_dt2_waveform_rpc.py",
+    "input": "dt2-sample-preview-20261009",
+    "output": "dt2-waveform-rpc-v2-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "a03da7e1637a328fb5b7bebb2da7c608f6dd1bc76aa73e893901ab5495bd1414"
+  },
+  {
+    "component": "waveform_cache",
+    "script": "build_dt2_waveform_cache.py",
+    "input": "dt2-waveform-rpc-v2-20261009",
+    "output": "dt2-waveform-cache-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "6a96b3c90bf926a8b147126fbcefb6fce42466c6a6249afb0ac4c01d53c050ca"
+  },
+  {
+    "component": "waveform_events",
+    "script": "build_dt2_waveform_events.py",
+    "input": "dt2-waveform-cache-20261009",
+    "output": "dt2-waveform-events-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "994510a22417c00b79ec756c3d08997f99c874c474c8434ae21e34aeb19fe0ba"
+  },
+  {
+    "component": "waveform_drawers",
+    "script": "build_dt2_waveform_drawers.py",
+    "input": "dt2-waveform-events-20261009",
+    "output": "dt2-waveform-drawers-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "5ac4e53e08cbd8702ef2d54fba4a3e0ea9e5cfab364c355de37d9dbc33330008"
+  },
+  {
+    "component": "source_parameters",
+    "script": "build_dt2_source_parameters.py",
+    "input": "dt2-waveform-drawers-20261009",
+    "output": "dt2-source-parameters-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "f4d62e2a73c4ccdb3071df66acb05caa50e4c671fca0b471d5031e2a811eb248"
+  },
+  {
+    "component": "source_page_access",
+    "script": "build_dt2_source_page_access.py",
+    "input": "dt2-source-parameters-20261009",
+    "output": "dt2-source-page-access-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "651f9ee8e336df497653871ad0ef95a8abe7dd1b2d931247aa6d0a6d22ecb92d"
+  },
+  {
+    "component": "slice_storage",
+    "script": "build_dt2_slice_storage.py",
+    "input": "dt2-source-page-access-20261009",
+    "output": "dt2-slice-storage-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "01d7f1775f3eec06319f08c2d01eb52619ee6ff77ce3681e28d851fa1b6363de"
+  },
+  {
+    "component": "slice_live",
+    "script": "build_dt2_slice_live.py",
+    "input": "dt2-slice-storage-20261009",
+    "output": "dt2-slice-live-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "6e5d3a38b0450fbe163ac271268843d9f2bd2e12792fc80eced69e8322d1d13f"
+  },
+  {
+    "component": "source_waveform_update",
+    "script": "build_dt2_source_waveform_update.py",
+    "input": "dt2-slice-live-20261009",
+    "output": "dt2-source-waveform-update-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "410252bd5dc9ded664b5a7bdce00ee1c88fc34f5a2564346bb2329846c0caf03"
+  },
+  {
+    "component": "source_controls",
+    "script": "build_dt2_source_controls.py",
+    "input": "dt2-source-waveform-update-20261009",
+    "output": "dt2-source-controls-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "c9936bb3fecf607bce71b6d4dbbb8d983a0dfacbffbe44ef8c2f84097feca9d6"
+  },
+  {
+    "component": "source_draw",
+    "script": "build_dt2_source_draw.py",
+    "input": "dt2-source-controls-20261009",
+    "output": "dt2-source-draw-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "4f11868c2ab912d4baabaf4a95ff9051f5c9816ac1f28479231004cd472e9970"
+  },
+  {
+    "component": "source_browser",
+    "script": "build_dt2_source_browser.py",
+    "input": "dt2-source-draw-20261009",
+    "output": "dt2-source-browser-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "441a5a63dc9b53ba177f53c3d4435edd83c544beade4f8a9b149a66fb21c6960"
+  },
+  {
+    "component": "source_encoder",
+    "script": "build_dt2_source_encoder.py",
+    "input": "dt2-source-browser-20261009",
+    "output": "dt2-source-encoder-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "e2784efb9101a9fb2db1ed627444e83addee4b57c490a6249386bc71803c3ba3"
+  },
+  {
+    "component": "source_dialogs",
+    "script": "build_dt2_source_dialogs.py",
+    "input": "dt2-source-encoder-20261009",
+    "output": "dt2-source-dialogs-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "5c22bd865a544b256e3086720952627b481d9876200d04bbf884181bb5d653be"
+  },
+  {
+    "component": "grid_actions",
+    "script": "build_dt2_grid_actions.py",
+    "input": "dt2-source-dialogs-20261009",
+    "output": "dt2-grid-actions-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "ee04c9777a885aa02ca409cc3e8301ed87d3fd4fb5d419f8f6e4eeecae268b86"
+  },
+  {
+    "component": "slice_create_dialog",
+    "script": "build_dt2_slice_create_dialog.py",
+    "input": "dt2-grid-actions-20261009",
+    "output": "dt2-slice-create-dialog-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "47938fcd9a5bdbbb8d2fc58533505900853ce418980ce77744447378cf3dd81b"
+  },
+  {
+    "component": "manual_slice_editor",
+    "script": "build_dt2_manual_slice_editor.py",
+    "input": "dt2-slice-create-dialog-20261009",
+    "output": "dt2-manual-slice-editor-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "b3755e59b01a899465ec060187613043df28a4580502e25861c0885f0d0619fd"
+  },
+  {
+    "component": "source_events",
+    "script": "build_dt2_source_events.py",
+    "input": "dt2-manual-slice-editor-20261009",
+    "output": "dt2-source-events-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "b0612a6e7c33186657101f3dd371b8a5d11352151dadbf644d9519ccc5e4ea4d"
+  },
+  {
+    "component": "source_view",
+    "script": "build_dt2_source_view.py",
+    "input": "dt2-source-events-20261009",
+    "output": "dt2-source-view-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "07ca03dd8ee6a3891c96ab71a33e8d643a4d487fac8c4ab3338be7f513fca753"
+  },
+  {
+    "component": "source_factory",
+    "script": "build_dt2_source_factory.py",
+    "input": "dt2-source-view-20261009",
+    "output": "dt2-source-factory-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "31f1259b1ab709b235902f0ff09a28a3f94748b61cd53dd87a21c2a175058591"
+  },
+  {
+    "component": "source_page_route",
+    "script": "build_dn2_source_page_route.py",
+    "input": "dt2-source-factory-20261009",
+    "output": "dn2-source-page-route-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "ae24042aaac5cf76606c37c197fe21f5a42682aa101f009c5500c1a5043fd1d2"
+  },
+  {
+    "component": "sample_cursor_readers",
+    "script": "build_dn2_sample_cursor_readers.py",
+    "input": "dn2-source-page-route-20261009",
+    "output": "dn2-sample-cursor-readers-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "1ecb836d1088025e7576d7a7444284828bef0a2d370f9fd0ae22f9d92454d0fa"
+  },
+  {
+    "component": "sample_cursor_tracks",
+    "script": "build_dn2_sample_cursor_tracks.py",
+    "input": "dn2-sample-cursor-readers-20261009",
+    "output": "dn2-sample-cursor-tracks-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "53656af9881f8b5c4a52b15402c291f823ef502f7903aefde4a22fd0d7205e34"
+  },
+  {
+    "component": "sample_fs_startup",
+    "script": "build_dn2_sample_fs_startup.py",
+    "input": "dn2-sample-cursor-tracks-20261009",
+    "output": "dn2-sample-fs-startup-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "1498a585c2123967f30ae821c2a75650121850e96700b4d5c52c60de32d7cd04"
+  },
+  {
+    "component": "sample_reset",
+    "script": "build_dt2_sample_reset.py",
+    "input": "dn2-sample-fs-startup-20261009",
+    "output": "dt2-sample-reset-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "4f4dbe8795f3d63cf9413af4e6a79a3b6ab874d042d16d75e963c783996dbf25"
+  },
+  {
+    "component": "sample_restore_order",
+    "script": "build_dt2_sample_restore_order.py",
+    "input": "dt2-sample-reset-20261009",
+    "output": "dt2-sample-restore-order-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "69b6229d51fca681d6acd9da883c379fcc6717a2e93b40f2387ce4486c81f89f"
+  },
+  {
+    "component": "sample_restore_worker",
+    "script": "build_dt2_sample_restore_worker.py",
+    "input": "dt2-sample-restore-order-20261009",
+    "output": "dt2-sample-restore-worker-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "31e9644b457eb5a38c149b1c52acfeff0ee8712676be9bf3bee148fbf0aef3cf"
+  },
+  {
+    "component": "sample_restore_lifecycle",
+    "script": "build_dn2_sample_restore_lifecycle.py",
+    "input": "dt2-sample-restore-worker-20261009",
+    "output": "dn2-sample-restore-lifecycle-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "96c3376b4f2aaf54aae41d5c43f09092ff27e5bbbc8c4f2916eb179fa96f2d0e"
+  },
+  {
+    "component": "sample_file_finalize",
+    "script": "build_dt2_sample_file_finalize.py",
+    "input": "dn2-sample-restore-lifecycle-20261009",
+    "output": "dt2-sample-file-finalize-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "f90e89bea224755a7f702e15813c1b917c999cadbc1f3de28defd28d2a117376"
+  },
+  {
+    "component": "sample_file",
+    "script": "build_dt2_sample_file.py",
+    "input": "dt2-sample-file-finalize-20261009",
+    "output": "dt2-sample-file-20261009",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "628cf4a2d9b47452ddacb83e9d21e3a882423118c7a09db7bf55127c6a94fbb9"
+  },
+  {
+    "component": "file_output_stream",
+    "script": "build_dt2_file_output_stream.py",
+    "input": "dt2-sample-file-20261009",
+    "output": "dt2-file-output-stream-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "046e12deeac1062a23fa7329a09bca9ca386c3e74631d4251ec045adecf9bcc0"
+  },
+  {
+    "component": "sample_host",
+    "script": "build_dt2_sample_host.py",
+    "input": "dt2-file-output-stream-20261010",
+    "output": "dt2-sample-host-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "5909017e1bd159a8d160ad6ab12572edfdb61f1ce834ee1582d761a556517dc6"
+  },
+  {
+    "component": "sample_host_lifecycle",
+    "script": "build_dn2_sample_host_lifecycle.py",
+    "input": "dt2-sample-host-20261010",
+    "output": "dn2-sample-host-lifecycle-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "41c3268bea2c52977812ecd71bfd63e2f92cb889997207760129a98698ec3544"
+  },
+  {
+    "component": "sample_host_capabilities",
+    "script": "build_dn2_sample_host_capabilities.py",
+    "input": "dn2-sample-host-lifecycle-20261010",
+    "output": "dn2-sample-host-capabilities-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "54e97d5c92a502ff003e9738cdc45c0d98fb4879f14678b8aa328f4b7a570c0c"
+  },
+  {
+    "component": "sample_host_assignment",
+    "script": "build_dn2_sample_host_assignment.py",
+    "input": "dn2-sample-host-capabilities-20261010",
+    "output": "dn2-sample-host-assignment-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "d393e23938588057714d19160de2a9be3f7fec290489ffc18010da777b11f336"
+  },
+  {
+    "component": "sample_host_epoch",
+    "script": "build_dn2_sample_host_epoch.py",
+    "input": "dn2-sample-host-assignment-20261010",
+    "output": "dn2-sample-host-epoch-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "a0ceca15b0abff8906f61265045b56abcbd52649ec8e54bf4a035a6efab97a8a"
+  },
+  {
+    "component": "sample_pool_lock",
+    "script": "build_dn2_sample_pool_lock.py",
+    "input": "dn2-sample-host-epoch-20261010",
+    "output": "dn2-sample-pool-lock-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "7939fca90a8ddfba03f2fef68c811d3252a2aa5118f0844b76ae093603e77692"
+  },
+  {
+    "component": "browser_job_epoch",
+    "script": "build_dn2_browser_job_epoch.py",
+    "input": "dn2-sample-pool-lock-20261010",
+    "output": "dn2-browser-job-epoch-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "826108c90b796e12ddef81f73b0f0caf416a1d11f15d8d0aa8d2f05ff25ec6d1"
+  },
+  {
+    "component": "project_sample_copy",
+    "script": "build_dn2_project_sample_copy.py",
+    "input": "dn2-browser-job-epoch-20261010",
+    "output": "dn2-project-sample-copy-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "cab61d44ed15936b6ac2c19d81fdcc9378f09967234ceb410668696173868cd4"
+  },
+  {
+    "component": "pool_usage_query",
+    "script": "build_dn2_pool_usage_query.py",
+    "input": "dn2-project-sample-copy-20261010",
+    "output": "dn2-pool-usage-query-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "1270845838cc07c7167f481fe282251c37bb63f83f275eeaaf3dc727257bbff2"
+  },
+  {
+    "component": "browser_preferences",
+    "script": "build_dn2_browser_preferences.py",
+    "input": "dn2-pool-usage-query-20261010",
+    "output": "dn2-browser-preferences-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "6df33ef8f78a6588ff397fcf48bf3f19d4e04a1fbc5ebf62f1ded00611447a68"
+  },
+  {
+    "component": "boot_kit_diagnostic",
+    "script": "build_dn2_boot_kit_diagnostic.py",
+    "input": "dn2-browser-preferences-20261010",
+    "output": "dn2-boot-kit-diagnostic-r1-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "3429127ee0ebdf30e086a672e96c64244a1aedf65c6bf77fefa03a839908b205"
+  },
+  {
+    "component": "boot_kit_watch",
+    "script": "build_dn2_boot_kit_watch.py",
+    "input": "dn2-boot-kit-diagnostic-r1-20261010",
+    "output": "dn2-boot-kit-watch-r3-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "8b0f43a1814718a9c0d6e6d9e689606a12943347e16f6a91f65fa1ffaa49daf0"
+  },
+  {
+    "component": "boot_heap_watch",
+    "script": "build_dn2_boot_heap_watch.py",
+    "input": "dn2-boot-kit-watch-r3-20261010",
+    "output": "dn2-boot-heap-watch-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "8bfe1cc41125f09462cca6bc81bc7ed89e2e4953e9bf8c3d339e87bf60db756f"
+  },
+  {
+    "component": "boot_freelist_watch",
+    "script": "build_dn2_boot_freelist_watch.py",
+    "input": "dn2-boot-heap-watch-20261010",
+    "output": "dn2-boot-freelist-watch-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "e94a488627aafcbff41fc663c7db4a3971a7b453df1656c8ee02590eac861422"
+  },
+  {
+    "component": "dsp_boot_capacity_fix",
+    "script": "build_dn2_dsp_boot_capacity.py",
+    "input": "dn2-boot-freelist-watch-20261010",
+    "output": "dn2-dsp-boot-capacity-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "25a8d8b8528d25eac803702045a1333c782c5f6a7dab2a15813f574125b9f610"
+  },
+  {
+    "component": "dsp_transfer_wait",
+    "script": "build_dn2_dsp_transfer_wait.py",
+    "input": "dn2-dsp-boot-capacity-20261010",
+    "output": "dn2-dsp-transfer-wait-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "4d413493ccba6bd50460085b8b03d5bac210776e05fa033ed1aeb699bdc1934a"
+  },
+  {
+    "component": "sample_manager_font_fix",
+    "script": "build_dn2_sample_manager_font_fix.py",
+    "input": "dn2-dsp-transfer-wait-20261010",
+    "output": "dn2-sample-manager-font-fix-20261010",
+    "argv": [
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "bc12e2464940db879eb5e06e03523a77a85c50d6b2bf5641980504caf5ca1277"
+  },
+  {
+    "component": "sample_load_error_fix",
+    "script": "build_dn2_sample_load_errors.py",
+    "input": "dn2-sample-manager-font-fix-20261010",
+    "output": "dn2-sample-load-errors-20261010",
+    "argv": [
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "1716f53c270800203bdf374237998c0471dd8a7186d3915c6d190f1fd6aeb8c1"
+  },
+  {
+    "component": "playback_diagnostic_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-sample-load-errors-20261010",
+    "output": "dn2-playback-diagnostic-20261010",
+    "argv": [
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "376cb0afaa5414b2ca24d496531d6fac726ca58eaee808f12bd8204a6b5438e9"
+  },
+  {
+    "component": "fatal_diagnostic_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-playback-diagnostic-20261010",
+    "output": "dn2-fatal-diagnostic-20261010",
+    "argv": [
+      "{prior}",
+      "--fatal-diagnostic",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "c514198dcf159b77ffe8459d2e7170a3f1a0f39fa8b99aa4396b48a4f9279499"
+  },
+  {
+    "component": "code_diagnostic_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-fatal-diagnostic-20261010",
+    "output": "dn2-code-diagnostic-20261010",
+    "argv": [
+      "{prior}",
+      "--code-diagnostic",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "ce3913fac0d1c2484b7d8b9a32827f081097dcfd8c45ad86558d117617fea394"
+  },
+  {
+    "component": "decimator_l2_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-code-diagnostic-20261010",
+    "output": "dn2-decimator-l2-20261010",
+    "argv": [
+      "{prior}",
+      "--decimator-l2",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "e26a218cb4114bfa4b2a38595062eafdfc7970e53e7bac1aba0adea2a4b2f608"
+  },
+  {
+    "component": "waveform_rpc_trace",
+    "script": "build_dn2_waveform_rpc_trace.py",
+    "input": "dn2-decimator-l2-20261010",
+    "output": "dn2-waveform-trace-20261010",
+    "argv": [
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "8aa02a301c459943b9442311efe6f8cb1e9061ad474495395067a2747c82e01f"
+  },
+  {
+    "component": "l1_code_fix_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-waveform-trace-20261010",
+    "output": "dn2-l1-code-fix-20261010",
+    "argv": [
+      "{prior}",
+      "--l1-code-fix",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "716ff49552832bf3a40f68a5aee59979cb8b8eee3e879ff651c2f74cb77a9fca"
+  },
+  {
+    "component": "waveform_coherency_fix",
+    "script": "build_dn2_waveform_coherency.py",
+    "input": "dn2-l1-code-fix-20261010",
+    "output": "dn2-waveform-coherency-20261010",
+    "argv": [
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "53a7dd2e3b42910114d729b6c1bfbe1cd52ed184b9d7c407aa58458b56e73dfd"
+  },
+  {
+    "component": "waveform_coherency_fix_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-waveform-coherency-20261010",
+    "output": "dn2-waveform-fix-20261010",
+    "argv": [
+      "{prior}",
+      "--waveform-coherency-fix",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "e8b78a5603fba7591529305a0df186b13db11710b07a5520ca9e69218688af41"
+  },
+  {
+    "component": "stereo_rate_fix_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-waveform-fix-20261010",
+    "output": "dn2-stereo-rate-20261010",
+    "argv": [
+      "{prior}",
+      "--stereo-rate-fix",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "eb0026bd6c06ee545c45ce7a9e1ba618bccaebcd57491bb2899aa42400841e0f"
+  },
+  {
+    "component": "stretch_rate_fix_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-stereo-rate-20261010",
+    "output": "dn2-stretch-rate-20261010",
+    "argv": [
+      "{prior}",
+      "--stretch-rate-fix",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "e47a8e635af03195f0a0e4a7440f5920afd1b47a0d0639c07067fd62bd47ff62"
+  },
+  {
+    "component": "slice_encoder_fix",
+    "script": "build_dn2_slice_encoder_fix.py",
+    "input": "dn2-stretch-rate-20261010",
+    "output": "dn2-slice-encoder-fix-20261010",
+    "argv": [
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "22d84fdf6f4862a780cdeaa3e2f1ab5fe94f0371a891e1a3c2bd78cef3657312",
+    "carry": [
+      "bootstrap.S",
+      "fn_new_map.txt",
+      "ram_map.txt"
+    ]
+  },
+  {
+    "component": "samp_slot_display",
+    "script": "build_dn2_samp_slot_display.py",
+    "input": "dn2-slice-encoder-fix-20261010",
+    "output": "dn2-samp-slot-display-20261010",
+    "argv": [
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "34c74860a567cba3ed22f2cffdb10fd84b16a98050179d4e540aceb89b8d0f5b"
+  },
+  {
+    "component": "samp_slot_display_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-samp-slot-display-20261010",
+    "output": "dn2-samp-slot-display-identity-20261010",
+    "argv": [
+      "{prior}",
+      "--samp-slot-display",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "9e86574554404e93710c05edc64d9bd882ceb3a5eb467f80cfa0420a9ed21bad"
+  },
+  {
+    "component": "cursor_stop_fix_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-samp-slot-display-identity-20261010",
+    "output": "dn2-cursor-stop-identity-20261010",
+    "argv": [
+      "{prior}",
+      "--cursor-stop-fix",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "07d32e529efa2ab7a07e05930f69aca7c2f93de89f83edf1282a64cb10c732a6"
+  },
+  {
+    "component": "preview_audio_fix",
+    "script": "build_dn2_sample_preview_commands.py",
+    "input": "dn2-cursor-stop-identity-20261010",
+    "output": "dn2-sample-preview-commands-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "52a449c77920e10978a0740f797ca0a7041f7d5fd9530e541f48aacdf8e5672c"
+  },
+  {
+    "component": "preview_audio_fix_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-sample-preview-commands-20261010",
+    "output": "dn2-preview-audio-identity-20261010",
+    "argv": [
+      "{prior}",
+      "--preview-audio-fix",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "820db492ee661e66124e362156cbacfef916d404bc1a99e16f2a2a37a3ca98c8"
+  },
+  {
+    "component": "encoder_sensitivity",
+    "script": "build_dn2_sampler_encoder_sensitivity.py",
+    "input": "dn2-preview-audio-identity-20261010",
+    "output": "dn2-sampler-encoder-sensitivity-20261010",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "29d4b5edebdce12febcc520e7b5d7be2fdb4d15a3244529e26a30ac4ee73b1d4"
+  },
+  {
+    "component": "encoder_sensitivity_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-sampler-encoder-sensitivity-20261010",
+    "output": "dn2-encoder-sensitivity-identity-20261010",
+    "argv": [
+      "{prior}",
+      "--encoder-sensitivity",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "66d2996644f8d87be2383bbf1350f2f26afa439648fe40be526a3ee8fb818456"
+  },
+  {
+    "component": "sampler_start_fix_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-encoder-sensitivity-identity-20261010",
+    "output": "dn2-sampler-start-fix-identity-20261011",
+    "argv": [
+      "{prior}",
+      "--sampler-start-fix",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "12c4bc70eb93de9e8ca269f913b1fbe84edad38cfbf9d5da8868e53d318f4042"
+  },
+  {
+    "component": "block_timing_diagnostic_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-sampler-start-fix-identity-20261011",
+    "output": "dn2-block-timing-diagnostic-identity-20261011",
+    "argv": [
+      "{prior}",
+      "--block-timing-diagnostic",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "214954fb2de2ea22a7486a5f65eebb0f60712a61dc72173ce6736bb8a37c29e0"
+  },
+  {
+    "component": "timing_publication_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-block-timing-diagnostic-identity-20261011",
+    "output": "dn2-timing-publication-identity-20261011",
+    "argv": [
+      "{prior}",
+      "--timing-publication",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "e9917da8569ea8d87f4cf25e22b8aa8f1af46c3269ded60832cfdaf7b32ba357"
+  },
+  {
+    "component": "scheduler_backlog_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-timing-publication-identity-20261011",
+    "output": "dn2-scheduler-backlog-identity-20261011",
+    "argv": [
+      "{prior}",
+      "--scheduler-backlog",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "d3e77f709d9e400e10fff130cfc9b69091b9e103a53d2e1c33f328674e6eee0c"
+  },
+  {
+    "component": "output_deadline_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-scheduler-backlog-identity-20261011",
+    "output": "dn2-output-deadline-identity-20261012",
+    "argv": [
+      "{prior}",
+      "--output-deadline",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "ffc65adb7ed09b6b8425cba5aaadb588ec8377241cd7676098964519bb8036e6"
+  },
+  {
+    "component": "codec_usb_capture_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-output-deadline-identity-20261012",
+    "output": "dn2-codec-usb-capture-identity-20261012",
+    "argv": [
+      "{prior}",
+      "--codec-usb-capture",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "c168266d952850e7bb3058f94141fb293fc727f05974a443e82ec91864c23603"
+  },
+  {
+    "component": "codec_usb_capture_fix_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-codec-usb-capture-identity-20261012",
+    "output": "dn2-codec-usb-capture-fix-identity-20261012",
+    "argv": [
+      "{prior}",
+      "--codec-usb-capture-fix",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "d974f192f8689ebe46340f10fa452b35de2cba4e3a9c6dc85e0f1dfafc290040"
+  },
+  {
+    "component": "codec_delivery_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-codec-usb-capture-fix-identity-20261012",
+    "output": "dn2-codec-delivery-identity-20261012",
+    "argv": [
+      "{prior}",
+      "--codec-delivery",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "e03f73d5407a1444f6d12eb3a1285ee7e8f1a1ea38a3d0be931e4f6edaa29d4b"
+  },
+  {
+    "component": "codec_stage_commit_identity",
+    "script": "build_dn2_playback_diagnostic_identity.py",
+    "input": "dn2-codec-delivery-identity-20261012",
+    "output": "dn2-codec-stage-commit-identity-20261012",
+    "argv": [
+      "{prior}",
+      "--codec-stage-commit",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "b23354cb00a8b55677ed1edb6ebe133f3c33ef48ebb1ce0d8033fb56d77a07e8"
+  },
+  {
+    "component": "usb_multitrack",
+    "script": "build_dn2_usb_multitrack.py",
+    "input": "dn2-codec-stage-commit-identity-20261012",
+    "output": "dn2-usb-multitrack-20261012",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "acb2d713c89ae21b2190f20e482aa78da34a27fdd68c75898b0400f6624d5228"
+  },
+  {
+    "component": "usb_multitrack_efficient",
+    "script": "build_dn2_usb_multitrack_efficient.py",
+    "input": "dn2-usb-multitrack-20261012",
+    "output": "dn2-usb-multitrack-efficient-20261012",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "116b21a48406f3feffa4d6d3d70c69e227ba8dd3129dcf8510353f8aa3cacd9c"
+  },
+  {
+    "component": "usb_multitrack_sram",
+    "script": "build_dn2_usb_multitrack_sram.py",
+    "input": "dn2-usb-multitrack-efficient-20261012",
+    "output": "dn2-usb-multitrack-sram-20261012",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "7067ea3c1b62c0bb563f8232f2ff3106a95d2d4cf809a213769d4d39d5e1c475"
+  },
+  {
+    "component": "usb_fullmix",
+    "script": "build_dn2_usb_fullmix.py",
+    "input": "dn2-usb-multitrack-sram-20261012",
+    "output": "dn2-usb-fullmix-20261013",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "27b9f5e9acfbbc4b18d7e7088679d91a79989cdd9332481efae4d8276878f01f"
+  },
+  {
+    "component": "oneshot_shared_defaults",
+    "script": "build_dn2_oneshot_shared_defaults.py",
+    "input": "dn2-usb-fullmix-20261013",
+    "output": "dn2-oneshot-shared-defaults-r2-20261013",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "f8288a2bd56046d64b4977c467e7fd862a47dbb6bbe036b124c7c61d65427aa7"
+  },
+  {
+    "component": "oneshot_init_release",
+    "script": "build_dn2_oneshot_init_release.py",
+    "input": "dn2-oneshot-shared-defaults-r2-20261013",
+    "output": "dn2-oneshot-init-t1e0-20261013",
+    "argv": [
+      "--input",
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "28fa87afd36ee119c3183822920773761a2f611356ecc9a1757125a495f10eae"
+  },
+  {
+    "component": "sample_browser_names",
+    "script": "build_dn2_sample_browser_names.py",
+    "input": "dn2-oneshot-init-t1e0-20261013",
+    "output": "dn2-sample-browser-names-20261013",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "5a5f986ffc23ea3346fe3c8b4af2cd5f3f4661b0494c17066b726c6374bc383d"
+  },
+  {
+    "component": "browser_identity_lookup",
+    "script": "build_dn2_browser_identity_lookup.py",
+    "input": "dn2-sample-browser-names-20261013",
+    "output": "dn2-browser-identity-lookup-20261013",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "8bc5b66ef3ed99fa685477fbb26ebe117f3fef6b500f4283319125618a51f12d"
+  },
+  {
+    "component": "sample_browser_release",
+    "script": "build_dn2_sample_browser_release.py",
+    "input": "dn2-browser-identity-lookup-20261013",
+    "output": "dn2-browser-performance-t1e1-20261013",
+    "argv": [
+      "--input",
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "866e2a6c3ac602e1dfd8f75aa685631a500d7a061a00ae77c26be7b41eb59a64"
+  },
+  {
+    "component": "usb_capture_efficient",
+    "script": "build_dn2_usb_capture_efficient.py",
+    "input": "dn2-browser-performance-t1e1-20261013",
+    "output": "dn2-usb-capture-efficient-20261013",
+    "argv": [
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "5f6c2dbdd6db75ceca1d728a2e062754d5bbb0b893641e1c2ad8b092c532a6ea"
+  },
+  {
+    "component": "slice_trig_mode",
+    "script": "build_dn2_slice_trig_mode.py",
+    "input": "dn2-usb-capture-efficient-20261013",
+    "output": "dn2-slice-trig-mode-20261015",
+    "argv": [
+      "--input",
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "5ea841490484aad4f6c481ca37419e672d4e4f76913f27fad792a5b510131a62"
+  },
+  {
+    "component": "sampler_widgets",
+    "script": "build_dn2_sampler_widgets.py",
+    "input": "dn2-slice-trig-mode-20261015",
+    "output": "dn2-sampler-ui-slices-t1e2-20261015",
+    "argv": [
+      "{prior}",
+      "--out",
+      "{out}"
+    ],
+    "main_sha256": "4f2cea43e6a70ae922dc58ac7c02cfb91f72fdeaa4b4146ba72e2007a2c39f96"
+  }
+]

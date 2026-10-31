@@ -1,0 +1,132 @@
+{
+  "reservations": [
+    {
+      "donor": "0x4065d8c0",
+      "length": "0x8000",
+      "mapped": [
+        "0x468af58c",
+        "0x468b758c"
+      ]
+    },
+    {
+      "donor": "0x4067d8c4",
+      "length": "0x2c4000",
+      "mapped": [
+        "0x468b7590",
+        "0x46b7b590"
+      ]
+    },
+    {
+      "donor": "0x40941d90",
+      "length": "0x8000",
+      "mapped": [
+        "0x46b7bb58",
+        "0x46b83b58"
+      ]
+    },
+    {
+      "donor": "0x40949d90",
+      "length": "0x8000",
+      "mapped": [
+        "0x46b83b8c",
+        "0x46b8bb8c"
+      ]
+    },
+    {
+      "donor": "0x40959d90",
+      "length": "0x8000",
+      "mapped": [
+        "0x46b8bb8c",
+        "0x46b93b8c"
+      ]
+    },
+    {
+      "donor": "0x44f2bd6c",
+      "length": "0x8000",
+      "mapped": [
+        "0x46b96090",
+        "0x46b9e090"
+      ]
+    },
+    {
+      "donor": "0x46f63ed0",
+      "length": "0xe10000",
+      "mapped": [
+        "0x46bc188c",
+        "0x479d188c"
+      ]
+    },
+    {
+      "donor": "0x47d73ed0",
+      "length": "0x40000",
+      "mapped": [
+        "0x479d188c",
+        "0x47a1188c"
+      ]
+    },
+    {
+      "donor": "0x405d5770",
+      "length": "0x80000",
+      "mapped": [
+        "0x4682ef8c",
+        "0x468aef8c"
+      ]
+    },
+    {
+      "donor": "0x405bd770",
+      "length": "0x8000",
+      "mapped": [
+        "0x46816f8c",
+        "0x4681ef8c"
+      ]
+    },
+    {
+      "donor": "0x405c5770",
+      "length": "0x8000",
+      "mapped": [
+        "0x4681ef8c",
+        "0x46826f8c"
+      ]
+    },
+    {
+      "donor": "0x405cd770",
+      "length": "0x8000",
+      "mapped": [
+        "0x46826f8c",
+        "0x4682ef8c"
+      ]
+    },
+    {
+      "donor": "0x47e203cc",
+      "length": "0x8000",
+      "mapped": [
+        "0x47a11c8c",
+        "0x47a19c8c"
+      ]
+    },
+    {
+      "donor": "0x46f4dcb0",
+      "length": "0x200",
+      "mapped": [
+        "0x46bb289c",
+        "0x46bb2a9c"
+      ]
+    },
+    {
+      "donor": "0x46f39ca0",
+      "length": "0x18000",
+      "mapped": [
+        "0x46b9e88c",
+        "0x46bb688c"
+      ]
+    },
+    {
+      "donor": "0x46f58ed0",
+      "length": "0xb000",
+      "mapped": [
+        "0x46bb688c",
+        "0x46bc188c"
+      ]
+    }
+  ]
+}
