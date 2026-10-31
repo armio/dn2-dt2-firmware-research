@@ -5,6 +5,13 @@ designated stable on October 15, 2026. No firmware images or sample audio are
 distributed. The build extracts required Elektron code and assets from firmware
 you supply locally, assembles the adapters, and checks the complete output hash.
 
+This project builds on the DN2 research and `dnfw` tooling from
+[angellinares/dn2_firmware_explore](https://github.com/angellinares/dn2_firmware_explore),
+with firmware container tooling from
+[mischa85/elektron-firmware-tool](https://github.com/mischa85/elektron-firmware-tool).
+Credit to the upstream authors and contributors for that foundation. See
+[source attribution](THIRD_PARTY.md) for component credits and licences.
+
 T1E2 includes ONESHOT, WERP, STRETCH, REPITCH, GRID and SLICE; stereo samples;
 sample browsing; DT2 parameter graphics; SLICES trig mode; and class-compliant
 USB audio with 42 capture channels at 48 kHz/24 bit. Its USB return is stereo.
