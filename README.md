@@ -5,6 +5,10 @@ designated stable on October 15, 2026. No firmware images or sample audio are
 distributed. The build extracts required Elektron code and assets from firmware
 you supply locally, assembles the adapters, and checks the complete output hash.
 
+**Build limitation:** exact T1E2 also requires a private project test-sample bank.
+This is **not Digitakt II factory content** and cannot be obtained by exporting
+samples from a Digitakt II. See [private inputs](#private-inputs) before building.
+
 This project builds on the DN2 research and `dnfw` tooling from
 [angellinares/dn2_firmware_explore](https://github.com/angellinares/dn2_firmware_explore),
 with firmware container tooling from
@@ -18,6 +22,9 @@ USB audio with 42 capture channels at 48 kHz/24 bit. Its USB return is stereo.
 The 21 capture pairs are MAIN, tracks 1–16, DELAY, REVERB, CHORUS and INPUT,
 in that order. Individual tracks exclude shared effect returns.
 
+Already running this firmware? See [loading your own samples](docs/samples.md)
+for Transfer, +Drive, project loading and track assignment instructions.
+
 This is a version-specific port, not Elektron's source code. Later experimental
 Recorder changes and USB stress-test branches are outside this release. The
 stable designation records successful owner testing with USB streaming; it is
@@ -26,14 +33,24 @@ not a claim that every workflow or long-running workload has been verified.
 ## Private inputs
 
 The exact build requires official Digitone II OS 1.11, official Digitakt II
-OS 1.16, and the original 47,104-byte three-slot sample bank. Sizes and SHA-256
+OS 1.16, and the original private 47,104-byte three-slot test-sample bank. Sizes and SHA-256
 hashes are pinned in [releases/t1e2.json](releases/t1e2.json). Obtain firmware
 from Elektron and retain your own copies locally.
 
-**The sample bank is not included or offered for download.** It contains private
-sample audio. Someone without that exact bank cannot reproduce T1E2 from this
-repository alone. Replacing it would produce a different firmware, outside the
-stable release's checksum and validation history.
+The Digitakt II input is its **OS firmware `.syx` file**, from which the build
+extracts Machine code and UI assets. The Digitakt II factory sample library is
+not a build input.
+
+**`sample-bank.bin` is not included or offered for download.** It is a private
+test asset created for this project, separate from both official OS files.
+Owning a Digitakt II or exporting its factory samples will not supply this file.
+Without the exact bank, the current recipe cannot build T1E2. Arbitrary WAVs,
+an empty file, or samples uploaded through Transfer cannot replace it: the
+builder checks the bank's size and hash before building.
+
+A build without this dependency needs its own release and validation; no such
+build target is currently provided. The instructions for [loading playable
+samples](docs/samples.md) apply after installation and are a separate workflow.
 
 Check the inputs without changing them:
 

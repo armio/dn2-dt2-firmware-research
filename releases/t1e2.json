@@ -14,7 +14,7 @@
       "sha256": "278541e466edcd77d6b3e018a91fb90185932d3c7de224dd3e68294dddf3a9ec"
     },
     "sample_bank": {
-      "description": "Original private three-slot sample bank; not distributed",
+      "description": "Original private project test bank with three sample slots; not Digitakt II factory content; not distributed",
       "bytes": 47104,
       "sha256": "bef6175add1febd8dbfed8a01a387e2e94f794144bc4f5db298a3f9c0c438b0e"
     }

@@ -4,6 +4,9 @@ This repository is intended to reproduce T1E2 from three privately supplied
 inputs identified in `releases/t1e2.json`. It does not distribute those inputs
 or any generated firmware. The original sample bank is required for exact
 reproduction; arbitrary replacement audio will not match the release hash.
+That bank is a private project test asset, not Digitakt II factory content or
+an export obtainable from a Digitakt II. See [sample loading](samples.md) for
+the separate workflow of importing playable samples after installation.
 
 Publish original build/adaptor source, extraction and relocation recipes,
 factual address metadata, dependency pins, synthetic tests and research notes.
