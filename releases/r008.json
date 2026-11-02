@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "build": "R008",
+  "status": "experimental-diagnostic",
+  "date": "2026-11-02",
+  "stable_baseline": "T1E2",
+  "inputs": {
+    "dn2": {
+      "description": "Official Digitone II OS 1.11 SysEx",
+      "bytes": 2389280,
+      "sha256": "2af43e65e3d8390b41c9f66222620f8cce027d73ed87db00c80b440f628472e0"
+    },
+    "dt2": {
+      "description": "Official Digitakt II OS 1.16 SysEx",
+      "bytes": 1880864,
+      "sha256": "278541e466edcd77d6b3e018a91fb90185932d3c7de224dd3e68294dddf3a9ec"
+    },
+    "sample_bank": {
+      "description": "Original private project test bank with three sample slots; not Digitakt II factory content; not distributed",
+      "bytes": 47104,
+      "sha256": "bef6175add1febd8dbfed8a01a387e2e94f794144bc4f5db298a3f9c0c438b0e"
+    }
+  },
+  "outputs": {
+    "main_sha256": "e048626f25be1cdbbb02f83f892f6f70f876b655d5e45659fc3dc6c1abfa4cc8",
+    "expanded_main_sha256": "af0f0eb6d0bcfbadad8a2aed69cc90e1c7f8d2dad0cf9ed77bf5784f689c3033",
+    "dsp_sha256": "7613f501bcf71c8e8a8d99a1976a549baf8f8b2df7dc30a8a88baa2dc08da7ff",
+    "sysex_sha256": "2d2a0fad7af74b5ff1e7b355bc4bccf7e932877cf9736ca416613a699a7d3ece",
+    "sysex_bytes": 2587936
+  },
+  "machines": [
+    "ONESHOT",
+    "WERP",
+    "STRETCH",
+    "REPITCH",
+    "GRID",
+    "SLICE"
+  ],
+  "usb": {
+    "capture_channels": 42,
+    "return_channels": 2,
+    "sample_rate": 48000,
+    "valid_bits": 24,
+    "stereo_pairs": [
+      "MAIN",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15",
+      "T16",
+      "DELAY",
+      "REVERB",
+      "CHORUS",
+      "INPUT"
+    ]
+  },
+  "changes": [
+    "R003 Recorder and separate MAIN-tail loader retained",
+    "R004 buffer phase accounting and R005 sample scratch-memory efficiency changes",
+    "R007 guarded USB publication retains previous audio on rejection",
+    "R008 records 40 rejection/postcheck predicates with bounded journals and immutable checksummed diagnostic snapshots",
+    "R008 keeps R007 acceptance conditions, buffer ownership and control-frame ordering unchanged; MAIN changes only the build marker"
+  ],
+  "validation": {
+    "hardware_confirmed": [],
+    "offline_checked": [
+      "Exact R007 DSP reversal and bounded ABI/predicate-route execution fixtures",
+      "Native export/header comparisons and complete immutable diagnostic publication windows",
+      "Recorder gating, native memory layout and synthetic host decoder checks",
+      "Both MAIN loader paths, container integrity and exact SysEx roundtrip"
+    ],
+    "pending": [
+      "R008 installation and first hardware rejection-reason capture",
+      "Behavioral correction for R007 USB publication rejection/freeze",
+      "Long-duration USB, sample playback and project-change endurance"
+    ],
+    "audit_status": "review",
+    "notes": "Diagnostic candidate, not a confirmed USB fix. No failed aggregate component; SHARC encoding/fetch interpretation and incomplete source-store coverage remain under review. Instrumentation can perturb timing."
+  },
+  "source_reproduction": {
+    "verified_on": "2026-11-02",
+    "platform": "macOS, Python 3.12",
+    "method": "Exported R008 source rebuilt with the pinned public toolchain from previously source-reproduced T1E2/R003 private intermediates; packaged with the original validated private DN2 input",
+    "exact_main_dsp_and_sysex": true,
+    "baseline_rebuilt_this_run": false,
+    "hardware_access": false
+  }
+}

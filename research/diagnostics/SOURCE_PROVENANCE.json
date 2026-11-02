@@ -1,0 +1,42 @@
+{
+  "schema": "read-only-diagnostic-source-v1",
+  "license": "AGPL-3.0-or-later",
+  "sources": [
+    {
+      "source": "scripts/capture_dn2_r007_diagnostic.py",
+      "sha256": "4de6d15b1f2509bc39c6175c73b1d7e4ed82a501306fb136870cbba96791b322"
+    },
+    {
+      "source": "scripts/capture_dn2_r008_diagnostic.py",
+      "sha256": "7559d282d5c7cfdcef632ec536a54905c7899c6f4f532ec11860fcf21439e709"
+    },
+    {
+      "source": "dn2_midi.py",
+      "sha256": "912af5d7a3b82c529b63857e275d1886ecd488af15ae64fe28dbe6a4ab130530"
+    },
+    {
+      "source": "dn2_sample_load_v2.py",
+      "sha256": "a4de01fa8394d1f67509e3058097ba0af03257cd24646340115a50bd72ae8b4f"
+    },
+    {
+      "source": "oneshot_probe.py",
+      "sha256": "ee26e4b486cc1e82e9de59192e760907544d1fe5d4a1a4466d593948e6e7369c"
+    },
+    {
+      "source": "tests/test_r007_diagnostic_decoder.py",
+      "sha256": "6843d6e4bd960b943265ca84372a4ffc3d357e08671e4b63c36cc04d0a0ca5b3"
+    },
+    {
+      "source": "tests/test_r008_diagnostic_decoder.py",
+      "sha256": "5480e489c1e56c2d905df479a7332e3064fa906d32b9f106bf1a8b022bd0babb"
+    }
+  ],
+  "adaptations": [
+    "Required private build/output paths replace research-workspace defaults",
+    "UTC timestamps replace local timezone",
+    "Read-only transport extracted from existing MIDI/loader/wire helpers; all load, note and control APIs omitted",
+    "Capture read allowlist is immutable per client; output inside source tree rejected",
+    "Optional exact MIDI port name; decoder tests resolve the public source directory"
+  ],
+  "publication": "Source and synthetic tests only; no firmware, sample audio or device capture payloads"
+}

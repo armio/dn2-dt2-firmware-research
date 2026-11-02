@@ -1,0 +1,166 @@
+{
+  "schema": "r008-usb-research-source-v1",
+  "sources": [
+    {
+      "source": "scripts/build_dt2_buffer_phase_accounting.py",
+      "source_sha256": "ce8ff0ec2bbbf0a793d8e48b9adc9b991d8e179551c72aedf0cc8f262ca31011",
+      "export": "tree/scripts/build_dt2_buffer_phase_accounting.py",
+      "export_sha256": "ce8ff0ec2bbbf0a793d8e48b9adc9b991d8e179551c72aedf0cc8f262ca31011"
+    },
+    {
+      "source": "scripts/build_dt2_dsp_scratch_efficiency.py",
+      "source_sha256": "bc6c4016a1a06ecafaf8e5c3cd8d29ba70d3c0e011d716596d367c094ca3b85f",
+      "export": "tree/scripts/build_dt2_dsp_scratch_efficiency.py",
+      "export_sha256": "bc6c4016a1a06ecafaf8e5c3cd8d29ba70d3c0e011d716596d367c094ca3b85f"
+    },
+    {
+      "source": "scripts/build_dt2_usb_publication_timing.py",
+      "source_sha256": "c5e75d296625208117e7033dbba8eb6b4e93c4c05cf70891523117f0536fe0db",
+      "export": "tree/scripts/build_dt2_usb_publication_timing.py",
+      "export_sha256": "c5e75d296625208117e7033dbba8eb6b4e93c4c05cf70891523117f0536fe0db"
+    },
+    {
+      "source": "scripts/build_dt2_usb_guarded_publication.py",
+      "source_sha256": "b8353e072100b3ac39ee1be7a89b4fbbadc68fe808ec606688522fee210b1237",
+      "export": "tree/scripts/build_dt2_usb_guarded_publication.py",
+      "export_sha256": "b8353e072100b3ac39ee1be7a89b4fbbadc68fe808ec606688522fee210b1237"
+    },
+    {
+      "source": "scripts/build_dt2_usb_guard_reasons.py",
+      "source_sha256": "51fb80b03e20f2a26cf151ce300f263b61a59a1f6d8bc1d4016e843ccad21088",
+      "export": "tree/scripts/build_dt2_usb_guard_reasons.py",
+      "export_sha256": "51fb80b03e20f2a26cf151ce300f263b61a59a1f6d8bc1d4016e843ccad21088"
+    },
+    {
+      "source": "scripts/build_dn2_recovery_tail.py",
+      "source_sha256": "62304194205a6d5431d02ef8ea001ad12b2546de1e211f6ad8b755d8123cce4e",
+      "export": "tree/scripts/build_dn2_recovery_tail.py",
+      "export_sha256": "62304194205a6d5431d02ef8ea001ad12b2546de1e211f6ad8b755d8123cce4e"
+    },
+    {
+      "source": "scripts/audit_dn2_dsp_encoding.py",
+      "source_sha256": "ca5796ad63a87b2e6866d9733e3112fcff43be1e80ada9c6725444cdddcfa661",
+      "export": "tree/scripts/audit_dn2_dsp_encoding.py",
+      "export_sha256": "ca5796ad63a87b2e6866d9733e3112fcff43be1e80ada9c6725444cdddcfa661"
+    },
+    {
+      "source": "scripts/check_dt2_buffer_phase_accounting.py",
+      "source_sha256": "4ce13cd64483a36ca8866895a93feb7ebb5c439c3df6b61d892bc9c98b7e50cb",
+      "export": "tree/scripts/check_dt2_buffer_phase_accounting.py",
+      "export_sha256": "4ce13cd64483a36ca8866895a93feb7ebb5c439c3df6b61d892bc9c98b7e50cb"
+    },
+    {
+      "source": "scripts/check_dt2_usb_guarded_publication.py",
+      "source_sha256": "d7b2c49b1a68e36e7df320e04c1deb653a15f8b3da4394c5ad3da57d744d8c61",
+      "export": "tree/scripts/check_dt2_usb_guarded_publication.py",
+      "export_sha256": "d7b2c49b1a68e36e7df320e04c1deb653a15f8b3da4394c5ad3da57d744d8c61"
+    },
+    {
+      "source": "scripts/check_dt2_usb_guard_reasons.py",
+      "source_sha256": "0e107a9f40fe568d010880b0cd09b0ac58325f51f85b37f88b30d4d2efae39d7",
+      "export": "tree/scripts/check_dt2_usb_guard_reasons.py",
+      "export_sha256": "0e107a9f40fe568d010880b0cd09b0ac58325f51f85b37f88b30d4d2efae39d7"
+    },
+    {
+      "source": "scripts/check_dt2_dsp_render_diagnostic.py",
+      "source_sha256": "d0f1c09c6cf0eaf0e61b4d30cc6d7eea813c589402cd2e7de3994e2a1cd93332",
+      "export": "tree/scripts/check_dt2_dsp_render_diagnostic.py",
+      "export_sha256": "d0f1c09c6cf0eaf0e61b4d30cc6d7eea813c589402cd2e7de3994e2a1cd93332"
+    },
+    {
+      "source": "scripts/sharc_modify_units.py",
+      "source_sha256": "31a8f4bbe632476841449e5acdabe5eac58d5145ce9e03358a178fcf26e7a434",
+      "export": "tree/scripts/sharc_modify_units.py",
+      "export_sha256": "31a8f4bbe632476841449e5acdabe5eac58d5145ce9e03358a178fcf26e7a434"
+    },
+    {
+      "source": "firmware/ghidra/oneshot-proof/v7-source/scripts/sharc_dn2_fixups.py",
+      "source_sha256": "653e082de633d8c740a776dfa8e392b5e8f35febf853de9173df3997f52c422b",
+      "export": "tree/scripts/sharc_dn2_fixups.py",
+      "export_sha256": "653e082de633d8c740a776dfa8e392b5e8f35febf853de9173df3997f52c422b"
+    },
+    {
+      "source": "scripts/check_dt2_dsp_scratch_efficiency.py",
+      "source_sha256": "e2dc8e332c05137a78fe7f90e5b48a05b9dca5e2e2cb75ca919565a42b9f43a0",
+      "export": "tree/scripts/check_dt2_dsp_scratch_efficiency.py",
+      "export_sha256": "e2dc8e332c05137a78fe7f90e5b48a05b9dca5e2e2cb75ca919565a42b9f43a0"
+    },
+    {
+      "source": "scripts/check_dt2_stereo_balance.py",
+      "source_sha256": "5f0178b37f0c3f83f7965ef83fc0b532b68d7755394bd8b09205b4ebe842a7b5",
+      "export": "tree/scripts/check_dt2_stereo_balance.py",
+      "export_sha256": "5f0178b37f0c3f83f7965ef83fc0b532b68d7755394bd8b09205b4ebe842a7b5"
+    },
+    {
+      "source": "scripts/check_dn2_right_process.py",
+      "source_sha256": "9b618fd69aa47357bb0410cdb710c0da3409843be9594a36bd62595cf7d37308",
+      "export": "tree/scripts/check_dn2_right_process.py",
+      "export_sha256": "9b618fd69aa47357bb0410cdb710c0da3409843be9594a36bd62595cf7d37308"
+    },
+    {
+      "source": "scripts/check_dn2_right_engine.py",
+      "source_sha256": "b4be8a562add36bc5a68b4c0280bee6838a9dc7e5bfe0adc52eb03b964e2f942",
+      "export": "tree/scripts/check_dn2_right_engine.py",
+      "export_sha256": "b4be8a562add36bc5a68b4c0280bee6838a9dc7e5bfe0adc52eb03b964e2f942"
+    },
+    {
+      "source": "scripts/check_dt2_sampler_dispatch.py",
+      "source_sha256": "c0e845a83f7d0478d06f6775881b070e4afe56bb3b30011a5f17f4e37de228b2",
+      "export": "tree/scripts/check_dt2_sampler_dispatch.py",
+      "export_sha256": "c0e845a83f7d0478d06f6775881b070e4afe56bb3b30011a5f17f4e37de228b2"
+    },
+    {
+      "source": "scripts/check_dt2_sampler_dsp.py",
+      "source_sha256": "c7c1a4e6ff701a59dd1188f85c0aa3df11108f2b1e8fc4861802cf828e48519b",
+      "export": "tree/scripts/check_dt2_sampler_dsp.py",
+      "export_sha256": "c7c1a4e6ff701a59dd1188f85c0aa3df11108f2b1e8fc4861802cf828e48519b"
+    },
+    {
+      "source": "scripts/check_dt2_stereo_voices.py",
+      "source_sha256": "cbe99114cc7d23a2bcd400d451613b03032fa027b9f4990b8335e6a6cc50fa35",
+      "export": "tree/scripts/check_dt2_stereo_voices.py",
+      "export_sha256": "cbe99114cc7d23a2bcd400d451613b03032fa027b9f4990b8335e6a6cc50fa35"
+    },
+    {
+      "source": "scripts/check_dn2_recovery_tail.py",
+      "source_sha256": "aad272fc9d55a31201f869fe6d2dc9196104da2c5511c35aeb7a19bdfc1e4b81",
+      "export": "tree/scripts/check_dn2_recovery_tail.py",
+      "export_sha256": "aad272fc9d55a31201f869fe6d2dc9196104da2c5511c35aeb7a19bdfc1e4b81"
+    },
+    {
+      "source": "firmware/ghidra/oneshot-proof/v7-source/scripts/oneshot_memory_gate.py",
+      "source_sha256": "ffe49e7a938904e547a20745122667b7c091f7cb01bb2158bc49e8b5a32f4b34",
+      "export": "tree/scripts/oneshot_memory_gate.py",
+      "export_sha256": "ffe49e7a938904e547a20745122667b7c091f7cb01bb2158bc49e8b5a32f4b34"
+    },
+    {
+      "source": "firmware/ghidra/oneshot-proof/v7-source/scripts/check_oneshot_adapter_direct.py",
+      "source_sha256": "bf23a4763c9acde04e246c86e0276d8aba763adfa1ffdf726b47f8efc554194b",
+      "export": "tree/scripts/check_oneshot_adapter_direct.py",
+      "export_sha256": "0dc7643230bbc5becb00973e561e864828c257cc25a84db12881c217606deb92",
+      "transformation": "Retain only exact_bytes and register emulator readers; omit unrelated artifact/capture CLI and its unused imports."
+    },
+    {
+      "source": "firmware/ghidra/oneshot-proof/v7-source/scripts/sharc_oneshot_run.py",
+      "source_sha256": "1e0a68d8c8dd04aa7df9e6aca57e9bd1fcfea94775ffaa5a366de423d2c8fa78",
+      "export": "tree/scripts/sharc_oneshot_run.py",
+      "export_sha256": "1e0a68d8c8dd04aa7df9e6aca57e9bd1fcfea94775ffaa5a366de423d2c8fa78"
+    },
+    {
+      "source": "output/dn2-research/oneshot-native-bounds-dt2-20261008/native_conversion_model.py",
+      "source_sha256": "7c54f56256c914f77b69c15c2a6a8ac0beea2de5a4afee85af80a9b107ecc90e",
+      "export": "tree/scripts/native_conversion_model.py",
+      "export_sha256": "7c54f56256c914f77b69c15c2a6a8ac0beea2de5a4afee85af80a9b107ecc90e"
+    }
+  ],
+  "transformations": [
+    "Replace local workspace/toolchain roots with materialized path placeholders."
+  ],
+  "omitted": [
+    "Firmware binaries and loader payloads",
+    "Private sample bank and recordings",
+    "Device captures and personal paths"
+  ],
+  "baseline": "Reproduced R003, itself derived from T1E2",
+  "status": "Experimental diagnostic; USB publication rejection fault unresolved."
+}

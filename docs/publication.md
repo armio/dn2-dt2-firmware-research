@@ -1,6 +1,6 @@
 # Source-only publication
 
-This repository reproduces stable T1E2 and experimental R003 from three privately
+This repository reproduces stable T1E2 and experimental R003/R008 from three privately
 supplied inputs identified in their `releases/` manifests. It does not distribute those inputs
 or any generated firmware. The original sample bank is required for exact
 reproduction; arbitrary replacement audio will not match the release hash.
@@ -12,6 +12,9 @@ Experimental recipes and research checks do not promote a build to stable.
 Publish validation summaries with their limits, not private hardware captures
 or generated receipts. R003 hardware trim comparison and endurance remain
 pending; T1E2 retains its stable designation.
+R008 is diagnostic: it has not been validated on hardware, and the captured
+R007 USB freeze remains unresolved. Publishing its source does not promote it
+as an upgrade recommendation.
 
 Publish original build/adaptor source, extraction and relocation recipes,
 factual address metadata, dependency pins, synthetic tests and research notes.

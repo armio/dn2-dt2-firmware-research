@@ -10,6 +10,12 @@ auditioning, saving and reopening Recorder. See the [R003 build and usage
 guide](docs/recorder.md). T1E2 remains the stable default; R003 validation is
 still in progress.
 
+**R008 publishes the latest USB diagnostic research.** It includes the Recorder,
+sample scratch-memory changes and guarded USB publication, plus checksummed
+records of rejected audio blocks. It is **not a confirmed USB fix**: R007 can
+freeze USB audio while headphones and UI continue working; R008 hardware
+validation is pending. See the [USB research guide](docs/usb-research.md).
+
 **Build limitation:** exact T1E2 also requires a private project test-sample bank.
 This is **not Digitakt II factory content** and cannot be obtained by exporting
 samples from a Digitakt II. See [private inputs](#private-inputs) before building.
@@ -31,8 +37,8 @@ Already running this firmware? See [loading your own samples](docs/samples.md)
 for Transfer, +Drive, project loading and track assignment instructions.
 
 This is a version-specific port, not Elektron's source code. Recorder is
-available only in the separate R003 target. Later USB stress-test branches are
-excluded from both targets. The
+available in the separate R003 and R008 targets. T1E2 and R003 exclude the later
+USB research changes; R008 includes the diagnostic branch described above. The
 stable designation records successful owner testing with USB streaming; it is
 not a claim that every workflow or long-running workload has been verified.
 
@@ -55,7 +61,7 @@ an empty file, or samples uploaded through Transfer cannot replace it: the
 builder checks the bank's size and hash before building.
 
 A build without this dependency needs its own release and validation; neither
-T1E2 nor R003 currently provides that. The instructions for [loading playable
+T1E2, R003 nor R008 currently provides that. The instructions for [loading playable
 samples](docs/samples.md) apply after installation and are a separate workflow.
 
 Check the inputs without changing them:
@@ -104,8 +110,15 @@ To build experimental R003 instead, use the same command with `--target R003`
 and a different output filename. It rebuilds the stable baseline first, then
 applies the Recorder and startup changes. The same private inputs are required.
 
+For the latest diagnostic candidate, use `--target R008` and a separate output
+filename. It builds through R003, then applies the USB research stages. Expected
+output identities and validation limits are in [releases/r008.json](releases/r008.json).
+Neither experimental target changes the stable default.
+
 ## Source and contributions
 
+[November 2 research update](docs/research/2026-11-02.md) covers the USB freeze,
+buffer checks and new diagnostics. The
 [October 31 research update](docs/research/2026-10-31.md) documents Recorder
 verification, loader-overlap findings and remaining audit limits. Reusable
 offline checks and synthetic tests are described in the
