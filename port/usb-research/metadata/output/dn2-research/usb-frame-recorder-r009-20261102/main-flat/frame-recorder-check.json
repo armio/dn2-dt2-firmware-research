@@ -1,0 +1,41 @@
+{
+  "ok": true,
+  "main_sha256": "0fcedfbcb93b766379606aadb5307ca65b36ab68770769368ba6198ed425900e",
+  "runtime_sha256": "a4c5ee83792ecbb95860b4c5cc9f6b58253ea5cc66a162ffb4020d9b99db7671",
+  "scope": {
+    "exact_parent_reversal": true,
+    "parent_main_sha256": "af0f0eb6d0bcfbadad8a2aed69cc90e1c7f8d2dad0cf9ed77bf5784f689c3033",
+    "parent_runtime_sha256": "ddf418cc1f341222312556ba1dc225a43ab8981ab4f49996a71ef8cb8028aeb2",
+    "appended_bytes": 57744,
+    "allowed_sites": 6,
+    "runtime_reservation_unchanged": true
+  },
+  "cases": [
+    "unknown and inherited command4 preserve registers/CCR before native fallback",
+    "malformed arm/freeze refuse without private state mutation",
+    "disabled/enabled original memcpy, queue, gather hook registers/CCR/stack/output parity",
+    "native queue refusal D0/CCR retained and logged",
+    "SPI exact observed marker/heartbeat/word3/word4 and CSR brackets",
+    "all rings wrap with bounded stores, matching sequence+epoch and exact overwrite counts",
+    "freeze in-flight commits once; subsequent hooks leave frozen body/counts unchanged; freeze idempotent",
+    "freeze busy mask and ARM refusal protect split gather while pending",
+    "sequence counter saturates rather than wrapping",
+    "non-audio memcpy rejected by observer without changing native memcpy"
+  ],
+  "observer_instructions": {
+    "spi_False": 38,
+    "queue_False": 37,
+    "collector_begin_False": 16,
+    "collector_end_False": 14,
+    "spi_True": 105,
+    "queue_True": 117,
+    "collector_begin_True": 42,
+    "collector_end_True": 47
+  },
+  "limits": [
+    "Native CF execution with fixture memory/MMIO/timer, not hardware timing.",
+    "Four-word sparse XOR signatures are observations, not full payload identity.",
+    "Known accepted producer callsites share non-reentrant priority5 audio ISR; no additional IRQ policy.",
+    "No physical USB completion, DSP journal reconstruction, audible-continuity or dropout-elimination claim."
+  ]
+}

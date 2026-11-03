@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "inputs": {
+    "dn2": {
+      "description": "Official Digitone II OS 1.11 SysEx",
+      "bytes": 2389280,
+      "sha256": "2af43e65e3d8390b41c9f66222620f8cce027d73ed87db00c80b440f628472e0"
+    },
+    "dt2": {
+      "description": "Official Digitakt II OS 1.16 SysEx",
+      "bytes": 1880864,
+      "sha256": "278541e466edcd77d6b3e018a91fb90185932d3c7de224dd3e68294dddf3a9ec"
+    },
+    "sample_bank": {
+      "description": "Original private project test bank with three sample slots; not Digitakt II factory content; not distributed",
+      "bytes": 47104,
+      "sha256": "bef6175add1febd8dbfed8a01a387e2e94f794144bc4f5db298a3f9c0c438b0e"
+    }
+  },
+  "machines": [
+    "ONESHOT",
+    "WERP",
+    "STRETCH",
+    "REPITCH",
+    "GRID",
+    "SLICE"
+  ],
+  "usb": {
+    "capture_channels": 42,
+    "return_channels": 2,
+    "sample_rate": 48000,
+    "valid_bits": 24,
+    "stereo_pairs": [
+      "MAIN",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15",
+      "T16",
+      "DELAY",
+      "REVERB",
+      "CHORUS",
+      "INPUT"
+    ]
+  },
+  "build": "R011",
+  "status": "stable",
+  "date": "2026-11-03",
+  "stable_baseline": "T1E2",
+  "previous_stable": "T1E2",
+  "outputs": {
+    "main_sha256": "a71a42b5d95eca1bfa5416cd7ffe7959687529383a5b7967ac57ab7c4a59f8e5",
+    "expanded_main_sha256": "453df8ed6927d25f8364db6f6f70579de1f47f9f4a39849db3ba5f25e4e2e809",
+    "runtime_sha256": "420a763dc77ca584ecb42d4e6557f56d305e626730cda36d74a36b772acd0c97",
+    "dsp_sha256": "495a2de2cee75d5c7c9f61e2fb28daed3a40cadf0223de3f57ff24238664f58e",
+    "sysex_sha256": "91b32a4d2161a87a4725a2296371e01ee6c7e83a95dccb38fe9f4a8dd2e53b0b",
+    "sysex_bytes": 2591008
+  },
+  "changes": [
+    "Six sample Machines, sample browsing, Recorder and 42-channel USB audio retained",
+    "R009 adds a bounded control-frame recorder for repeatable USB diagnosis",
+    "R010 retains completed paired TDM/SPI audio in FIFO order until publication is permitted",
+    "R011 selects the SPI destination candidate from current DMA START rather than the earlier render/RX phase",
+    "Buffer ownership checks, control-frame ordering, native DMA configuration and TDM destination selection remain unchanged from R010"
+  ],
+  "validation": {
+    "hardware_confirmed": [
+      "Owner reports R011 installed and playback working after loading a different project",
+      "Owner designated R011 stable on 2026-11-03"
+    ],
+    "offline_checked": [
+      "Native execution reproduces the R010 SPI destination rejection and verifies R011 progress for both SPI pages and both TDM phases",
+      "FIFO order, native control prefix/trailer, unchanged-START protection and DMA-turnover cases",
+      "Invalid COUNT, unknown START and torn ownership brackets reject without live writes",
+      "Inherited exporter, ABI, queue and post-copy checks; both MAIN loader paths; container integrity and exact SysEx roundtrip",
+      "44 synthetic host tests passed during local R011 preparation"
+    ],
+    "pending": [
+      "Instrumented R011 hardware comparison across repeated project changes",
+      "Long-duration USB and sample playback endurance",
+      "Exact end-to-end USB latency measurement",
+      "Investigation of track-2 sample assignment missing after project loads"
+    ],
+    "notes": "Stable designation follows owner testing, not exhaustive verification. The track-2 persistence report has no confirmed cause yet. Emulator checks do not establish hardware timing deadlines."
+  },
+  "known_issues": [
+    {
+      "issue": "Sample assigned to track 2 reported missing after project loads",
+      "status": "under-investigation",
+      "cause_confirmed": false
+    }
+  ],
+  "source_reproduction": {
+    "verified_on": "2026-11-03",
+    "exact_main_dsp_and_sysex": true,
+    "baseline_rebuilt_this_run": false,
+    "baseline": "Previously source-reproduced T1E2/R003 intermediates reused; USB extension rebuilt fresh from public recipes.",
+    "fresh_native_checks": [
+      "R009 ColdFire frame recorder",
+      "R011 DSP SPI publication, including FIFO and ownership rejection cases"
+    ],
+    "notes": "Exact 2,591,008-byte SysEx output matches the release hash. Generated firmware and build intermediates remain private."
+  }
+}

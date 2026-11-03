@@ -1,20 +1,22 @@
-# Experimental R003 Recorder
+# Recording and resampling
 
-R003 adds recording and resampling to the T1E2 sample Machines and 42-channel
-USB audio. The workflow includes source selection, recording, normalization,
+R011 includes the Recorder introduced by R003 alongside the sample Machines
+and 42-channel USB audio. The workflow includes source selection, recording, normalization,
 trim and audition controls, saving to +Drive, and optional track assignment.
 VOICE cycles through Voice Setup, Sample Manager and Recorder.
 
-**R003 is experimental. T1E2 remains the stable default.** Hardware boot, stock
-audio, MAIN recording, saving and Recorder reopening have passed. Hardware
+**R011 is the stable default; R003 remains a historical experimental target.**
+R003 hardware boot, stock audio, MAIN recording, saving and Recorder reopening have passed. Hardware
 trimmed-file comparison, power-cycle persistence and long-duration USB stress
-testing remain pending. See [today's evidence and limits](research/2026-10-31.md).
+testing remain pending. See [R003 evidence and limits](research/2026-10-31.md).
 
 ## Build locally
 
 Follow the [tool setup](../port/tools/README.md) and [private input
 requirements](../README.md#private-inputs) first. The same private test bank is
-required; R003 does not remove that dependency or use DT2 factory samples.
+required; neither target removes that dependency or uses DT2 factory samples.
+For current R011, follow the [default build](../README.md#build). The command
+below reproduces the historical Recorder-only R003 target.
 
 ```sh
 python build.py --target R003 \
@@ -72,5 +74,6 @@ closed-mode diagnostic replies as the take length.
 
 R003 also repairs a confirmed MAIN-loader input overlap by restoring a
 separately compressed tail before original startup. Protected loader sections,
-panel firmware and flash writer remain unchanged. The later experimental USB
-queues, scheduling and timing changes are not included.
+panel firmware and flash writer remain unchanged. R003 excludes later USB
+queues, scheduling and timing changes; current R011 includes the
+[USB publication changes](usb-research.md).

@@ -1,6 +1,6 @@
 # Loading your own samples
 
-These instructions apply to an already installed T1E2 custom firmware. You can
+These instructions apply to an already installed R011 or T1E2 custom firmware. You can
 use your own mono or stereo samples; the Digitakt II factory library is not
 required for playback. This guide does not remove the [private build-input
 requirement](../README.md#private-inputs).
@@ -49,6 +49,11 @@ the project and assign it to the active track.
 
 ## If a sample is missing or silent
 
+R011 has a new report of a track-2 sample assignment not surviving project loads.
+The cause and scope remain unconfirmed. Save the project after assigning a
+sample, retain the original file on +Drive, and keep a backup while this is
+investigated. A successful transfer alone does not save project assignments.
+
 - **Visible in Transfer, absent from SAMP:** check +Drive in Sample Manager and
   load the file into the project first.
 - **Transfer cannot see DN2:** check both MIDI port selections, USB mode and the
@@ -66,5 +71,5 @@ specific to this port; Elektron's DT2 manual uses SAMPLING/SRC for those pages.
 No. The required 47,104-byte bank is this project's private test asset, not the
 DT2 factory library, a factory-content download or an export from a DT2.
 Uploading your own samples after installation is independent of that build
-dependency. The current exact-T1E2 recipe still requires the original private
+dependency. The current exact-build recipes still require the original private
 bank; there is no public substitute supported by the builder.

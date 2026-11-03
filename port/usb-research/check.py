@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one optional offline DSP fixture against a private R008 source build."""
+"""Run one optional offline DSP fixture against a private R008/R011 source build."""
 import argparse
 import importlib
 import json
@@ -13,6 +13,8 @@ CHECKS = {
     'scratch': ('check_dt2_dsp_scratch_efficiency', 'output/dn2-research/sample-scratch-r005-20261101/dsp'),
     'guard': ('check_dt2_usb_guarded_publication', 'output/dn2-research/usb-guard-r007-20261101/dsp'),
     'reasons': ('check_dt2_usb_guard_reasons', 'dsp'),
+    'retained': ('check_dt2_usb_retained', 'output/dn2-research/usb-retained-r010-20261102/dsp'),
+    'publication': ('check_dt2_usb_spi_publication', 'dsp'),
 }
 
 
@@ -38,6 +40,9 @@ def main():
 
     support.Digikit = ExecutionDigikit
     name, folder = CHECKS[args.check]
+    if args.check == 'reasons' and (work/'rebuild.json').is_file():
+        if json.loads((work/'rebuild.json').read_text()).get('build') == 'R011':
+            folder = 'output/dn2-research/usb-guard-r008-20261102/dsp'
     result = importlib.import_module(name).check(work/folder)
     print(json.dumps(result, indent=2))
 

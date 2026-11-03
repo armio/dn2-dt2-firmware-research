@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Pack the approved MAIN tail separately, before the original startup.
 
-R003–R005 and R007–R008 require exact R002; R006 uses a separately pinned observer profile.
+R003–R005 and R007–R008 require exact R002; later variants use pinned profiles.
 Protected loader sections and DSP are unchanged by this MAIN-only builder.
 The temporary staging region is the existing sampler runtime reservation, used
 before the original bootstrap installs that runtime. No extra RAM is reserved.
@@ -69,6 +69,15 @@ def expand_verified(raw, doc):
     if doc.get('build') == 'R006':
         from build_dn2_recovery_r006 import verify_projection
         verify_projection(expanded,doc)
+    elif doc.get('build') == 'R009':
+        from build_dn2_recovery_r009 import verify_projection
+        verify_projection(expanded,doc)
+    elif doc.get('build') == 'R010':
+        from build_dn2_recovery_r010 import verify_projection
+        verify_projection(expanded,doc)
+    elif doc.get('build') == 'R011':
+        from build_dn2_recovery_r011 import verify_projection
+        verify_projection(expanded,doc)
     return expanded
 
 
@@ -105,6 +114,15 @@ invalid_length:
 
 
 def build(parent, out, build_id='R003'):
+    if build_id == 'R011':
+        from build_dn2_recovery_r011 import build as build_identity
+        return build_identity(parent,out)
+    if build_id == 'R010':
+        from build_dn2_recovery_r010 import build as build_identity
+        return build_identity(parent,out)
+    if build_id == 'R009':
+        from build_dn2_recovery_r009 import build as build_recorder
+        return build_recorder(parent,out)
     if build_id == 'R006':
         from build_dn2_recovery_r006 import build as build_observer
         return build_observer(parent,out)
@@ -183,6 +201,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--parent',type=Path,required=True)
     parser.add_argument('--out',type=Path,required=True)
-    parser.add_argument('--build',choices=('R003','R004','R005','R006','R007','R008'),default='R003')
+    parser.add_argument('--build',choices=('R003','R004','R005','R006','R007','R008','R009','R010','R011'),default='R003')
     args = parser.parse_args()
     build(args.parent,args.out,args.build)

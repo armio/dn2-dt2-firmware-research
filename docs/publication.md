@@ -1,20 +1,22 @@
 # Source-only publication
 
-This repository reproduces stable T1E2 and experimental R003/R008 from three privately
-supplied inputs identified in their `releases/` manifests. It does not distribute those inputs
-or any generated firmware. The original sample bank is required for exact
+This repository reproduces stable R011, previous stable T1E2 and historical
+experimental R003/R008 from three privately supplied inputs identified in their
+`releases/` manifests. It does not distribute those inputs or any generated
+firmware. The original sample bank is required for exact
 reproduction; arbitrary replacement audio will not match the release hash.
 That bank is a private project test asset, not Digitakt II factory content or
 an export obtainable from a Digitakt II. See [sample loading](samples.md) for
 the separate workflow of importing playable samples after installation.
 
-Experimental recipes and research checks do not promote a build to stable.
 Publish validation summaries with their limits, not private hardware captures
-or generated receipts. R003 hardware trim comparison and endurance remain
-pending; T1E2 retains its stable designation.
-R008 is diagnostic: it has not been validated on hardware, and the captured
-R007 USB freeze remains unresolved. Publishing its source does not promote it
-as an upgrade recommendation.
+or raw build receipts. Reviewed offline fixture summaries may be included when
+bound to exact output hashes and stripped of private paths and binary payloads.
+R011 was designated stable after owner-reported playback
+success following a project change. It has no completed long-duration endurance
+claim. A track-2 sample assignment failing to survive loads is reported and
+under investigation. Historical R003/R008 manifests retain their original
+validation scope; their experimental status is not changed retroactively.
 
 Publish original build/adaptor source, extraction and relocation recipes,
 factual address metadata, dependency pins, synthetic tests and research notes.

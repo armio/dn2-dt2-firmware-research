@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce T1E2 (stable), R003 or R008 (experimental); never flash a device."""
+"""Reproduce stable R011 or an earlier release; never flash a device."""
 import argparse
 import hashlib
 import json
@@ -80,14 +80,15 @@ def build(args):
                            (dsp, stable['outputs']['dsp_sha256'])):
         if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
             raise ValueError(f'Stable section hash mismatch: {path}')
-    if args.target in ('R003', 'R008'):
+    if args.target in ('R003', 'R008', 'R011'):
         run('06-Experimental-Recorder rebuilding', 'port/recorder/build.py',
             '--stable-work', work, '--work', work/'recorder',
             '--toolchain', args.toolchain.resolve())
         main = work/'recorder/main/main-os.bin'
         dsp = work/'recorder/dsp/section_7.bin'
-    if args.target == 'R008':
-        run('07-Experimental-USB-diagnostics rebuilding', 'port/usb-research/build.py',
+    if args.target in ('R008', 'R011'):
+        run('07-USB-publication rebuilding', 'port/usb-research/build.py',
+            '--target', args.target,
             '--stable-work', work, '--recorder-work', work/'recorder',
             '--work', work/'usb-research', '--toolchain', args.toolchain.resolve())
         main = work/'usb-research/main/main-os.bin'
@@ -116,8 +117,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('dn2', 'dt2', 'sample-bank', 'out'):
         parser.add_argument('--'+name, type=Path, required=True)
-    parser.add_argument('--target', choices=('T1E2', 'R003', 'R008'), default='T1E2',
-                        help='Stable T1E2; experimental Recorder R003; diagnostic USB research R008')
+    parser.add_argument('--target', choices=('T1E2', 'R003', 'R008', 'R011'), default='R011',
+                        help='Stable R011 (default); previous stable T1E2; experimental R003/R008')
     parser.add_argument('--toolchain', type=Path, default=ROOT/'.toolchain/paths.json')
     parser.add_argument('--work', type=Path, help='Fresh directory outside the source tree; default: system temporary directory')
     args = parser.parse_args()

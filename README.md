@@ -1,22 +1,20 @@
 # DN2 DT2 firmware research
 
-Source recipes for reproducing **T1E2**, the Digitone II research firmware
-designated stable on October 15, 2026. No firmware images or sample audio are
-distributed. The build extracts required Elektron code and assets from firmware
-you supply locally, assembles the adapters, and checks the complete output hash.
+Source recipes for reproducing **R011**, designated stable on November 3, 2026.
+It adds the six Digitakt II sample Machines, sample browsing, recording and
+resampling, and multichannel USB audio to Digitone II. No firmware images or
+sample audio are distributed. Build locally from your own firmware inputs.
 
-**Experimental R003 adds recording and resampling**, including trimming,
-auditioning, saving and reopening Recorder. See the [R003 build and usage
-guide](docs/recorder.md). T1E2 remains the stable default; R003 validation is
-still in progress.
+**R011 fixes the USB publication stall after project changes.** The owner reports
+normal playback after loading another project. T1E2 remains available as the
+previous stable release. See the [R011 USB guide](docs/usb-research.md) and
+[release manifest](releases/r011.json) for changes and validation limits.
 
-**R008 publishes the latest USB diagnostic research.** It includes the Recorder,
-sample scratch-memory changes and guarded USB publication, plus checksummed
-records of rejected audio blocks. It is **not a confirmed USB fix**: R007 can
-freeze USB audio while headphones and UI continue working; R008 hardware
-validation is pending. See the [USB research guide](docs/usb-research.md).
+**Known issue under investigation:** a sample assigned to track 2 was reported
+missing after project loads. The cause and scope are not yet confirmed. Keep
+project backups; the stable designation does not mean every workflow is verified.
 
-**Build limitation:** exact T1E2 also requires a private project test-sample bank.
+**Build limitation:** every current target also requires a private project test-sample bank.
 This is **not Digitakt II factory content** and cannot be obtained by exporting
 samples from a Digitakt II. See [private inputs](#private-inputs) before building.
 
@@ -27,7 +25,7 @@ with firmware container tooling from
 Credit to the upstream authors and contributors for that foundation. See
 [source attribution](THIRD_PARTY.md) for component credits and licences.
 
-T1E2 includes ONESHOT, WERP, STRETCH, REPITCH, GRID and SLICE; stereo samples;
+R011 includes ONESHOT, WERP, STRETCH, REPITCH, GRID and SLICE; stereo samples;
 sample browsing; DT2 parameter graphics; SLICES trig mode; and class-compliant
 USB audio with 42 capture channels at 48 kHz/24 bit. Its USB return is stereo.
 The 21 capture pairs are MAIN, tracks 1–16, DELAY, REVERB, CHORUS and INPUT,
@@ -36,11 +34,14 @@ in that order. Individual tracks exclude shared effect returns.
 Already running this firmware? See [loading your own samples](docs/samples.md)
 for Transfer, +Drive, project loading and track assignment instructions.
 
-This is a version-specific port, not Elektron's source code. Recorder is
-available in the separate R003 and R008 targets. T1E2 and R003 exclude the later
-USB research changes; R008 includes the diagnostic branch described above. The
-stable designation records successful owner testing with USB streaming; it is
-not a claim that every workflow or long-running workload has been verified.
+Recording includes source selection, trimming, auditioning and saving to +Drive.
+Plain **VOICE** cycles through Voice Setup, Sample Manager and Recorder;
+**FUNC + VOICE** retains unison. See the [Recorder workflow](docs/recorder.md).
+
+This is a version-specific port, not Elektron's source code. T1E2 is the earlier
+stable build without Recorder. R003 and R008 remain available as historical
+experimental targets. R011 includes Recorder and the later USB publication work.
+Long-duration endurance and exact end-to-end USB latency remain unmeasured.
 
 ## Private inputs
 
@@ -56,12 +57,12 @@ not a build input.
 **`sample-bank.bin` is not included or offered for download.** It is a private
 test asset created for this project, separate from both official OS files.
 Owning a Digitakt II or exporting its factory samples will not supply this file.
-Without the exact bank, the current recipe cannot build T1E2. Arbitrary WAVs,
+Without the exact bank, the current recipes cannot build any target. Arbitrary WAVs,
 an empty file, or samples uploaded through Transfer cannot replace it: the
 builder checks the bank's size and hash before building.
 
-A build without this dependency needs its own release and validation; neither
-T1E2, R003 nor R008 currently provides that. The instructions for [loading playable
+A build without this dependency needs its own release and validation; none of
+T1E2, R003, R008 or R011 currently provides that. The instructions for [loading playable
 samples](docs/samples.md) apply after installation and are a separate workflow.
 
 Check the inputs without changing them:
@@ -89,7 +90,7 @@ python build.py \
   --dn2 /path/to/Digitone_II_OS1.11.syx \
   --dt2 /path/to/Digitakt_II_OS1.16.syx \
   --sample-bank /private/path/to/sample-bank.bin \
-  --out /private/builds/T1E2.syx
+  --out /private/builds/R011.syx
 ```
 
 The output must be outside this repository. An existing output is never
@@ -97,27 +98,21 @@ overwritten. Intermediate firmware and diagnostic logs stay in the private
 temporary directory printed by the builder; retain or remove that directory
 locally after the build. Nothing is flashed automatically.
 
-Expected output: 2,537,120 bytes, SHA-256
-`c79c42d2e044bb1142b575f7b62e2a0d7aeb68179fdea333217c17bb03f2ec8b`.
+R011 is the default target. Expected output: **2,591,008 bytes**, SHA-256
+`91b32a4d2161a87a4725a2296371e01ee6c7e83a95dccb38fe9f4a8dd2e53b0b`.
+The builder checks MAIN, DSP and complete SysEx identities against
+[releases/r011.json](releases/r011.json).
 
-Verified on October 31, 2026: a clean export of the staged source reproduced
-that exact output on macOS with Python 3.12, a fresh Capstone-only environment,
-and tools built from the pinned public sources. All MAIN and DSP stage hashes
-matched. No historical firmware builds or private research checkout were used
-as build dependencies.
-
-To build experimental R003 instead, use the same command with `--target R003`
-and a different output filename. It rebuilds the stable baseline first, then
-applies the Recorder and startup changes. The same private inputs are required.
-
-For the latest diagnostic candidate, use `--target R008` and a separate output
-filename. It builds through R003, then applies the USB research stages. Expected
-output identities and validation limits are in [releases/r008.json](releases/r008.json).
-Neither experimental target changes the stable default.
+Use `--target T1E2` to reproduce the previous stable release, or `--target R003`
+and `--target R008` for the historical experimental builds. Give each target a
+separate output filename. All targets require the same private inputs; R011
+builds through T1E2, Recorder and the USB publication stages.
 
 ## Source and contributions
 
-[November 2 research update](docs/research/2026-11-02.md) covers the USB freeze,
+[November 3 research update](docs/research/2026-11-03.md) covers R011
+publication, project-change behavior and the reported sample persistence issue.
+The [November 2 research update](docs/research/2026-11-02.md) covers the USB freeze,
 buffer checks and new diagnostics. The
 [October 31 research update](docs/research/2026-10-31.md) documents Recorder
 verification, loader-overlap findings and remaining audit limits. Reusable

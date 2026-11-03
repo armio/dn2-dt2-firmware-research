@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline native R003–R008 outer depack, tail restore and early startup check.
+"""Offline native R003–R011 outer depack, tail restore and early startup check.
 
 Executes actual OS 1.11 instructions. No hardware, flash writes, MMIO fixtures,
 instruction substitutions or production changes. Requires ColdFire Unicorn.
@@ -31,7 +31,7 @@ def need(condition, message):
 
 
 def check(candidate, folder, build_id='R003'):
-    need(build_id in ('R003', 'R004', 'R005', 'R006', 'R007', 'R008'), 'unsupported build identifier')
+    need(build_id in ('R003', 'R004', 'R005', 'R006', 'R007', 'R008', 'R009', 'R010', 'R011'), 'unsupported build identifier')
     raw = candidate.read_bytes()
     stock_raw = (ROOT/'firmware/Digitone_II_OS1.11.syx').read_bytes()
     need(SHA(stock_raw)==STOCK_SHA, 'unsupported stock image')
@@ -60,11 +60,18 @@ def check(candidate, folder, build_id='R003'):
          (0x402faf54,0x47a58000,0x4028da70,0x400004e8,0x40136540), 'unsupported entry layout')
     need(int.from_bytes(staged[:4],'big')==entry, 'entry pointer mismatch')
     need(cfg['stored_bytes']<=len(runtime)==cfg['scratch_bytes'], 'scratch exceeds existing runtime ownership')
-    # Legacy projection is exact R002; R006 separately proves its pinned R005 observer scope.
-    if build_id == 'R006':
+    # Legacy projection is exact R002; observer builds prove their pinned parent scope.
+    if build_id in ('R006', 'R009', 'R010', 'R011'):
         from build_dn2_recovery_tail import expand_verified
-        from build_dn2_recovery_r006 import verify_projection
-        need(expand_verified(staged,doc) == expanded, 'R006 staged projection differs')
+        if build_id == 'R006':
+            from build_dn2_recovery_r006 import verify_projection
+        elif build_id == 'R009':
+            from build_dn2_recovery_r009 import verify_projection
+        elif build_id == 'R010':
+            from build_dn2_recovery_r010 import verify_projection
+        else:
+            from build_dn2_recovery_r011 import verify_projection
+        need(expand_verified(staged,doc) == expanded, 'observer staged projection differs')
         expected = bytearray(verify_projection(expanded,doc))
     else:
         expected = bytearray(parent)
@@ -185,7 +192,7 @@ if __name__=='__main__':
     p.add_argument('--candidate',type=Path,required=True)
     p.add_argument('--main',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
-    p.add_argument('--build',choices=('R003','R004','R005','R006','R007','R008'),default='R003')
+    p.add_argument('--build',choices=('R003','R004','R005','R006','R007','R008','R009','R010','R011'),default='R003')
     a=p.parse_args()
     inputs=[a.candidate,*a.main.rglob('*'),Path(__file__),
         ROOT/'firmware/Digitone_II_OS1.11.syx',

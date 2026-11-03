@@ -1,5 +1,5 @@
 {
-  "schema": "r008-usb-research-source-v1",
+  "schema": "r011-usb-source-v1",
   "sources": [
     {
       "source": "scripts/build_dt2_buffer_phase_accounting.py",
@@ -33,9 +33,9 @@
     },
     {
       "source": "scripts/build_dn2_recovery_tail.py",
-      "source_sha256": "62304194205a6d5431d02ef8ea001ad12b2546de1e211f6ad8b755d8123cce4e",
+      "source_sha256": "771183474d3ca84c06444385280524c264c0c5db33582d127148e05f9fe5a225",
       "export": "tree/scripts/build_dn2_recovery_tail.py",
-      "export_sha256": "62304194205a6d5431d02ef8ea001ad12b2546de1e211f6ad8b755d8123cce4e"
+      "export_sha256": "771183474d3ca84c06444385280524c264c0c5db33582d127148e05f9fe5a225"
     },
     {
       "source": "scripts/audit_dn2_dsp_encoding.py",
@@ -123,9 +123,9 @@
     },
     {
       "source": "scripts/check_dn2_recovery_tail.py",
-      "source_sha256": "aad272fc9d55a31201f869fe6d2dc9196104da2c5511c35aeb7a19bdfc1e4b81",
+      "source_sha256": "5ecab20350523a674d29a3c0aec93798ec9e5aed9b95155004e8b319d032f775",
       "export": "tree/scripts/check_dn2_recovery_tail.py",
-      "export_sha256": "aad272fc9d55a31201f869fe6d2dc9196104da2c5511c35aeb7a19bdfc1e4b81"
+      "export_sha256": "5ecab20350523a674d29a3c0aec93798ec9e5aed9b95155004e8b319d032f775"
     },
     {
       "source": "firmware/ghidra/oneshot-proof/v7-source/scripts/oneshot_memory_gate.py",
@@ -151,6 +151,67 @@
       "source_sha256": "7c54f56256c914f77b69c15c2a6a8ac0beea2de5a4afee85af80a9b107ecc90e",
       "export": "tree/scripts/native_conversion_model.py",
       "export_sha256": "7c54f56256c914f77b69c15c2a6a8ac0beea2de5a4afee85af80a9b107ecc90e"
+    },
+    {
+      "source": "scripts/build_dn2_frame_recorder.py",
+      "source_sha256": "e206e39faa65e935dc1393d21ab54a3fbee2da52eb60fcf5b3271d84b1f8c08b",
+      "export": "tree/scripts/build_dn2_frame_recorder.py",
+      "export_sha256": "e206e39faa65e935dc1393d21ab54a3fbee2da52eb60fcf5b3271d84b1f8c08b"
+    },
+    {
+      "source": "scripts/check_dn2_frame_recorder.py",
+      "source_sha256": "3a0fe9c12e3a76862099a1eecd434103a34aee21fdd19f28670aa2154e37d2bc",
+      "export": "tree/scripts/check_dn2_frame_recorder.py",
+      "export_sha256": "3a0fe9c12e3a76862099a1eecd434103a34aee21fdd19f28670aa2154e37d2bc"
+    },
+    {
+      "source": "scripts/build_dn2_recovery_r009.py",
+      "source_sha256": "99721cb01c882b3fb5d2219e2fff1cee60876a04c7403d58341d1344d1454220",
+      "export": "tree/scripts/build_dn2_recovery_r009.py",
+      "export_sha256": "99721cb01c882b3fb5d2219e2fff1cee60876a04c7403d58341d1344d1454220"
+    },
+    {
+      "source": "scripts/build_dn2_recovery_r010.py",
+      "source_sha256": "60513ab2e3167db3e438240a14ed82122e57615a49879075aec48f6f781531c8",
+      "export": "tree/scripts/build_dn2_recovery_r010.py",
+      "export_sha256": "60513ab2e3167db3e438240a14ed82122e57615a49879075aec48f6f781531c8"
+    },
+    {
+      "source": "scripts/build_dn2_recovery_r011.py",
+      "source_sha256": "4ee2102180961c0dd369688b18afea01007f452ae63b4871e9f3a796b9cd242f",
+      "export": "tree/scripts/build_dn2_recovery_r011.py",
+      "export_sha256": "4ee2102180961c0dd369688b18afea01007f452ae63b4871e9f3a796b9cd242f"
+    },
+    {
+      "source": "scripts/build_dt2_usb_retained.py",
+      "source_sha256": "52468bc22992a191935fc1df7276652b57e5c31405c2dcfbdc76b955162e791b",
+      "export": "tree/scripts/build_dt2_usb_retained.py",
+      "export_sha256": "52468bc22992a191935fc1df7276652b57e5c31405c2dcfbdc76b955162e791b"
+    },
+    {
+      "source": "scripts/check_dt2_usb_retained.py",
+      "source_sha256": "79b33f3582060d02fd1ebf0f456d0a68958f7d3488f08a8b8967e6fbed7895be",
+      "export": "tree/scripts/check_dt2_usb_retained.py",
+      "export_sha256": "79b33f3582060d02fd1ebf0f456d0a68958f7d3488f08a8b8967e6fbed7895be"
+    },
+    {
+      "source": "scripts/build_dt2_usb_spi_publication.py",
+      "source_sha256": "429f7b168ca411789cbb97f7e1c388d86dccafc84f4d54195470408146b24658",
+      "export": "tree/scripts/build_dt2_usb_spi_publication.py",
+      "export_sha256": "429f7b168ca411789cbb97f7e1c388d86dccafc84f4d54195470408146b24658"
+    },
+    {
+      "source": "scripts/check_dt2_usb_spi_publication.py",
+      "source_sha256": "abd7c5dedc4530fd87ecb7b0d8feb0b58e86efa053b31312c1d28c65e98e7c7d",
+      "export": "tree/scripts/check_dt2_usb_spi_publication.py",
+      "export_sha256": "abd7c5dedc4530fd87ecb7b0d8feb0b58e86efa053b31312c1d28c65e98e7c7d"
+    },
+    {
+      "source": "output/dn2-research/usb-frame-recorder-r009-20261102/main-flat/frame-recorder-check.json",
+      "source_sha256": "9f497b34d278c0da400fefc708a56c937ab96740ea16eb2c8718ddcb1223c11d",
+      "export": "metadata/output/dn2-research/usb-frame-recorder-r009-20261102/main-flat/frame-recorder-check.json",
+      "export_sha256": "9f497b34d278c0da400fefc708a56c937ab96740ea16eb2c8718ddcb1223c11d",
+      "kind": "hash-bound offline execution receipt, not a fresh execution"
     }
   ],
   "transformations": [
@@ -162,5 +223,5 @@
     "Device captures and personal paths"
   ],
   "baseline": "Reproduced R003, itself derived from T1E2",
-  "status": "Experimental diagnostic; USB publication rejection fault unresolved."
+  "status": "R011 designated stable by the user after successful project-change playback; R008 remains historical experimental research. See release notes for validation limits and open issues."
 }

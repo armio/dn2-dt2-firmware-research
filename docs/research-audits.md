@@ -1,7 +1,7 @@
 # Experimental offline audits
 
 The tools in [`research/audits`](../research/audits) inspect local inputs without
-accessing MIDI, USB or the device. They do not change the stable T1E2 build or
+accessing MIDI, USB or the device. They do not change the selected firmware build or
 certify a candidate as safe to flash. No vendor firmware, disassembly, samples
 or hardware captures accompany them.
 
