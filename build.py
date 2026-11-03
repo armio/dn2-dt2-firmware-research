@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Reproduce stable R011 or an earlier release; never flash a device."""
+"""Build R012 from two official OS files, or reproduce an earlier release."""
 import argparse
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import shutil
@@ -15,7 +16,12 @@ ROOT = Path(__file__).resolve().parent
 
 
 def build(args):
-    private = inputs(args.dn2, args.dt2, args.sample_bank)
+    if args.target == 'R012':
+        spec = importlib.util.spec_from_file_location('public_bank_build', ROOT/'port/public-bank/build.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module.build(args)
+    private = inputs(args.dn2, args.dt2, args.sample_bank, target=args.target)
     stable = json.loads((ROOT/'releases/t1e2.json').read_text())
     release = json.loads((ROOT/'releases'/f'{args.target.lower()}.json').read_text())
     paths = json.loads(args.toolchain.read_text())
@@ -115,10 +121,11 @@ def build(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    for name in ('dn2', 'dt2', 'sample-bank', 'out'):
+    for name in ('dn2', 'dt2', 'out'):
         parser.add_argument('--'+name, type=Path, required=True)
-    parser.add_argument('--target', choices=('T1E2', 'R003', 'R008', 'R011'), default='R011',
-                        help='Stable R011 (default); previous stable T1E2; experimental R003/R008')
+    parser.add_argument('--sample-bank', type=Path, help='Required only to reproduce historical targets')
+    parser.add_argument('--target', choices=('T1E2', 'R003', 'R008', 'R011', 'R012'), default='R012',
+                        help='Public-input R012 candidate (default); stable R011; historical T1E2/R003/R008')
     parser.add_argument('--toolchain', type=Path, default=ROOT/'.toolchain/paths.json')
     parser.add_argument('--work', type=Path, help='Fresh directory outside the source tree; default: system temporary directory')
     args = parser.parse_args()

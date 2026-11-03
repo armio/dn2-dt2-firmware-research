@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate shared private T1E2/R003 inputs without modifying or copying them."""
+"""Validate the two official R012 OS inputs, or historical release inputs."""
 import argparse
 import hashlib
 import json
@@ -19,8 +19,14 @@ def verify(path, expected, label):
     return path
 
 
-def inputs(dn2, dt2, sample_bank):
-    release = json.loads((ROOT / 'releases/t1e2.json').read_text())
+def inputs(dn2, dt2, sample_bank=None, *, target='T1E2'):
+    if target not in ('T1E2', 'R003', 'R008', 'R011', 'R012'):
+        raise ValueError('Unknown build target')
+    if target == 'R012' and sample_bank is not None:
+        raise ValueError('R012 does not use --sample-bank; supply only the two official OS files')
+    if target != 'R012' and sample_bank is None:
+        raise ValueError(f'{target} requires --sample-bank for exact historical reproduction')
+    release = json.loads((ROOT / 'releases' / f'{target.lower()}.json').read_text())
     supplied = dict(dn2=dn2, dt2=dt2, sample_bank=sample_bank)
     return {key: verify(supplied[key], expected, key)
             for key, expected in release['inputs'].items()}
@@ -30,13 +36,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--dn2', type=Path, required=True)
     parser.add_argument('--dt2', type=Path, required=True)
-    parser.add_argument('--sample-bank', type=Path, required=True)
+    parser.add_argument('--sample-bank', type=Path, help='Required only for historical targets')
+    parser.add_argument('--target', choices=('T1E2', 'R003', 'R008', 'R011', 'R012'), default='R012')
     args = parser.parse_args()
     try:
-        inputs(args.dn2, args.dt2, args.sample_bank)
+        checked = inputs(args.dn2, args.dt2, args.sample_bank, target=args.target)
     except (OSError, ValueError) as exc:
         parser.exit(1, f'{exc}\n')
-    print('All three private inputs match T1E2. No files changed.')
+    print(f'All {len(checked)} inputs match {args.target}. No files changed.')
 
 
 if __name__ == '__main__':

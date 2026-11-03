@@ -6,7 +6,11 @@ after project changes. The owner reports normal playback after loading a
 different project. Repeated instrumented project-change testing and endurance
 remain pending.
 
-## Build locally
+R012 carries this USB implementation forward unchanged and removes the private
+sample-bank build dependency. Use the [two-file R012 build](../README.md#build)
+for the current candidate. R012 hardware validation is pending.
+
+## Reproduce historical R011
 
 Follow the [tool setup and private-input instructions](../README.md#build):
 

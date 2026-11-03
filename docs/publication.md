@@ -1,13 +1,11 @@
 # Source-only publication
 
-This repository reproduces stable R011, previous stable T1E2 and historical
-experimental R003/R008 from three privately supplied inputs identified in their
-`releases/` manifests. It does not distribute those inputs or any generated
-firmware. The original sample bank is required for exact
-reproduction; arbitrary replacement audio will not match the release hash.
-That bank is a private project test asset, not Digitakt II factory content or
-an export obtainable from a Digitakt II. See [sample loading](samples.md) for
-the separate workflow of importing playable samples after installation.
+R012 builds from two privately supplied official OS files identified in its
+`releases/` manifest. It generates silent compatibility data from source and
+requires no private sample bank. Historical exact R011, R008, R003 and T1E2
+recipes retain their original private-bank requirement. No input firmware,
+generated firmware or sample audio is distributed. See [sample loading](samples.md)
+for importing playable samples after installation.
 
 Publish validation summaries with their limits, not private hardware captures
 or raw build receipts. Reviewed offline fixture summaries may be included when

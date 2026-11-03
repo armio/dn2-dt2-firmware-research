@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline native R003–R011 outer depack, tail restore and early startup check.
+"""Offline native R003–R012 outer depack, tail restore and early startup check.
 
 Executes actual OS 1.11 instructions. No hardware, flash writes, MMIO fixtures,
 instruction substitutions or production changes. Requires ColdFire Unicorn.
@@ -31,7 +31,7 @@ def need(condition, message):
 
 
 def check(candidate, folder, build_id='R003'):
-    need(build_id in ('R003', 'R004', 'R005', 'R006', 'R007', 'R008', 'R009', 'R010', 'R011'), 'unsupported build identifier')
+    need(build_id in ('R003', 'R004', 'R005', 'R006', 'R007', 'R008', 'R009', 'R010', 'R011', 'R012'), 'unsupported build identifier')
     raw = candidate.read_bytes()
     stock_raw = (ROOT/'firmware/Digitone_II_OS1.11.syx').read_bytes()
     need(SHA(stock_raw)==STOCK_SHA, 'unsupported stock image')
@@ -61,7 +61,16 @@ def check(candidate, folder, build_id='R003'):
     need(int.from_bytes(staged[:4],'big')==entry, 'entry pointer mismatch')
     need(cfg['stored_bytes']<=len(runtime)==cfg['scratch_bytes'], 'scratch exceeds existing runtime ownership')
     # Legacy projection is exact R002; observer builds prove their pinned parent scope.
-    if build_id in ('R006', 'R009', 'R010', 'R011'):
+    if build_id == 'R012':
+        from build_dn2_recovery_tail import expand_verified
+        previous = ROOT/'main'
+        previous_doc = json.loads((previous/'build-receipt.json').read_text())
+        need(previous_doc['build'] == 'R011', 'wrong public-bank R011 parent')
+        expected = bytearray(expand_verified((previous/'main-os.bin').read_bytes(), previous_doc))
+        marker = int(doc['runtime_copy']['source'],16)-BASE+0x47aa5a0c-scratch
+        need(expected[marker:marker+4] == b'R011', 'public-bank R011 marker mismatch')
+        expected[marker:marker+4] = b'R012'
+    elif build_id in ('R006', 'R009', 'R010', 'R011'):
         from build_dn2_recovery_tail import expand_verified
         if build_id == 'R006':
             from build_dn2_recovery_r006 import verify_projection
@@ -192,7 +201,7 @@ if __name__=='__main__':
     p.add_argument('--candidate',type=Path,required=True)
     p.add_argument('--main',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
-    p.add_argument('--build',choices=('R003','R004','R005','R006','R007','R008','R009','R010','R011'),default='R003')
+    p.add_argument('--build',choices=('R003','R004','R005','R006','R007','R008','R009','R010','R011','R012'),default='R003')
     a=p.parse_args()
     inputs=[a.candidate,*a.main.rglob('*'),Path(__file__),
         ROOT/'firmware/Digitone_II_OS1.11.syx',

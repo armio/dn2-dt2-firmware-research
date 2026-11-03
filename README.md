@@ -6,20 +6,19 @@ audio for Digitone II—alongside its stock synth Machines.**
 Play stereo samples chromatically, stretch and slice loops, record the main mix,
 and send individual tracks and effect returns to your DAW.
 
-**Current stable target: R011**, designated November 3, 2026. It fixes the USB
-publication stall encountered after changing projects; the owner reports normal
-playback after loading another project. T1E2 remains available as the previous
-stable release.
+**R012 is the new two-file build candidate.** It carries the R011 features forward
+without the private sample-bank requirement. Supply your own official Digitone II
+OS 1.11 and Digitakt II OS 1.16 files; no factory sample library is needed.
+R012 hardware validation is pending. **R011 remains the owner-tested stable
+release**, with T1E2 retained as the previous stable release.
 
 This repository distributes **source, build recipes and research only**. Firmware
-images and sample audio are not included. Exact builds require your own official
-OS files **and a private test-sample bank that is not publicly available**. Owning
-a DT2 does not supply that bank. Read [private inputs](#private-inputs) before
-setting up the build.
+images and sample audio are not included. Builds happen locally; add your own
+playable samples through Transfer after installation.
 
 [Sample loading](docs/samples.md) · [Recorder](docs/recorder.md) ·
 [USB audio](#usb-audio-routing) · [Build](#build) ·
-[Release manifest](releases/r011.json)
+[Release manifest](releases/r012.json)
 
 ## What you get
 
@@ -135,12 +134,13 @@ See the [USB guide](docs/usb-research.md) for R011's changes and validation scop
 
 ## Status and limitations
 
-“Stable” records successful owner testing and the selected default build. It is
+“Stable” records successful owner testing. It is
 not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 | Target | Status | Scope |
 | --- | --- | --- |
-| **R011** | Current stable / default | Sample Machines, browsing, Recorder and latest USB publication fix |
+| **R012** | Candidate / default build | R011 features; needs only the two official OS files |
+| **R011** | Current stable / historical exact build | Sample Machines, browsing, Recorder and latest USB publication fix |
 | **T1E2** | Previous stable | Sample Machines, browsing and 42-channel USB; no Recorder |
 | **R003** | Historical experimental | Recorder extension on the T1E2 baseline |
 | **R008** | Historical diagnostic | Recorder plus earlier USB publication diagnostics |
@@ -153,8 +153,9 @@ Current limits:
   workloads and exact end-to-end latency remain to be characterized.
 - **External parameter control:** a complete DN2-compatible CC/NRPN map for the
   added sampler parameters is not implemented.
-- **Build access:** all current targets require the original private sample
-  bank. A build that removes that dependency needs separate work and validation.
+- **R012 hardware validation:** the generated silent compatibility data and new
+  build identity have not yet been tested on the instrument. DSP code is unchanged
+  from R011; source checks do not replace a hardware check.
 
 This port targets **Digitone II OS 1.11**, using **Digitakt II OS 1.16** as donor.
 It is version-specific; these recipes do not support the original Digitone or
@@ -163,25 +164,25 @@ recovery image privately.
 
 ## Private inputs
 
-All targets require these exact local inputs. The builder verifies their sizes
-and SHA-256 hashes against the [release manifests](releases/r011.json).
+R012 requires these two exact local inputs. The builder verifies their sizes
+and SHA-256 hashes against the [release manifest](releases/r012.json).
 
 | Input | Purpose |
 | --- | --- |
 | Official **Digitone II OS 1.11 `.syx`** | Recipient firmware |
 | Official **Digitakt II OS 1.16 `.syx`** | Donor Machine code and UI assets |
-| Original **47,104-byte `sample-bank.bin`** | Private three-slot test bank required for exact reproduction |
 
 Obtain official firmware from Elektron and retain your own copies locally.
-The DT2 input is its **OS firmware**, not its factory sample library.
+The DT2 input is its **OS firmware**, not its factory sample library. These are
+build inputs for one DN2 update; a second instrument is not involved in building.
 
-**The private bank is not included or offered for download.** Owning a DT2 or
-exporting its factory samples will not produce it. Arbitrary WAVs, an empty
-file, or samples uploaded through Transfer cannot replace it. Without that
-exact bank, none of the current recipes can build successfully.
+**R012 needs no private sample bank.** It generates silent compatibility data for
+an unused legacy bank region. Load playable samples through Transfer after
+installation; see [sample loading](docs/samples.md).
 
-Uploading playable samples to an installed DN2 is a separate workflow and does
-not require DT2 factory content. See [sample loading](docs/samples.md).
+Exact historical targets R011, R008, R003 and T1E2 still require their original
+47,104-byte private test bank. That asset is not distributed and is not DT2
+factory content. Choose R012 for a build using only the official OS files.
 
 ## Build
 
@@ -207,42 +208,40 @@ Replace the example paths with your local files:
 ```sh
 python tools/check_inputs.py \
   --dn2 /path/to/Digitone_II_OS1.11.syx \
-  --dt2 /path/to/Digitakt_II_OS1.16.syx \
-  --sample-bank /private/path/to/sample-bank.bin
+  --dt2 /path/to/Digitakt_II_OS1.16.syx
 ```
 
 Resolve any missing-input or hash error before continuing. This check does not
 change the input files.
 
-### 3. Build the toolchain and R011
+### 3. Build the toolchain and R012
 
 ```sh
 python port/tools/bootstrap.py --prefix .toolchain --jobs 4
 python build.py \
   --dn2 /path/to/Digitone_II_OS1.11.syx \
   --dt2 /path/to/Digitakt_II_OS1.16.syx \
-  --sample-bank /private/path/to/sample-bank.bin \
-  --out /private/builds/R011.syx
+  --out /private/builds/R012.syx
 ```
 
 The output must be **outside this repository**. Existing outputs are never
 overwritten. Intermediate firmware and diagnostic logs stay in the private
 temporary directory printed by the builder. Nothing is flashed automatically.
 
-Expected R011 output: **2,591,008 bytes**, SHA-256:
+Expected R012 output: **2,563,872 bytes**, SHA-256:
 
 ```text
-91b32a4d2161a87a4725a2296371e01ee6c7e83a95dccb38fe9f4a8dd2e53b0b
+4a2742a43e98ee28a1c83fa7d5d2c319eb786bac93e5394a6c066e88a63a3a9a
 ```
 
-The builder verifies MAIN, DSP and complete SysEx identities. Public-source
-reproduction matched this output; the [manifest](releases/r011.json) records
-which stages were rebuilt and which previously reproduced intermediates were
-reused during validation.
+The builder verifies MAIN, DSP and complete SysEx identities. The
+[manifest](releases/r012.json) records source-reproduction results and hardware
+validation limits.
 
-Use `--target T1E2`, `--target R003` or `--target R008` to reproduce an earlier
-target. Give each build a separate output filename. All require the same three
-private inputs.
+Use `--target R011`, `--target R008`, `--target R003` or `--target T1E2` only for
+historical exact reproduction. Those targets additionally require
+`--sample-bank /private/path/to/sample-bank.bin`. R012 rejects that option so a
+private bank cannot accidentally enter the new build.
 
 ## Documentation and contributions
 
@@ -257,8 +256,8 @@ private inputs.
 | [Publication boundaries](docs/publication.md) | What belongs in this source-only repository |
 
 Useful contributions include reproducible bug reports, synthetic regression
-cases, clearer workflow documentation and improvements that remove private
-build dependencies. For a bug report, include the firmware target, Machine,
+cases, clearer workflow documentation and improvements to the local
+build workflow. For a bug report, include the firmware target, Machine,
 steps to reproduce, USB mode/host buffer size where relevant, and whether the
 fault affects headphones, USB or both. For sample reload issues, state whether
 the project was saved after assignment.

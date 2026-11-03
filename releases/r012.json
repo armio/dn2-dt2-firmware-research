@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "inputs": {
+    "dn2": {
+      "description": "Official Digitone II OS 1.11 SysEx",
+      "bytes": 2389280,
+      "sha256": "2af43e65e3d8390b41c9f66222620f8cce027d73ed87db00c80b440f628472e0"
+    },
+    "dt2": {
+      "description": "Official Digitakt II OS 1.16 SysEx",
+      "bytes": 1880864,
+      "sha256": "278541e466edcd77d6b3e018a91fb90185932d3c7de224dd3e68294dddf3a9ec"
+    }
+  },
+  "machines": [
+    "ONESHOT",
+    "WERP",
+    "STRETCH",
+    "REPITCH",
+    "GRID",
+    "SLICE"
+  ],
+  "usb": {
+    "capture_channels": 42,
+    "return_channels": 2,
+    "sample_rate": 48000,
+    "valid_bits": 24,
+    "stereo_pairs": [
+      "MAIN",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15",
+      "T16",
+      "DELAY",
+      "REVERB",
+      "CHORUS",
+      "INPUT"
+    ]
+  },
+  "build": "R012",
+  "status": "candidate",
+  "date": "2026-11-03",
+  "stable_baseline": "T1E2",
+  "previous_stable": "R011",
+  "outputs": {
+    "main_sha256": "2fca25ae4f90ceb71d357d693a9c75348f1a3b459113c1cdb2b6deacd6b54755",
+    "expanded_main_sha256": "d8476fa547eb0c1fcdd47bc67a88556e850556d0b701b626984e2e98718d30f4",
+    "runtime_sha256": "2e4ea75c61e072b148515db93abc7559b658275e40a8a91e2bb7147345c0cf83",
+    "dsp_sha256": "495a2de2cee75d5c7c9f61e2fb28daed3a40cadf0223de3f57ff24238664f58e",
+    "sysex_sha256": "4a2742a43e98ee28a1c83fa7d5d2c319eb786bac93e5394a6c066e88a63a3a9a",
+    "sysex_bytes": 2563872
+  },
+  "changes": [
+    "Six sample Machines, sample browsing, Recorder and 42-channel USB audio retained",
+    "R009 adds a bounded control-frame recorder for repeatable USB diagnosis",
+    "R010 retains completed paired TDM/SPI audio in FIFO order until publication is permitted",
+    "R011 selects the SPI destination candidate from current DMA START rather than the earlier render/RX phase",
+    "Buffer ownership checks, control-frame ordering, native DMA configuration and TDM destination selection remain unchanged from R010",
+    "Private recorded sample bank replaced by reproducible silent compatibility data generated from source; only official DN2 and DT2 OS files are required."
+  ],
+  "validation": {
+    "hardware_confirmed": [],
+    "offline_checked": [
+      "Fresh complete build from official DN2 OS 1.11 and DT2 OS 1.16 only; all 115 MAIN stage identities and Recorder/USB continuation identities passed without bypassing assertions.",
+      "Final MAIN, expanded MAIN, runtime, DSP and SysEx hashes match the published R012 output identities.",
+      "DSP section remains byte-identical to R011; MAIN changes are limited to generated silent bank data, R012 identity and loader length operands.",
+      "Fresh native ColdFire frame-recorder regression passed all 10 cases on the rebuilt R009 stage using patched Unicorn: hook ABI parity, bounded writes, ring wrap, arm/freeze busy guards and freeze behavior.",
+      "Fresh native R012 boot-helper checks passed both loader staging addresses (0x40200000 and 0x40400000): exact outer/tail decompression, unread-source preservation, guarded runtime copies, register/stack/boot-flag preservation, SRAM initialization and complete BSS clearing. These checks do not replace hardware boot validation.",
+      "41 source tests passed, including two-input validation, historical-target bank requirements and fail-closed hash-profile projection."
+    ],
+    "pending": [
+      "R012 hardware boot, sample loading, Recorder and USB checks",
+      "Instrumented R011 hardware comparison across repeated project changes",
+      "Long-duration USB and sample playback endurance",
+      "Exact end-to-end USB latency measurement"
+    ],
+    "notes": "R012 is a new candidate; R011 remains the owner-designated stable build. R012 hardware validation is pending."
+  },
+  "known_issues": [],
+  "source_reproduction": {
+    "verified_on": "2026-11-03",
+    "exact_main_dsp_and_sysex": true,
+    "baseline_rebuilt_this_run": true,
+    "private_sample_bank_required": false,
+    "notes": "Complete fresh build from the two pinned official OS files and pinned toolchain. Silent compatibility bank generated from source. No historical firmware build or recorded sample asset used as a build input."
+  }
+}

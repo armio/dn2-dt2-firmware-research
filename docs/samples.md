@@ -1,9 +1,9 @@
 # Loading your own samples
 
-These instructions apply to an already installed R011 or T1E2 custom firmware. You can
-use your own mono or stereo samples; the Digitakt II factory library is not
-required for playback. This guide does not remove the [private build-input
-requirement](../README.md#private-inputs).
+These instructions apply to R012, R011 and T1E2 custom firmware. Use your own
+mono or stereo samples; the Digitakt II factory library is not required for
+playback. R012 also builds without a private sample bank, using only the two
+[official OS inputs](../README.md#private-inputs).
 
 ## 1. Transfer samples to +Drive
 
@@ -17,8 +17,8 @@ requirement](../README.md#private-inputs).
    EXPLORE lets you choose their destination. Wait for the transfer to finish.
 
 This stores files on +Drive. It does not automatically load them into the active
-project or assign them to a track. Use ordinary audio files such as WAV, not
-the build's private `sample-bank.bin`. Transfer handles its own audio-format
+project or assign them to a track. Use ordinary audio files such as WAV.
+Transfer handles its own audio-format
 conversion; manually converting files first is not required for this workflow.
 
 ## 2. Load samples into the project
@@ -66,10 +66,12 @@ Transfer's [official sample-pack instructions](https://support.elektron.se/suppo
 describe the computer-side EXPLORE workflow. The DN2 VOICE/SYN mapping above is
 specific to this port; Elektron's DT2 manual uses SAMPLING/SRC for those pages.
 
-## Does owning a DT2 supply the build's sample bank?
+## Do I need the DT2 factory samples?
 
-No. The required 47,104-byte bank is this project's private test asset, not the
-DT2 factory library, a factory-content download or an export from a DT2.
-Uploading your own samples after installation is independent of that build
-dependency. The current exact-build recipes still require the original private
-bank; there is no public substitute supported by the builder.
+No. R012 needs only the official DN2 and DT2 OS files to build. After installing,
+upload your own samples using the steps above. A DT2 factory library is optional
+playable content and is not a build input.
+
+Older exact-build targets retain a private test-bank requirement. That bank was
+created for this project; it cannot be obtained by exporting DT2 factory content.
+Use R012 to avoid that historical dependency.

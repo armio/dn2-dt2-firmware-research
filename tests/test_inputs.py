@@ -1,8 +1,10 @@
 import hashlib
 import importlib.util
+import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('check_inputs', Path(__file__).resolve().parents[1]/'tools/check_inputs.py')
 check_inputs = importlib.util.module_from_spec(spec)
@@ -30,6 +32,26 @@ class PrivateInputValidation(unittest.TestCase):
             with self.assertRaises(FileNotFoundError):
                 check_inputs.verify(path, {'bytes': 0, 'sha256': ''}, 'fixture')
             self.assertFalse(path.exists())
+
+    def test_r012_requires_only_the_two_official_inputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root/'releases').mkdir()
+            expected = {}
+            for name, data in (('dn2', b'recipient'), ('dt2', b'donor')):
+                (root/name).write_bytes(data)
+                expected[name] = dict(bytes=len(data), sha256=hashlib.sha256(data).hexdigest())
+            (root/'releases/r012.json').write_text(json.dumps(dict(inputs=expected)))
+            with patch.object(check_inputs, 'ROOT', root):
+                result = check_inputs.inputs(root/'dn2', root/'dt2', target='R012')
+                self.assertEqual(set(result), {'dn2', 'dt2'})
+                with self.assertRaisesRegex(ValueError, 'does not use --sample-bank'):
+                    check_inputs.inputs(root/'dn2', root/'dt2', root/'missing-bank', target='R012')
+
+    def test_historical_targets_still_require_the_exact_bank(self):
+        for target in ('T1E2', 'R003', 'R008', 'R011'):
+            with self.subTest(target=target), self.assertRaisesRegex(ValueError, 'requires --sample-bank'):
+                check_inputs.inputs('unused-dn2', 'unused-dt2', target=target)
 
 
 if __name__ == '__main__':

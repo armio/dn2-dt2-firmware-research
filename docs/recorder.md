@@ -1,11 +1,12 @@
 # Recording and resampling
 
-R011 includes the Recorder introduced by R003 alongside the sample Machines
+R012 and R011 include the Recorder introduced by R003 alongside the sample Machines
 and 42-channel USB audio. The workflow includes source selection, recording, normalization,
 trim and audition controls, saving to +Drive, and optional track assignment.
 VOICE cycles through Voice Setup, Sample Manager and Recorder.
 
-**R011 is the stable default; R003 remains a historical experimental target.**
+**R012 is the two-file build candidate; R011 remains hardware-tested stable.**
+R003 remains a historical experimental target.
 R003 hardware boot, stock audio, MAIN recording, saving and Recorder reopening have passed. Hardware
 trimmed-file comparison, power-cycle persistence and long-duration USB stress
 testing remain pending. See [R003 evidence and limits](research/2026-10-31.md).
@@ -13,10 +14,10 @@ testing remain pending. See [R003 evidence and limits](research/2026-10-31.md).
 ## Build locally
 
 Follow the [tool setup](../port/tools/README.md) and [private input
-requirements](../README.md#private-inputs) first. The same private test bank is
-required; neither target removes that dependency or uses DT2 factory samples.
-For current R011, follow the [default build](../README.md#build). The command
-below reproduces the historical Recorder-only R003 target.
+requirements](../README.md#private-inputs) first. For R012, follow the
+[default two-file build](../README.md#build); no sample bank is required.
+The command below reproduces historical R003 and requires its original private
+test bank, which is not DT2 factory content.
 
 ```sh
 python build.py --target R003 \
