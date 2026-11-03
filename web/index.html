@@ -16,16 +16,18 @@
     <a href="https://github.com/armio/dn2-dt2-firmware-research#readme">Read the guide</a>
   </header>
   <main>
+    <section class="installation-warning" role="alert" aria-labelledby="installation-warning-title">
+      <p class="warning-label">R012 INSTALLATION WARNING</p>
+      <h2 id="installation-warning-title">New users: do not install R012 yet.</h2>
+      <p><strong>First-time sample-storage setup is missing.</strong> Transfer may show <strong>0% Free / 0 bytes</strong>, stall uploads or report <strong>Connection failed</strong>.</p>
+      <p><strong>Do not use stock FORMAT +DRIVE or reset commands as a workaround.</strong> They can erase projects or presets. Existing users with working sample storage do not need to format it.</p>
+      <p><strong>Wait for the storage fix. It has not been released or hardware-validated.</strong></p>
+      <a href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/docs/samples.md#first-time-installation-warning">Read the warning and current status →</a>
+    </section>
     <section class="intro" aria-labelledby="title">
       <h1 id="title">Build your<br>DN2 firmware.</h1>
       <p class="lead">Six sample Machines, recording and 42-channel USB audio. Built locally from your two Elektron OS files.</p>
       <div class="machine-list" aria-label="Included sample Machines"><span>ONESHOT</span><span>WERP</span><span>STRETCH</span><span>REPITCH</span><span>GRID</span><span>SLICE</span></div>
-    </section>
-    <section class="notice candidate" aria-label="First-time installation warning">
-      <strong>New users: wait before installing R012.</strong>
-      <p>First-time sample-storage setup is missing. Transfer may show 0% Free / 0 bytes, stall uploads or report Connection failed.</p>
-      <p>Do not use stock FORMAT +DRIVE or reset commands as a workaround; they can erase projects or presets. Existing users with working sample storage do not need to format it. A fix is in development.</p>
-      <a href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/docs/samples.md#first-time-installation-warning">Read the storage warning</a>
     </section>
     <div class="workspace">
       <section class="builder" aria-labelledby="builder-title">
@@ -60,6 +62,7 @@
           <a id="download" class="button">Download .syx</a>
           <details><summary>Output SHA-256</summary><code id="output-hash"></code></details>
           <p>Back up your projects, then install the .syx file using Elektron Transfer.</p>
+          <p class="error"><strong>New users: do not install this build yet.</strong> R012 is missing first-time sample-storage setup. Building it does not fix that issue.</p>
         </section>
       </section>
       <aside aria-label="Build information">

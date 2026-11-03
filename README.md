@@ -1,13 +1,16 @@
 # DN2 DT2 firmware research
 
-> **First-time installation warning — 2026-11-03:** R012 does not initialize
+> [!WARNING]
+> **NEW USERS: DO NOT INSTALL R012 YET.**
+>
+> **First-time sample-storage setup is missing.** R012 does not initialize
 > sample storage on a previously unprepared DN2. Transfer may show **0% Free /
-> 0 bytes**, stall uploads or report **Connection failed**. **New users should
-> wait for the storage-setup fix before installing.** Do not use the stock
+> 0 bytes**, stall uploads or report **Connection failed**. Wait for the
+> storage-setup fix and its hardware validation before installing. Do not use the stock
 > **FORMAT +DRIVE**, EMPTY RESET or FACTORY RESET as a workaround; they can
 > erase projects or presets and do not provide this missing setup. Existing
 > users with working sample storage do not need to format it.
-> [Details and status](docs/samples.md#first-time-installation-warning).
+> **Fix in development — not released.** [Details and status](docs/samples.md#first-time-installation-warning). Updated 2026-11-03.
 
 **Six Digitakt II sample Machines, recording and resampling, and 42-channel USB
 audio for Digitone II—alongside its stock synth Machines.**
