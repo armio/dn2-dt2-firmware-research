@@ -49,13 +49,13 @@ the project and assign it to the active track.
 
 ## If a sample is missing or silent
 
-R011 has a new report of a track-2 sample assignment not surviving project loads.
-The cause and scope remain unconfirmed. Save the project after assigning a
-sample, retain the original file on +Drive, and keep a backup while this is
-investigated. A successful transfer alone does not save project assignments.
+Save the project after loading and assigning samples. A successful transfer
+alone does not save project assignments; retain the original files on +Drive.
 
 - **Visible in Transfer, absent from SAMP:** check +Drive in Sample Manager and
   load the file into the project first.
+- **Assignment missing after reload:** confirm the project was saved after
+  loading and assigning the sample.
 - **Transfer cannot see DN2:** check both MIDI port selections, USB mode and the
   data cable. Reconnect to a working computer USB port if necessary.
 - **Loaded but silent:** check track mute, selected sample slot, sample level,

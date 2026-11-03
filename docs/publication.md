@@ -14,8 +14,7 @@ or raw build receipts. Reviewed offline fixture summaries may be included when
 bound to exact output hashes and stripped of private paths and binary payloads.
 R011 was designated stable after owner-reported playback
 success following a project change. It has no completed long-duration endurance
-claim. A track-2 sample assignment failing to survive loads is reported and
-under investigation. Historical R003/R008 manifests retain their original
+claim. Historical R003/R008 manifests retain their original
 validation scope; their experimental status is not changed retroactively.
 
 Publish original build/adaptor source, extraction and relocation recipes,

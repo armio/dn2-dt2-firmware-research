@@ -223,5 +223,5 @@
     "Device captures and personal paths"
   ],
   "baseline": "Reproduced R003, itself derived from T1E2",
-  "status": "R011 designated stable by the user after successful project-change playback; R008 remains historical experimental research. See release notes for validation limits and open issues."
+  "status": "R011 designated stable by the user after successful project-change playback; R008 remains historical experimental research. See release notes for validation limits."
 }

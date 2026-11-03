@@ -89,18 +89,11 @@
     "pending": [
       "Instrumented R011 hardware comparison across repeated project changes",
       "Long-duration USB and sample playback endurance",
-      "Exact end-to-end USB latency measurement",
-      "Investigation of track-2 sample assignment missing after project loads"
+      "Exact end-to-end USB latency measurement"
     ],
-    "notes": "Stable designation follows owner testing, not exhaustive verification. The track-2 persistence report has no confirmed cause yet. Emulator checks do not establish hardware timing deadlines."
+    "notes": "Stable designation follows owner testing, not exhaustive verification. Emulator checks do not establish hardware timing deadlines."
   },
-  "known_issues": [
-    {
-      "issue": "Sample assigned to track 2 reported missing after project loads",
-      "status": "under-investigation",
-      "cause_confirmed": false
-    }
-  ],
+  "known_issues": [],
   "source_reproduction": {
     "verified_on": "2026-11-03",
     "exact_main_dsp_and_sysex": true,
@@ -111,5 +104,13 @@
       "R011 DSP SPI publication, including FIFO and ownership rejection cases"
     ],
     "notes": "Exact 2,591,008-byte SysEx output matches the release hash. Generated firmware and build intermediates remain private."
-  }
+  },
+  "resolved_reports": [
+    {
+      "issue": "Sample assigned to track 2 reported missing after project loads",
+      "resolved_on": "2026-11-03",
+      "resolution": "Owner confirmed the project had not been saved after sample assignment.",
+      "firmware_change_required": false
+    }
+  ]
 }

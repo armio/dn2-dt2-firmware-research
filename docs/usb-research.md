@@ -4,7 +4,7 @@ R011 is the current stable target. It includes the six sample Machines,
 Recorder and 42-channel USB capture, with a fix for USB publication stalling
 after project changes. The owner reports normal playback after loading a
 different project. Repeated instrumented project-change testing and endurance
-remain pending; a separate sample-persistence report is under investigation.
+remain pending.
 
 ## Build locally
 

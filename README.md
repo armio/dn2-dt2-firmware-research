@@ -17,10 +17,6 @@ OS files **and a private test-sample bank that is not publicly available**. Owni
 a DT2 does not supply that bank. Read [private inputs](#private-inputs) before
 setting up the build.
 
-**Known issue under investigation:** a sample assigned to track 2 was reported
-missing after project loads. The cause and scope remain unconfirmed. See
-[status and limitations](#status-and-limitations).
-
 [Sample loading](docs/samples.md) · [Recorder](docs/recorder.md) ·
 [USB audio](#usb-audio-routing) · [Build](#build) ·
 [Release manifest](releases/r011.json)
@@ -151,9 +147,6 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 Current limits:
 
-- **Sample persistence:** the track-2 reload report is unresolved. A successful
-  upload does not save project assignments. Keep project backups and original
-  sample files on +Drive while this is investigated.
 - **Recorder coverage:** MAIN recording/save/reopen has hardware confirmation;
   not every input source, trimming case or power-cycle workflow is verified.
 - **USB endurance:** repeated instrumented project changes, long-running dense
@@ -260,7 +253,7 @@ private inputs.
 | [USB audio](docs/usb-research.md) | R011 publication fix and validation limits |
 | [Build tools](port/tools/README.md) | Pinned toolchain and local setup |
 | [Audit guide](docs/research-audits.md) | Offline checks and synthetic tests |
-| [November 3 update](docs/research/2026-11-03.md) | Stable designation, project-change results and open issue |
+| [November 3 update](docs/research/2026-11-03.md) | Stable designation, project-change results and resolved sample report |
 | [Publication boundaries](docs/publication.md) | What belongs in this source-only repository |
 
 Useful contributions include reproducible bug reports, synthetic regression

@@ -5,7 +5,7 @@ page from live DMA ownership. This avoids reusing a render-time page selection
 after a project change. Ownership checks, FIFO order and control-frame ordering
 remain intact. The user reported normal playback after loading another project
 and designated R011 stable; this is not an endurance-test claim. See the release
-notes for known issues, including the subsequent sample-persistence report.
+notes for validation limits.
 
 The source chain is R003 → R004 phase accounting → R005 private scratch relocation
 → R007 guarded publication → R008 rejection diagnostics → R009 frame recorder
