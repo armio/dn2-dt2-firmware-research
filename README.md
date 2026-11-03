@@ -1,90 +1,229 @@
 # DN2 DT2 firmware research
 
-Source recipes for reproducing **R011**, designated stable on November 3, 2026.
-It adds the six Digitakt II sample Machines, sample browsing, recording and
-resampling, and multichannel USB audio to Digitone II. No firmware images or
-sample audio are distributed. Build locally from your own firmware inputs.
+**Six Digitakt II sample Machines, recording and resampling, and 42-channel USB
+audio for Digitone II—alongside its stock synth Machines.**
 
-**R011 fixes the USB publication stall after project changes.** The owner reports
-normal playback after loading another project. T1E2 remains available as the
-previous stable release. See the [R011 USB guide](docs/usb-research.md) and
-[release manifest](releases/r011.json) for changes and validation limits.
+Play stereo samples chromatically, stretch and slice loops, record the main mix,
+and send individual tracks and effect returns to your DAW.
+
+**Current stable target: R011**, designated November 3, 2026. It fixes the USB
+publication stall encountered after changing projects; the owner reports normal
+playback after loading another project. T1E2 remains available as the previous
+stable release.
+
+This repository distributes **source, build recipes and research only**. Firmware
+images and sample audio are not included. Exact builds require your own official
+OS files **and a private test-sample bank that is not publicly available**. Owning
+a DT2 does not supply that bank. Read [private inputs](#private-inputs) before
+setting up the build.
 
 **Known issue under investigation:** a sample assigned to track 2 was reported
-missing after project loads. The cause and scope are not yet confirmed. Keep
-project backups; the stable designation does not mean every workflow is verified.
+missing after project loads. The cause and scope remain unconfirmed. See
+[status and limitations](#status-and-limitations).
 
-**Build limitation:** every current target also requires a private project test-sample bank.
-This is **not Digitakt II factory content** and cannot be obtained by exporting
-samples from a Digitakt II. See [private inputs](#private-inputs) before building.
+[Sample loading](docs/samples.md) · [Recorder](docs/recorder.md) ·
+[USB audio](#usb-audio-routing) · [Build](#build) ·
+[Release manifest](releases/r011.json)
 
-This project builds on the DN2 research and `dnfw` tooling from
-[angellinares/dn2_firmware_explore](https://github.com/angellinares/dn2_firmware_explore),
-with firmware container tooling from
-[mischa85/elektron-firmware-tool](https://github.com/mischa85/elektron-firmware-tool).
-Credit to the upstream authors and contributors for that foundation. See
-[source attribution](THIRD_PARTY.md) for component credits and licences.
+## What you get
 
-R011 includes ONESHOT, WERP, STRETCH, REPITCH, GRID and SLICE; stereo samples;
-sample browsing; DT2 parameter graphics; SLICES trig mode; and class-compliant
-USB audio with 42 capture channels at 48 kHz/24 bit. Its USB return is stereo.
-The 21 capture pairs are MAIN, tracks 1–16, DELAY, REVERB, CHORUS and INPUT,
-in that order. Individual tracks exclude shared effect returns.
+### Six sample Machines
 
-Already running this firmware? See [loading your own samples](docs/samples.md)
-for Transfer, +Drive, project loading and track assignment instructions.
+| Machine | Main purpose |
+| --- | --- |
+| **ONESHOT** | Direct sample playback for drum hits, pitched sounds and loops. |
+| **WERP** | Tempo-following playback with segment size and segment-mode controls. |
+| **STRETCH** | Granular time stretching with pitch control. |
+| **REPITCH** | Tempo matching through playback-rate and pitch changes. |
+| **GRID** | Divide a sample into evenly spaced slices for rhythmic rearrangement. |
+| **SLICE** | Play and edit individual slice boundaries within a sample. |
 
-Recording includes source selection, trimming, auditioning and saving to +Drive.
-Plain **VOICE** cycles through Voice Setup, Sample Manager and Recorder;
-**FUNC + VOICE** retains unison. See the [Recorder workflow](docs/recorder.md).
+The sample Machines share the DN2 with **FM TONE, WAVETONE, FM DRUM and
+SWARMER**, using the instrument's existing voice-allocation controls.
 
-This is a version-specific port, not Elektron's source code. T1E2 is the earlier
-stable build without Recorder. R003 and R008 remain available as historical
-experimental targets. R011 includes Recorder and the later USB publication work.
-Long-duration endurance and exact end-to-end USB latency remain unmeasured.
+- **Mono and stereo samples**, chromatic keyboard playing and live playback
+  controls, including tuning, loop position, length and sample level.
+- **Waveform views and DT2 parameter graphics**, with sample browsing from SYN
+  and a separate Sample Manager.
+- **Slice editing and performance:** editable boundaries, slice-grid creation,
+  linear/random slice locks and **SLICES trig mode** for GRID/SLICE.
+- **DN2 sequencing and modulation integration**, including parameter locks and
+  the existing voice-allocation controls.
+- **Recording and resampling**, with source selection, normalization, trimming,
+  auditioning, saving to +Drive and optional track assignment.
+- **Class-compliant USB audio:** the main mix, all 16 stereo tracks, three stereo
+  effect returns and physical inputs available to the computer separately.
+
+Explicitly switching another Machine to ONESHOT initializes FLTR, AMP, track FX
+and all three LFO pages. Loading a saved Sound or project preserves its settings;
+existing parameter locks can still override track-level values.
+
+## Getting around
+
+From a normal track page, plain **VOICE** cycles through three views:
+
+| Action | View or function |
+| --- | --- |
+| Press **VOICE** once | Voice Setup / voice allocation |
+| Press **VOICE** again | Sample Manager |
+| Press **VOICE** a third time | Recorder |
+| **FUNC + VOICE** | Existing unison shortcut |
+| **FUNC + SYN** | Machine selection, including the sample Machines |
+| Turn **SAMP** on SYN | Project sample browser |
+
+### Load and play a sample
+
+1. Use **Elektron Transfer → EXPLORE** to send your audio files or folders to the
+   DN2's +Drive. Wait for the transfer to finish.
+2. Open **Sample Manager** with two VOICE presses. Browse +DRIVE, mark samples,
+   open actions with **RIGHT**, then choose **LOAD TO PROJECT**.
+3. Select a sample Machine on the destination track. Turn **SAMP**, choose a
+   loaded sample and press **YES**. For a first ONESHOT check, use PLAY FWD,
+   STRT 0, LEN 120 and an audible sample level on an unmuted track.
+4. **Save the project** after loading and assigning samples.
+
+Transfer stores files on +Drive; project loading makes them available to the
+Machines; assignment chooses which sample a track plays. These are separate
+steps. You can also enter +Drive from the SYN SAMP list with **FUNC + YES** for
+quick assignment.
+
+Use your own audio files, such as WAV. Manual conversion before Transfer is not
+required for this workflow; Transfer performs its own audio-format conversion.
+For tempo-following loops, set BARS to the sample's actual bar length.
+
+See [loading your own samples](docs/samples.md) for folder navigation, preview,
+assignment and troubleshooting.
+
+### Record, trim and save
+
+Open Recorder on the third VOICE page. Select **SRC MAIN** to resample the main
+mix, or choose an available physical-input, USB or individual-track source.
+Arm with **H/ARM** and use **YES** to start and stop recording.
+
+On the trim page, **E/H** set start/end, **F** zooms, **G** pans and
+**FUNC + YES** auditions the selected range. Press **YES** to name and save the
+sample to the +Drive `recorded` folder. Assign it when prompted, or press **NO**
+to keep the file without assigning it. Save the project to retain assignments.
+
+MAIN recording, saving and Recorder reopening have been confirmed on hardware.
+Validation of every source and exact trimmed-file comparison remains incomplete.
+The [Recorder guide](docs/recorder.md) covers the full workflow and its limits.
+
+## USB audio routing
+
+Select **USB AUDIO/MIDI** in the DN2's USB configuration, then choose Digitone II
+as your DAW's audio input. The interface exposes **42 capture channels at
+48 kHz / 24 bit**, arranged as 21 stereo pairs. Enable the pairs you need in the
+DAW's input configuration.
+
+| DAW input pair | Signal from DN2 |
+| --- | --- |
+| **1/2** | Main stereo mix |
+| **3/4–33/34** | Tracks 1–16, one stereo pair per track |
+| **35/36** | Delay return |
+| **37/38** | Reverb return |
+| **39/40** | Chorus return |
+| **41/42** | Physical inputs |
+
+Track **n** uses channels **2n+1 / 2n+2**: track 1 is 3/4, track 2 is 5/6,
+and track 13 is 27/28.
+
+Individual track pairs exclude the shared effect returns. To capture a
+multitrack arrangement with those effects, record the track pairs and the
+separate DELAY, REVERB and CHORUS pairs. MAIN already contains the mixed effects.
+
+The computer-to-DN2 USB return remains **stereo**. The 42 channels describe
+capture into the computer, not 42 independent return channels. Host buffer
+settings affect latency; exact end-to-end USB latency has not been measured.
+See the [USB guide](docs/usb-research.md) for R011's changes and validation scope.
+
+## Status and limitations
+
+“Stable” records successful owner testing and the selected default build. It is
+not a claim of complete DT2 feature parity or exhaustive hardware validation.
+
+| Target | Status | Scope |
+| --- | --- | --- |
+| **R011** | Current stable / default | Sample Machines, browsing, Recorder and latest USB publication fix |
+| **T1E2** | Previous stable | Sample Machines, browsing and 42-channel USB; no Recorder |
+| **R003** | Historical experimental | Recorder extension on the T1E2 baseline |
+| **R008** | Historical diagnostic | Recorder plus earlier USB publication diagnostics |
+
+Current limits:
+
+- **Sample persistence:** the track-2 reload report is unresolved. A successful
+  upload does not save project assignments. Keep project backups and original
+  sample files on +Drive while this is investigated.
+- **Recorder coverage:** MAIN recording/save/reopen has hardware confirmation;
+  not every input source, trimming case or power-cycle workflow is verified.
+- **USB endurance:** repeated instrumented project changes, long-running dense
+  workloads and exact end-to-end latency remain to be characterized.
+- **External parameter control:** a complete DN2-compatible CC/NRPN map for the
+  added sampler parameters is not implemented.
+- **Build access:** all current targets require the original private sample
+  bank. A build that removes that dependency needs separate work and validation.
+
+This port targets **Digitone II OS 1.11**, using **Digitakt II OS 1.16** as donor.
+It is version-specific; these recipes do not support the original Digitone or
+arbitrary OS revisions. Research builds modify device firmware. Keep a known-good
+recovery image privately.
 
 ## Private inputs
 
-The exact build requires official Digitone II OS 1.11, official Digitakt II
-OS 1.16, and the original private 47,104-byte three-slot test-sample bank. Sizes and SHA-256
-hashes are pinned in [releases/t1e2.json](releases/t1e2.json). Obtain firmware
-from Elektron and retain your own copies locally.
+All targets require these exact local inputs. The builder verifies their sizes
+and SHA-256 hashes against the [release manifests](releases/r011.json).
 
-The Digitakt II input is its **OS firmware `.syx` file**, from which the build
-extracts Machine code and UI assets. The Digitakt II factory sample library is
-not a build input.
+| Input | Purpose |
+| --- | --- |
+| Official **Digitone II OS 1.11 `.syx`** | Recipient firmware |
+| Official **Digitakt II OS 1.16 `.syx`** | Donor Machine code and UI assets |
+| Original **47,104-byte `sample-bank.bin`** | Private three-slot test bank required for exact reproduction |
 
-**`sample-bank.bin` is not included or offered for download.** It is a private
-test asset created for this project, separate from both official OS files.
-Owning a Digitakt II or exporting its factory samples will not supply this file.
-Without the exact bank, the current recipes cannot build any target. Arbitrary WAVs,
-an empty file, or samples uploaded through Transfer cannot replace it: the
-builder checks the bank's size and hash before building.
+Obtain official firmware from Elektron and retain your own copies locally.
+The DT2 input is its **OS firmware**, not its factory sample library.
 
-A build without this dependency needs its own release and validation; none of
-T1E2, R003, R008 or R011 currently provides that. The instructions for [loading playable
-samples](docs/samples.md) apply after installation and are a separate workflow.
+**The private bank is not included or offered for download.** Owning a DT2 or
+exporting its factory samples will not produce it. Arbitrary WAVs, an empty
+file, or samples uploaded through Transfer cannot replace it. Without that
+exact bank, none of the current recipes can build successfully.
 
-Check the inputs without changing them:
+Uploading playable samples to an installed DN2 is a separate workflow and does
+not require DT2 factory content. See [sample loading](docs/samples.md).
+
+## Build
+
+Use macOS or Linux with Python 3.12+, Git, curl, Rust/Cargo, GNU Make, a host C
+compiler, Clang's preprocessor and zlib development headers. See
+[tool setup](port/tools/README.md) for the pinned dependencies. The builder does
+not open MIDI ports or flash a device.
+
+### 1. Get the source and Python dependencies
 
 ```sh
-python3 tools/check_inputs.py \
+git clone https://github.com/armio/dn2-dt2-firmware-research.git
+cd dn2-dt2-firmware-research
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+### 2. Check your private inputs
+
+Replace the example paths with your local files:
+
+```sh
+python tools/check_inputs.py \
   --dn2 /path/to/Digitone_II_OS1.11.syx \
   --dt2 /path/to/Digitakt_II_OS1.16.syx \
   --sample-bank /private/path/to/sample-bank.bin
 ```
 
-## Build
+Resolve any missing-input or hash error before continuing. This check does not
+change the input files.
 
-Use Python 3.12+, Git, Rust/Cargo, GNU Make, a host C compiler, Clang's
-preprocessor and zlib headers. See [tool setup](port/tools/README.md) for the
-pinned open-source dependencies. All build products stay local; the builder
-does not access a MIDI device or flash hardware.
+### 3. Build the toolchain and R011
 
 ```sh
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install -r requirements.txt
 python port/tools/bootstrap.py --prefix .toolchain --jobs 4
 python build.py \
   --dn2 /path/to/Digitone_II_OS1.11.syx \
@@ -93,40 +232,58 @@ python build.py \
   --out /private/builds/R011.syx
 ```
 
-The output must be outside this repository. An existing output is never
+The output must be **outside this repository**. Existing outputs are never
 overwritten. Intermediate firmware and diagnostic logs stay in the private
-temporary directory printed by the builder; retain or remove that directory
-locally after the build. Nothing is flashed automatically.
+temporary directory printed by the builder. Nothing is flashed automatically.
 
-R011 is the default target. Expected output: **2,591,008 bytes**, SHA-256
-`91b32a4d2161a87a4725a2296371e01ee6c7e83a95dccb38fe9f4a8dd2e53b0b`.
-The builder checks MAIN, DSP and complete SysEx identities against
-[releases/r011.json](releases/r011.json).
+Expected R011 output: **2,591,008 bytes**, SHA-256:
 
-Use `--target T1E2` to reproduce the previous stable release, or `--target R003`
-and `--target R008` for the historical experimental builds. Give each target a
-separate output filename. All targets require the same private inputs; R011
-builds through T1E2, Recorder and the USB publication stages.
+```text
+91b32a4d2161a87a4725a2296371e01ee6c7e83a95dccb38fe9f4a8dd2e53b0b
+```
 
-## Source and contributions
+The builder verifies MAIN, DSP and complete SysEx identities. Public-source
+reproduction matched this output; the [manifest](releases/r011.json) records
+which stages were rebuilt and which previously reproduced intermediates were
+reused during validation.
 
-[November 3 research update](docs/research/2026-11-03.md) covers R011
-publication, project-change behavior and the reported sample persistence issue.
-The [November 2 research update](docs/research/2026-11-02.md) covers the USB freeze,
-buffer checks and new diagnostics. The
-[October 31 research update](docs/research/2026-10-31.md) documents Recorder
-verification, loader-overlap findings and remaining audit limits. Reusable
-offline checks and synthetic tests are described in the
-[audit guide](docs/research-audits.md).
+Use `--target T1E2`, `--target R003` or `--target R008` to reproduce an earlier
+target. Give each build a separate output filename. All require the same three
+private inputs.
 
-The port contains original adapters, extraction/relocation recipes and factual
-address metadata. Donor routines, fonts and graphics are extracted locally.
-Read [publication boundaries](docs/publication.md) before contributing. Do not
-attach firmware, samples, generated disassemblies or raw device captures to
-commits, issues, pull requests or releases.
+## Documentation and contributions
 
-Research builds modify device firmware. Keep project backups and a known-good
-recovery image privately. This project is independent of Elektron.
+| Guide | Contents |
+| --- | --- |
+| [Sample loading](docs/samples.md) | Transfer, +Drive, project slots, assignment and preview |
+| [Recorder](docs/recorder.md) | Recording, trimming, auditioning, saving and reopening |
+| [USB audio](docs/usb-research.md) | R011 publication fix and validation limits |
+| [Build tools](port/tools/README.md) | Pinned toolchain and local setup |
+| [Audit guide](docs/research-audits.md) | Offline checks and synthetic tests |
+| [November 3 update](docs/research/2026-11-03.md) | Stable designation, project-change results and open issue |
+| [Publication boundaries](docs/publication.md) | What belongs in this source-only repository |
 
-Source licence: AGPL-3.0-or-later, with component notices retained in
-[THIRD_PARTY.md](THIRD_PARTY.md).
+Useful contributions include reproducible bug reports, synthetic regression
+cases, clearer workflow documentation and improvements that remove private
+build dependencies. For a bug report, include the firmware target, Machine,
+steps to reproduce, USB mode/host buffer size where relevant, and whether the
+fault affects headphones, USB or both. For sample reload issues, state whether
+the project was saved after assignment.
+
+Keep firmware, samples, generated disassemblies and raw device captures out of
+commits, issues, pull requests and releases. The repository contains original
+adapters, extraction/relocation recipes and factual address metadata; donor
+routines, fonts and graphics are extracted from private inputs locally.
+
+## Credits and licence
+
+This project builds on the DN2 research and `dnfw` tooling from
+[angellinares/dn2_firmware_explore](https://github.com/angellinares/dn2_firmware_explore),
+with firmware container tooling from
+[mischa85/elektron-firmware-tool](https://github.com/mischa85/elektron-firmware-tool).
+Credit to the upstream authors and contributors for that foundation.
+
+The [source attribution](THIRD_PARTY.md) lists component credits, licences and
+additional research dependencies. Source licence: **AGPL-3.0-or-later**, with
+component notices retained. This project is independent of Elektron; the source
+licence does not grant rights to Elektron's firmware or private sample audio.
