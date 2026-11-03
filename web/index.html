@@ -21,6 +21,12 @@
       <p class="lead">Six sample Machines, recording and 42-channel USB audio. Built locally from your two Elektron OS files.</p>
       <div class="machine-list" aria-label="Included sample Machines"><span>ONESHOT</span><span>WERP</span><span>STRETCH</span><span>REPITCH</span><span>GRID</span><span>SLICE</span></div>
     </section>
+    <section class="notice candidate" aria-label="First-time installation warning">
+      <strong>New users: wait before installing R012.</strong>
+      <p>First-time sample-storage setup is missing. Transfer may show 0% Free / 0 bytes, stall uploads or report Connection failed.</p>
+      <p>Do not use stock FORMAT +DRIVE or reset commands as a workaround; they can erase projects or presets. Existing users with working sample storage do not need to format it. A fix is in development.</p>
+      <a href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/docs/samples.md#first-time-installation-warning">Read the storage warning</a>
+    </section>
     <div class="workspace">
       <section class="builder" aria-labelledby="builder-title">
         <div class="release-line"><h2 id="builder-title">Build firmware</h2><span id="release-name">Loading release…</span></div>
@@ -59,7 +65,7 @@
       <aside aria-label="Build information">
         <section>
           <h2>For Digitone II</h2>
-          <p>Stock synths stay available. Add your own samples through Transfer after installation.</p>
+          <p>Stock synths stay available. Sample uploads require initialized sample storage; read the warning above before installing.</p>
           <p>Requires DN2 OS 1.11 and DT2 OS 1.16.</p>
         </section>
         <section>

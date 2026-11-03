@@ -1,5 +1,28 @@
 # Loading your own samples
 
+## First-time installation warning
+
+**2026-11-03: new users should wait for the sample-storage setup fix.** R012
+mounts an existing sample filesystem but does not create it on a previously
+unprepared DN2. Our owner testing used storage initialized during development;
+it missed this first-install case.
+
+Symptoms can include **0% Free / 0 bytes** in Transfer, an empty Samples root,
+uploads stuck at zero speed, and **Connection failed**. These symptoms alone
+do not establish whether storage is uninitialized, damaged, or occupied by
+another mod. A zero-capacity display is not proof that the physical drive is full.
+
+Do **not** use the stock **FORMAT +DRIVE**, EMPTY RESET or FACTORY RESET as a
+workaround. They can erase projects or presets and do not provide the missing
+sample-filesystem setup. If sample uploads already work, leave the storage intact.
+
+An explicit on-device sample-storage formatter with erase confirmation is in
+development. It has not yet passed hardware validation or been released. The
+candidate will be tested on our DN2 before publication. No automatic formatting
+is being added on a failed mount.
+
+The loading instructions below require initialized, working sample storage.
+
 These instructions apply to R012, R011 and T1E2 custom firmware. Use your own
 mono or stereo samples; the Digitakt II factory library is not required for
 playback. R012 also builds without a private sample bank, using only the two

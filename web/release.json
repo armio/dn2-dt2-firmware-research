@@ -90,7 +90,11 @@
     ],
     "notes": "Stable designation follows owner-confirmed hardware use on 2026-11-03. R011 remains the previous stable release. Long-duration endurance and instrumented timing checks remain separate from this confirmation."
   },
-  "known_issues": [],
+  "first_install_warning": "New users should wait: R012 does not initialize sample storage on an unprepared DN2. Transfer may report zero capacity and fail uploads. Do not use stock FORMAT +DRIVE or reset commands as a workaround.",
+  "known_issues": [
+    "First-install sample-storage setup is missing. Owner validation used an already initialized sample filesystem; an explicit on-device formatter is being developed and has not yet passed hardware validation.",
+    "Sample-transfer capabilities remain advertised when the sample filesystem fails to mount. Zero reported capacity does not distinguish uninitialized storage from corruption or another mod's data."
+  ],
   "source_reproduction": {
     "verified_on": "2026-11-03",
     "exact_main_dsp_and_sysex": true,

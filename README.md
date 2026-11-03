@@ -1,16 +1,27 @@
 # DN2 DT2 firmware research
 
+> **First-time installation warning — 2026-11-03:** R012 does not initialize
+> sample storage on a previously unprepared DN2. Transfer may show **0% Free /
+> 0 bytes**, stall uploads or report **Connection failed**. **New users should
+> wait for the storage-setup fix before installing.** Do not use the stock
+> **FORMAT +DRIVE**, EMPTY RESET or FACTORY RESET as a workaround; they can
+> erase projects or presets and do not provide this missing setup. Existing
+> users with working sample storage do not need to format it.
+> [Details and status](docs/samples.md#first-time-installation-warning).
+
 **Six Digitakt II sample Machines, recording and resampling, and 42-channel USB
 audio for Digitone II—alongside its stock synth Machines.**
 
 Play stereo samples chromatically, stretch and slice loops, record the main mix,
 and send individual tracks and effect returns to your DAW.
 
-**R012 is the current stable release.** It carries the R011 features forward
+**R012 is the current release, with the first-install limitation above.** It carries the R011 features forward
 without the private sample-bank requirement. Supply your own official Digitone II
 OS 1.11 and Digitakt II OS 1.16 files; no factory sample library is needed.
 Owner testing confirmed stock audio, samples, Recorder and USB audio, including
-after changing projects. R011 and T1E2 remain available as earlier stable releases.
+after changing projects, on a DN2 with sample storage already initialized during
+development. That testing missed first-time storage setup. R011 and T1E2 remain
+available as historical releases, not as a workaround for this issue.
 
 This repository distributes **source, build recipes and research only**. Firmware
 images and sample audio are not included. Builds happen locally; add your own
@@ -142,7 +153,7 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 | Target | Status | Scope |
 | --- | --- | --- |
-| **R012** | Current stable / default build | R011 features; needs only the two official OS files |
+| **R012** | Default build; first-install warning | Tested with initialized sample storage; new users should wait for the setup fix |
 | **R011** | Previous stable / historical exact build | Sample Machines, browsing, Recorder and latest USB publication fix |
 | **T1E2** | Earlier stable | Sample Machines, browsing and 42-channel USB; no Recorder |
 | **R003** | Historical experimental | Recorder extension on the T1E2 baseline |
