@@ -13,7 +13,8 @@ and verifies the result against the [R012 release hash](../releases/r012.json).
 It does not upload files, store them between visits or flash your instrument.
 Cancel closes the build worker; selected files can be reused for another attempt.
 
-R012 is a candidate based on stable R011. Hardware testing is pending.
+R012 is the current stable release. Owner testing confirmed stock audio, samples,
+Recorder and USB audio, including after changing projects.
 Back up projects and keep an official recovery OS before installing with
 Elektron Transfer. Add playable samples using the [sample-loading guide](samples.md).
 

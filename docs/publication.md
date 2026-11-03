@@ -10,9 +10,10 @@ for importing playable samples after installation.
 Publish validation summaries with their limits, not private hardware captures
 or raw build receipts. Reviewed offline fixture summaries may be included when
 bound to exact output hashes and stripped of private paths and binary payloads.
-R011 was designated stable after owner-reported playback
-success following a project change. It has no completed long-duration endurance
-claim. Historical R003/R008 manifests retain their original
+R012 was designated stable after owner-confirmed stock audio, sample playback,
+Recorder and USB audio, including after changing projects. R011 remains the
+previous stable release. Neither designation claims completed long-duration
+endurance testing. Historical R003/R008 manifests retain their original
 validation scope; their experimental status is not changed retroactively.
 
 Publish original build/adaptor source, extraction and relocation recipes,

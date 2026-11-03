@@ -1,6 +1,6 @@
 # R011 USB audio
 
-R011 is the current stable target. It includes the six sample Machines,
+R011 is the previous stable target. It includes the six sample Machines,
 Recorder and 42-channel USB capture, with a fix for USB publication stalling
 after project changes. The owner reports normal playback after loading a
 different project. Repeated instrumented project-change testing and endurance
@@ -8,7 +8,8 @@ remain pending.
 
 R012 carries this USB implementation forward unchanged and removes the private
 sample-bank build dependency. Use the [two-file R012 build](../README.md#build)
-for the current candidate. R012 hardware validation is pending.
+for the current stable release. Owner testing confirmed stock audio, samples,
+Recorder and USB audio on R012, including after changing projects.
 
 ## Reproduce historical R011
 

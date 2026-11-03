@@ -50,7 +50,7 @@
     ]
   },
   "build": "R012",
-  "status": "candidate",
+  "status": "stable",
   "date": "2026-11-03",
   "stable_baseline": "T1E2",
   "previous_stable": "R011",
@@ -71,7 +71,10 @@
     "Private recorded sample bank replaced by reproducible silent compatibility data generated from source; only official DN2 and DT2 OS files are required."
   ],
   "validation": {
-    "hardware_confirmed": [],
+    "hardware_confirmed": [
+      "Owner reports R012 installed with stock synth audio, sample playback, Recorder and USB audio working, including after changing projects.",
+      "Owner designated R012 stable on 2026-11-03."
+    ],
     "offline_checked": [
       "Fresh complete build from official DN2 OS 1.11 and DT2 OS 1.16 only; all 115 MAIN stage identities and Recorder/USB continuation identities passed without bypassing assertions.",
       "Final MAIN, expanded MAIN, runtime, DSP and SysEx hashes match the published R012 output identities.",
@@ -81,12 +84,11 @@
       "41 source tests passed, including two-input validation, historical-target bank requirements and fail-closed hash-profile projection."
     ],
     "pending": [
-      "R012 hardware boot, sample loading, Recorder and USB checks",
-      "Instrumented R011 hardware comparison across repeated project changes",
+      "Instrumented R012 hardware timing comparison across repeated project changes",
       "Long-duration USB and sample playback endurance",
       "Exact end-to-end USB latency measurement"
     ],
-    "notes": "R012 is a new candidate; R011 remains the owner-designated stable build. R012 hardware validation is pending."
+    "notes": "Stable designation follows owner-confirmed hardware use on 2026-11-03. R011 remains the previous stable release. Long-duration endurance and instrumented timing checks remain separate from this confirmation."
   },
   "known_issues": [],
   "source_reproduction": {

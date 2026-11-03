@@ -5,7 +5,8 @@ and 42-channel USB audio. The workflow includes source selection, recording, nor
 trim and audition controls, saving to +Drive, and optional track assignment.
 VOICE cycles through Voice Setup, Sample Manager and Recorder.
 
-**R012 is the two-file build candidate; R011 remains hardware-tested stable.**
+**R012 is the current stable release.** Owner testing confirmed Recorder operation,
+stock audio, samples and USB audio, including after changing projects.
 R003 remains a historical experimental target.
 R003 hardware boot, stock audio, MAIN recording, saving and Recorder reopening have passed. Hardware
 trimmed-file comparison, power-cycle persistence and long-duration USB stress
@@ -76,5 +77,5 @@ closed-mode diagnostic replies as the take length.
 R003 also repairs a confirmed MAIN-loader input overlap by restoring a
 separately compressed tail before original startup. Protected loader sections,
 panel firmware and flash writer remain unchanged. R003 excludes later USB
-queues, scheduling and timing changes; current R011 includes the
+queues, scheduling and timing changes; R011 and R012 include the
 [USB publication changes](usb-research.md).

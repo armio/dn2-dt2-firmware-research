@@ -125,7 +125,7 @@ def main():
         parser.add_argument('--'+name, type=Path, required=True)
     parser.add_argument('--sample-bank', type=Path, help='Required only to reproduce historical targets')
     parser.add_argument('--target', choices=('T1E2', 'R003', 'R008', 'R011', 'R012'), default='R012',
-                        help='Public-input R012 candidate (default); stable R011; historical T1E2/R003/R008')
+                        help='Stable R012 (default, two OS files); historical R011/T1E2/R003/R008')
     parser.add_argument('--toolchain', type=Path, default=ROOT/'.toolchain/paths.json')
     parser.add_argument('--work', type=Path, help='Fresh directory outside the source tree; default: system temporary directory')
     args = parser.parse_args()

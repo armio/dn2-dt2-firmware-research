@@ -6,11 +6,11 @@ audio for Digitone II—alongside its stock synth Machines.**
 Play stereo samples chromatically, stretch and slice loops, record the main mix,
 and send individual tracks and effect returns to your DAW.
 
-**R012 is the new two-file build candidate.** It carries the R011 features forward
+**R012 is the current stable release.** It carries the R011 features forward
 without the private sample-bank requirement. Supply your own official Digitone II
 OS 1.11 and Digitakt II OS 1.16 files; no factory sample library is needed.
-R012 hardware validation is pending. **R011 remains the owner-tested stable
-release**, with T1E2 retained as the previous stable release.
+Owner testing confirmed stock audio, samples, Recorder and USB audio, including
+after changing projects. R011 and T1E2 remain available as earlier stable releases.
 
 This repository distributes **source, build recipes and research only**. Firmware
 images and sample audio are not included. Builds happen locally; add your own
@@ -142,9 +142,9 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 | Target | Status | Scope |
 | --- | --- | --- |
-| **R012** | Candidate / default build | R011 features; needs only the two official OS files |
-| **R011** | Current stable / historical exact build | Sample Machines, browsing, Recorder and latest USB publication fix |
-| **T1E2** | Previous stable | Sample Machines, browsing and 42-channel USB; no Recorder |
+| **R012** | Current stable / default build | R011 features; needs only the two official OS files |
+| **R011** | Previous stable / historical exact build | Sample Machines, browsing, Recorder and latest USB publication fix |
+| **T1E2** | Earlier stable | Sample Machines, browsing and 42-channel USB; no Recorder |
 | **R003** | Historical experimental | Recorder extension on the T1E2 baseline |
 | **R008** | Historical diagnostic | Recorder plus earlier USB publication diagnostics |
 
@@ -156,9 +156,6 @@ Current limits:
   workloads and exact end-to-end latency remain to be characterized.
 - **External parameter control:** a complete DN2-compatible CC/NRPN map for the
   added sampler parameters is not implemented.
-- **R012 hardware validation:** the generated silent compatibility data and new
-  build identity have not yet been tested on the instrument. DSP code is unchanged
-  from R011; source checks do not replace a hardware check.
 
 This port targets **Digitone II OS 1.11**, using **Digitakt II OS 1.16** as donor.
 It is version-specific; these recipes do not support the original Digitone or
