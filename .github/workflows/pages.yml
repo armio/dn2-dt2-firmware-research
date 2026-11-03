@@ -1,0 +1,48 @@
+name: Browser patcher
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - 'port/**'
+      - 'releases/r012.json'
+      - 'tools/build_site.py'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Build original container tool for the browser
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
+          git -C "$RUNNER_TEMP/emsdk" checkout --quiet 15915cad554b707837024dc2758b6a1c5b94b036
+          "$RUNNER_TEMP/emsdk/emsdk" install 4.0.22
+          "$RUNNER_TEMP/emsdk/emsdk" activate 4.0.22
+          source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
+          sh web/build-codec.sh
+      - name: Check browser recipe boundaries
+        run: |
+          python3 tools/test_browser_recipe.py
+          node tools/test_browser_recipe.mjs
+      - name: Stage public browser assets
+        run: python3 tools/build_site.py --out build/site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -22,3 +22,8 @@ __pycache__/
 *.tar.gz
 *.tar.xz
 *.7z
+
+# Generated browser runtime: built from original open-source C in CI.
+/web/codec-native.mjs
+/web/codec-native.wasm
+/web/codec-LICENSE.txt

@@ -16,6 +16,9 @@ This repository distributes **source, build recipes and research only**. Firmwar
 images and sample audio are not included. Builds happen locally; add your own
 playable samples through Transfer after installation.
 
+[**Build in your browser**](https://armio.github.io/dn2-dt2-firmware-research/)
+— select both OS files, build locally, download. [Browser guide](docs/browser.md).
+
 [Sample loading](docs/samples.md) · [Recorder](docs/recorder.md) ·
 [USB audio](#usb-audio-routing) · [Build](#build) ·
 [Release manifest](releases/r012.json)

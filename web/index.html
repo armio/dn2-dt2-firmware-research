@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>Build your DN2 firmware</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="https://github.com/armio/dn2-dt2-firmware-research">DN2 / DT2 research</a>
+    <a href="https://github.com/armio/dn2-dt2-firmware-research#readme">Read the guide</a>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <h1 id="title">Build your<br>DN2 firmware.</h1>
+      <p class="lead">Six sample Machines, recording and 42-channel USB audio. Built locally from your two Elektron OS files.</p>
+      <div class="machine-list" aria-label="Included sample Machines"><span>ONESHOT</span><span>WERP</span><span>STRETCH</span><span>REPITCH</span><span>GRID</span><span>SLICE</span></div>
+    </section>
+    <div class="workspace">
+      <section class="builder" aria-labelledby="builder-title">
+        <div class="release-line"><h2 id="builder-title">Build firmware</h2><span id="release-name">Loading release…</span></div>
+        <p id="release-status" class="notice" role="status">Checking build availability.</p>
+        <fieldset id="inputs" disabled>
+          <legend>1. Select OS files</legend>
+          <p class="hint">Original .syx files only. No sample bank needed.</p>
+          <div class="file-grid">
+            <div class="file-field" id="dn2-zone">
+              <label for="dn2">Digitone II <span>OS 1.11</span></label>
+              <input id="dn2" type="file" accept=".syx" aria-describedby="dn2-status">
+              <p id="dn2-status" class="file-status" aria-live="polite"></p>
+            </div>
+            <div class="file-field" id="dt2-zone">
+              <label for="dt2">Digitakt II <span>OS 1.16</span></label>
+              <input id="dt2" type="file" accept=".syx" aria-describedby="dt2-status">
+              <p id="dt2-status" class="file-status" aria-live="polite"></p>
+            </div>
+          </div>
+        </fieldset>
+        <section class="build-step" aria-labelledby="build-step-title">
+          <h3 id="build-step-title">2. Build and verify</h3>
+          <div class="actions"><button id="build" type="button" disabled>Build firmware</button><button id="cancel" class="secondary" type="button" hidden>Cancel</button></div>
+          <progress id="progress" max="100" value="0" aria-label="Build progress"></progress>
+          <p id="build-status" class="build-status" role="status" aria-live="polite">Choose both OS files to begin.</p>
+          <p id="error" class="error" role="alert" hidden></p>
+        </section>
+        <section id="result" class="result" aria-labelledby="result-title" hidden>
+          <h3 id="result-title">3. Download firmware</h3>
+          <p id="result-summary"></p>
+          <a id="download" class="button">Download .syx</a>
+          <details><summary>Output SHA-256</summary><code id="output-hash"></code></details>
+          <p>Back up your projects, then install the .syx file using Elektron Transfer.</p>
+        </section>
+      </section>
+      <aside aria-label="Build information">
+        <section>
+          <h2>For Digitone II</h2>
+          <p>Stock synths stay available. Add your own samples through Transfer after installation.</p>
+          <p>Requires DN2 OS 1.11 and DT2 OS 1.16.</p>
+        </section>
+        <section>
+          <h2>Files stay on your device</h2>
+          <p>No uploads. The browser builds and verifies your firmware locally.</p>
+        </section>
+        <section>
+          <h2>Before installing</h2>
+          <p>Keep project backups and an official recovery OS.</p>
+          <p><a id="release-notes" href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/releases/r012.json">Release notes</a></p>
+        </section>
+      </aside>
+    </div>
+    <footer><span>Independent research. Not affiliated with Elektron.</span><a href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/THIRD_PARTY.md">Source and credits</a></footer>
+  </main>
+</body>
+</html>

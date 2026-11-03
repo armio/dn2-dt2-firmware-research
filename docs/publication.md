@@ -33,3 +33,18 @@ Preserve licences and attribution for every included third-party source. This
 project must not adopt the original C tool's independent-implementation claim
 for the entire port: vendor routines are deliberately transplanted locally
 from the user's firmware inputs.
+
+## Browser patcher
+
+The site contains original patcher code, a release recipe and compiled original
+adapter fragments tied to their source hashes. Donor bytes are excluded from
+those fragments; their reserved holes are filled from the user's OS files.
+The recipe copies vendor code and graphics from those local inputs and applies
+explicit relocation operations. An unexplained output byte blocks export;
+there is no generic binary-diff payload fallback.
+
+GitHub Pages compiles the vendored MIT container tool to WebAssembly and stages
+an explicit list of browser assets. CI receives no firmware or samples and
+publishes no generated instrument firmware. The browser checks both inputs,
+reconstructed sections and the final SysEx against the release hashes before
+enabling its download. Nothing is flashed automatically.
