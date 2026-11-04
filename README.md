@@ -14,10 +14,14 @@ audio for Digitone II—alongside its stock synth Machines.**
 Play stereo samples chromatically, stretch and slice loops, record the main mix,
 and send individual tracks and effect returns to your DAW.
 
-**R013 is the current candidate.** It adds an explicit, confirmed sample-storage
-setup command for first-time installations while preserving R012's sample
-Machines, Recorder and USB audio. Formatting, restart, Transfer capacity and
-post-format sample uploads have passed on-device checks. DSP code is unchanged.
+**R014 is the current candidate; hardware validation is pending.** It restores
+**FUNC + TUNE** octave snapping, **SYN + PLAY** page clear/undo for all six sample
+Machines on both SYN pages, and held SLICE boundary updates. Intermittent sample
+browser failures and hung notes remain unresolved. Recorder, DSP and USB audio
+code are unchanged.
+
+R014 retains R013's explicit sample-storage setup. Formatting, restart, Transfer
+capacity and post-format sample uploads passed on-device checks on R013.
 Supply your own official Digitone II OS 1.11 and Digitakt II OS 1.16 files;
 no private sample bank or factory sample library is needed.
 
@@ -26,8 +30,9 @@ expose this area as sample storage. R013 initializes a sample filesystem there;
 Elektron Transfer reported about **20 GB** available on the tested DN2.
 
 R012 was tested with sample storage already initialized during development;
-that missed the first-install case fixed by R013. R012, R011 and T1E2 remain
-available as historical builds, not as workarounds for missing storage setup.
+that missed the first-install case fixed by R013. R012 remains the stable target;
+R013, R011 and T1E2 remain available as older builds. R012 and earlier targets
+are not workarounds for missing storage setup.
 
 This repository distributes **source, build recipes and research only**. Firmware
 images and sample audio are not included. Builds happen locally; add your own
@@ -38,14 +43,14 @@ playable samples through Transfer after installation.
 
 [Sample loading](docs/samples.md) · [Recorder](docs/recorder.md) ·
 [USB audio](#usb-audio-routing) · [Build](#build) ·
-[Release manifest](releases/r013.json)
+[Release manifest](releases/r014.json)
 
 ## First installation, step by step
 
 1. Back up projects, Sounds and samples. Keep the official DN2 recovery OS.
 2. Open the [browser patcher](https://armio.github.io/dn2-dt2-firmware-research/),
    select your official **DN2 OS 1.11** and **DT2 OS 1.16** files, choose
-   **Build firmware**, then download the verified **R013** `.syx`.
+   **Build firmware**, then download the verified **R014** `.syx`.
 3. Install that file with Elektron Transfer using its OS update workflow.
    Let installation finish, then boot the DN2 into normal playing mode.
 4. If sample uploads already work, skip formatting. If sample storage needs
@@ -188,8 +193,9 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 | Target | Status | Scope |
 | --- | --- | --- |
-| **R013** | Default build / candidate | Adds confirmed sample-storage formatting; hardware setup and uploads verified |
-| **R012** | Previous stable; first-install limitation | Requires sample storage already initialized; lacks FORMAT SAMPLES |
+| **R014** | Default build / candidate | FUNC + TUNE snapping, SYN page clear/undo and held SLICE boundary updates; hardware validation pending |
+| **R013** | Earlier candidate / exact build | Adds confirmed sample-storage formatting; hardware setup and uploads verified |
+| **R012** | Stable; first-install limitation | Requires sample storage already initialized; lacks FORMAT SAMPLES |
 | **R011** | Previous stable / historical exact build | Sample Machines, browsing, Recorder and latest USB publication fix |
 | **T1E2** | Earlier stable | Sample Machines, browsing and 42-channel USB; no Recorder |
 | **R003** | Historical experimental | Recorder extension on the T1E2 baseline |
@@ -197,6 +203,8 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 Current limits:
 
+- **R014 controls:** offline checks pass; on-device validation remains pending.
+  Intermittent sample browser failures and hung notes remain unresolved.
 - **Recorder coverage:** MAIN recording/save/reopen has hardware confirmation;
   not every input source, trimming case or power-cycle workflow is verified.
 - **USB endurance:** repeated instrumented project changes, long-running dense
@@ -211,8 +219,8 @@ recovery image privately.
 
 ## Private inputs
 
-R013 requires these two exact local inputs. The builder verifies their sizes
-and SHA-256 hashes against the [release manifest](releases/r013.json).
+R014 requires these two exact local inputs. The builder verifies their sizes
+and SHA-256 hashes against the [release manifest](releases/r014.json).
 
 | Input | Purpose |
 | --- | --- |
@@ -223,13 +231,14 @@ Obtain official firmware from Elektron and retain your own copies locally.
 The DT2 input is its **OS firmware**, not its factory sample library. These are
 build inputs for one DN2 update; a second instrument is not involved in building.
 
-**R013 needs no private sample bank.** It generates silent compatibility data for
+**R014 needs no private sample bank.** It generates silent compatibility data for
 an unused legacy bank region. Load playable samples through Transfer after
 installation; see [sample loading](docs/samples.md).
 
 Exact historical targets R011, R008, R003 and T1E2 still require their original
 47,104-byte private test bank. That asset is not distributed and is not DT2
-factory content. Choose R013 for a build using only the official OS files.
+factory content. Choose R014 for the current two-file candidate, or R012 for the
+stable two-file build when sample storage is already initialized.
 
 ## Build
 
@@ -261,34 +270,36 @@ python tools/check_inputs.py \
 Resolve any missing-input or hash error before continuing. This check does not
 change the input files.
 
-### 3. Build the toolchain and R013
+### 3. Build the toolchain and R014
 
 ```sh
 python port/tools/bootstrap.py --prefix .toolchain --jobs 4
 python build.py \
   --dn2 /path/to/Digitone_II_OS1.11.syx \
   --dt2 /path/to/Digitakt_II_OS1.16.syx \
-  --out /private/builds/R013.syx
+  --out /private/builds/R014.syx
 ```
 
 The output must be **outside this repository**. Existing outputs are never
 overwritten. Intermediate firmware and diagnostic logs stay in the private
 temporary directory printed by the builder. Nothing is flashed automatically.
 
-Expected R013 output: **2,565,664 bytes**, SHA-256:
+Expected R014 output: **2,565,792 bytes**, SHA-256:
 
 ```text
-06466301ed3642ee104a15cb603609294ab9433a0ac4b4d50c8bb5837e5a8e01
+a6f51887aa651d4c23ff4d79ce9ec458df72f20b9129a9316de0dd4fb3f5000e
 ```
 
 The builder verifies MAIN, DSP and complete SysEx identities. The
-[manifest](releases/r013.json) records source-reproduction results and hardware
+[R014 manifest](releases/r014.json) records the current output identity,
+source-reproduction results and hardware
 validation limits.
 
-Use `--target R012` to reproduce the earlier two-file build.
+Use `--target R012` for the stable two-file build, or `--target R013` to reproduce
+the earlier sample-storage setup build.
 Use `--target R011`, `--target R008`, `--target R003` or `--target T1E2` only for
 historical exact reproduction. Those targets additionally require
-`--sample-bank /private/path/to/sample-bank.bin`. R013 and R012 reject that option so a
+`--sample-bank /private/path/to/sample-bank.bin`. R014, R013 and R012 reject that option so a
 private bank cannot accidentally enter the new build.
 
 ## Documentation and contributions

@@ -41,7 +41,7 @@ class PrivateInputValidation(unittest.TestCase):
             for name, data in (('dn2', b'recipient'), ('dt2', b'donor')):
                 (root/name).write_bytes(data)
                 expected[name] = dict(bytes=len(data), sha256=hashlib.sha256(data).hexdigest())
-            for target in ('R012', 'R013'):
+            for target in ('R012', 'R013', 'R014'):
                 (root/'releases'/f'{target.lower()}.json').write_text(json.dumps(dict(inputs=expected)))
                 with self.subTest(target=target), patch.object(check_inputs, 'ROOT', root):
                     result = check_inputs.inputs(root/'dn2', root/'dt2', target=target)

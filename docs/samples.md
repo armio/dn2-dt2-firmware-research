@@ -2,7 +2,7 @@
 
 ## Sample-storage setup
 
-**R013 adds SETTINGS → SYSTEM → FORMAT SAMPLES.** This explicitly prepares
+**R013 introduced SETTINGS → SYSTEM → FORMAT SAMPLES; R014 retains it.** This prepares
 sample storage on a DN2 that has not used these sample Machines before. R012
 could mount existing storage but could not create it. If sample uploads already
 work, **leave the storage intact; no format is needed**.
@@ -22,7 +22,7 @@ will need those files restored. This is separate from stock **FORMAT +DRIVE**;
 do not use that command, EMPTY RESET or FACTORY RESET for sample setup.
 
 1. Stop playback and transfers. Close Transfer on the computer.
-2. On R013, open **SETTINGS → SYSTEM → FORMAT SAMPLES**.
+2. On R014 or R013, open **SETTINGS → SYSTEM → FORMAT SAMPLES**.
 3. Read **ERASE SAMPLE AREA? / INCL. OTHER MODS. Y/N**. **NO** cancels without
    formatting. Press **YES** only when you intend to erase this area.
 4. Keep power connected while **FORMATTING SAMPLES** is displayed.
@@ -36,12 +36,16 @@ retrying. If **FORMAT INCOMPLETE** appears, restart and report the error; do not
 assume your previous samples remain intact. There is no automatic formatting
 at boot or after a failed mount.
 
-R013 is a candidate. On-device confirmation/cancellation, formatting, cold-start
+On R013, on-device confirmation/cancellation, formatting, cold-start
 mounting, Transfer capacity and subsequent sample uploads have been tested on
 one DN2. Broader endurance testing remains pending.
 
+R014 is the current candidate; hardware validation is pending. R012 remains
+stable, and R013 remains available. See the [R014 manifest](../releases/r014.json)
+for changes and limits.
+
 Use your own mono or stereo samples; the Digitakt II factory library is not
-required for playback. R013 and R012 build using only the two
+required for playback. R014, R013 and R012 build using only the two
 [official OS inputs](../README.md#private-inputs).
 
 ## 1. Transfer samples to +Drive
@@ -113,10 +117,10 @@ specific to this port; Elektron's DT2 manual uses SAMPLING/SRC for those pages.
 
 ## Do I need the DT2 factory samples?
 
-No. R013 needs only the official DN2 and DT2 OS files to build. After installing,
+No. R014 needs only the official DN2 and DT2 OS files to build. After installing,
 upload your own samples using the steps above. A DT2 factory library is optional
 playable content and is not a build input.
 
 Older exact-build targets retain a private test-bank requirement. That bank was
 created for this project; it cannot be obtained by exporting DT2 factory content.
-Use R013 to avoid that historical dependency.
+R014, R013 and R012 avoid that historical dependency.

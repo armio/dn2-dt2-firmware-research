@@ -1,11 +1,13 @@
 # Recording and resampling
 
-R013, R012 and R011 include the Recorder introduced by R003 alongside the sample Machines
+R014, R013, R012 and R011 include the Recorder introduced by R003 alongside the sample Machines
 and 42-channel USB audio. The workflow includes source selection, recording, normalization,
 trim and audition controls, saving to +Drive, and optional track assignment.
 VOICE cycles through Voice Setup, Sample Manager and Recorder.
 
-**R013 is the current candidate and preserves the R012 Recorder.**
+**R014 is the current candidate and preserves the R012 Recorder.** Hardware
+validation is pending. R012 remains stable, and R013 remains available. See the
+[R014 manifest](../releases/r014.json) for changes and limits.
 Owner testing on R012 confirmed Recorder operation,
 stock audio, samples and USB audio, including after changing projects.
 R003 remains a historical experimental target.
@@ -16,7 +18,7 @@ testing remain pending. See [R003 evidence and limits](research/2026-10-31.md).
 ## Build locally
 
 Follow the [tool setup](../port/tools/README.md) and [private input
-requirements](../README.md#private-inputs) first. For R013, follow the
+requirements](../README.md#private-inputs) first. For R014, follow the
 [default two-file build](../README.md#build); no sample bank is required.
 The command below reproduces historical R003 and requires its original private
 test bank, which is not DT2 factory content.
@@ -78,5 +80,5 @@ closed-mode diagnostic replies as the take length.
 R003 also repairs a confirmed MAIN-loader input overlap by restoring a
 separately compressed tail before original startup. Protected loader sections,
 panel firmware and flash writer remain unchanged. R003 excludes later USB
-queues, scheduling and timing changes; R011 and R012 include the
+queues, scheduling and timing changes; R011 through R014 include the
 [USB publication changes](usb-research.md).

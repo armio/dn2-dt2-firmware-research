@@ -17,9 +17,9 @@
   </header>
   <main>
     <section class="installation-warning" role="alert" aria-labelledby="installation-warning-title">
-      <p class="warning-label">R013 SAMPLE STORAGE SETUP</p>
+      <p class="warning-label">R014 CANDIDATE · SAMPLE STORAGE SETUP</p>
       <h2 id="installation-warning-title">First-time sample storage needs setup.</h2>
-      <p>R013 adds <strong>SYSTEM → FORMAT SAMPLES</strong> for uninitialized sample storage. The setup and subsequent uploads have been tested on a DN2.</p>
+      <p>R014 retains <strong>SYSTEM → FORMAT SAMPLES</strong> for uninitialized sample storage. The setup and subsequent uploads have been tested on a DN2.</p>
       <p>The DN2 already contains the physical flash capacity; stock firmware does not expose this area as sample storage. R013 initializes a sample filesystem there. Transfer reported about <strong>20 GB</strong> available on the tested DN2.</p>
       <p><strong>Formatting erases the sample area, including other mods' data there.</strong> Back up first and restart afterward. If sample uploads already work, leave storage intact.</p>
       <p>Use FORMAT SAMPLES only. Do not substitute stock FORMAT +DRIVE or reset commands.</p>
@@ -28,6 +28,7 @@
     <section class="intro" aria-labelledby="title">
       <h1 id="title">Build your<br>DN2 firmware.</h1>
       <p class="lead">Six sample Machines, recording and 42-channel USB audio. Built locally from your two Elektron OS files.</p>
+      <p>R014 fixes FUNC + TUNE octave snapping, SYN + PLAY clear/undo, and held SLICE boundary updates. These fixes passed offline checks; hardware confirmation is pending. Intermittent sample-browser opening and hanging notes remain unresolved. R012 remains stable.</p>
       <div class="machine-list" aria-label="Included sample Machines"><span>ONESHOT</span><span>WERP</span><span>STRETCH</span><span>REPITCH</span><span>GRID</span><span>SLICE</span></div>
     </section>
     <div class="workspace">
@@ -79,7 +80,7 @@
         <section>
           <h2>Before installing</h2>
           <p>Keep project backups and an official recovery OS.</p>
-          <p><a id="release-notes" href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/releases/r013.json">Release notes</a></p>
+          <p><a id="release-notes" href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/releases/r014.json">Release notes</a></p>
         </section>
       </aside>
     </div>
@@ -87,7 +88,7 @@
       <h2 id="setup-steps-title">Install and load your first sample</h2>
       <ol>
         <li>Back up projects, Sounds and samples; keep an official recovery OS.</li>
-        <li>Select official DN2 OS 1.11 and DT2 OS 1.16 above. Build and download the verified R013 file.</li>
+        <li>Select official DN2 OS 1.11 and DT2 OS 1.16 above. Build and download the verified R014 file.</li>
         <li>Install with Elektron Transfer's OS update workflow. Let it finish and boot normally.</li>
         <li>If uploads already work, skip formatting. Otherwise, after backing up, stop playback and transfers, close Transfer, then open SETTINGS → SYSTEM → FORMAT SAMPLES. YES erases the sample area, including other mods' data; NO cancels. Never substitute FORMAT +DRIVE.</li>
         <li>If you formatted, keep power connected until SAMPLES FORMATTED / SWITCH OFF / ON DN2 appears, then switch off and on. Reconnect Transfer and verify nonzero Samples capacity.</li>

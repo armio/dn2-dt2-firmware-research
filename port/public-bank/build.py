@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R012/R013: two official inputs, generated silence, exact reviewed hashes."""
+"""R012/R013/R014: two official inputs, generated silence, exact reviewed hashes."""
 import copy
 import hashlib
 import importlib
@@ -189,7 +189,7 @@ def build(args):
     print('Staging R012 identity', flush=True)
     doc = stage_identity(parent, work/'main', source)
     main = work/'main'
-    if args.target == 'R013':
+    if args.target in ('R013', 'R014'):
         print('Adding explicit sample-storage setup', flush=True)
         workspace = work/'rebuild/usb-research'
         for path in (source/'port/sample-storage/tree').rglob('*'):
@@ -206,6 +206,38 @@ def build(args):
                 '--parent', str(main), '--out', str(work/'sample-storage')],
                 cwd=workspace, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
         main = work/'sample-storage'
+        doc = json.loads((main/'build-receipt.json').read_text())
+    if args.target == 'R014':
+        print('Adding checked sampler control fixes', flush=True)
+        for path in (source/'port/sampler-fixes/tree').rglob('*'):
+            if path.is_file():
+                destination = workspace/path.relative_to(source/'port/sampler-fixes/tree')
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(path, destination)
+        # Callback equivalence checks read only the already extracted official MAINs.
+        for family, relative in (
+                ('dn2-1.11', 'firmware/dn2-1.11/section_3_MAIN_OS.bin'),
+                ('dt2-1.16', 'output/dn2-research/dt2-donor-main/section_3_MAIN_OS.bin/section_3_MAIN_OS.bin')):
+            destination = workspace/relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(work/'rebuild/main/firmware'/family/'section_3_MAIN_OS.bin', destination)
+        previous = main/'expanded'
+        for label, script, flag in (
+                ('func-snapping', 'build_dn2_sampler_func_snapping.py', '--parent'),
+                ('ui-actions', 'build_dn2_sampler_ui_actions.py', '--parent'),
+                ('slice-isolation', 'build_dn2_slice_frame_isolation.py', '--input')):
+            destination = work/label
+            with (work/(label+'.log')).open('w') as log:
+                subprocess.run([sys.executable, '-B', str(workspace/'scripts'/script),
+                    flag, str(previous), '--out', str(destination)], cwd=workspace,
+                    env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
+            previous = destination
+        with (work/'sampler-fixes.log').open('w') as log:
+            subprocess.run([sys.executable, '-B',
+                str(workspace/'scripts/build_dn2_sampler_fixes_r014.py'),
+                '--parent', str(main), '--patched', str(previous), '--out', str(work/'sampler-fixes')],
+                cwd=workspace, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
+        main = work/'sampler-fixes'
         doc = json.loads((main/'build-receipt.json').read_text())
     dsp = work/'rebuild/usb-research/dsp/section_7.bin'
     expected = release['outputs']

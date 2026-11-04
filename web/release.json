@@ -49,50 +49,51 @@
       "INPUT"
     ]
   },
-  "build": "R013",
+  "build": "R014",
   "status": "candidate",
   "date": "2026-11-04",
   "stable_baseline": "T1E2",
   "previous_stable": "R012",
   "outputs": {
-    "main_sha256": "cd61af42d601faa24b18245ddaeba15724776df2f327be12b5f19751a1c70173",
-    "expanded_main_sha256": "c928d2b30522dbd5c4bb385d883ac3149d44d0decb4ab64f5b455a1c1e36b684",
-    "runtime_sha256": "88bd465ee60339fb6f55746db71103a9a4132863c4479f8332543fcf3f743137",
+    "main_sha256": "fc3959a3a59449d124f04e0ada46dada6c8075ee6ee327a0f0c48566b428274d",
+    "expanded_main_sha256": "e2900a21dd4e1f0efceba7b574ac211afd2ed3ceef667fd960b9f894b6ea36d9",
+    "runtime_sha256": "526e8e01d7738a4cc8ed0ee302c2048d92c8c8a95e030bd9f3c2185538b65451",
     "dsp_sha256": "495a2de2cee75d5c7c9f61e2fb28daed3a40cadf0223de3f57ff24238664f58e",
-    "sysex_sha256": "06466301ed3642ee104a15cb603609294ab9433a0ac4b4d50c8bb5837e5a8e01",
-    "sysex_bytes": 2565664
+    "sysex_sha256": "a6f51887aa651d4c23ff4d79ce9ec458df72f20b9129a9316de0dd4fb3f5000e",
+    "sysex_bytes": 2565792
   },
   "changes": [
-    "Adds SYSTEM > FORMAT SAMPLES with explicit erase confirmation for first-time sample-storage setup.",
-    "Formatting checks card geometry, open files and filesystem status before writing; no automatic format occurs at boot.",
-    "Formatting leaves sample storage unavailable until restart, then the existing startup mount enables it.",
-    "Retains R012 sample Machines, browsing, Recorder, USB audio and two-official-OS build; DSP remains byte-identical to R012."
+    "TUNE FUNC octave snapping on sampler Machines with TUNE.",
+    "SYN-page clear/undo on all six sampler Machines, both pages.",
+    "Publish held SLICE marker changes so playback uses edited boundaries.",
+    "Retains R013 confirmed sample-storage setup; DSP and USB transport remain byte-identical to R013."
   ],
   "validation": {
-    "hardware_confirmed": [
-      "Opening FORMAT SAMPLES and cancelling with NO preserved stock audio and sample playback.",
-      "Owner confirmed SAMPLES FORMATTED; after a cold restart the sample root was empty and capacity reported 21,474,967,552 bytes free of 21,479,030,784 bytes total.",
-      "Elektron Transfer displayed 100% free / 20 GB after formatting and restart.",
-      "Two post-format sample uploads were verified by device readback."
-    ],
+    "hardware_confirmed": [],
     "offline_checked": [
-      "Native ColdFire tests covered blank and corrupt media, cancellation without writes, geometry and open-file rejection, explicit formatting, verification failure and preservation before confirmation.",
-      "Native first-transfer regression formatted blank sector-backed media, cold-mounted it, queried nonzero capacity, uploaded a sample through native RPC handlers and verified persistence after another cold mount.",
-      "Fresh complete public-source build from only the pinned official DN2 OS 1.11 and DT2 OS 1.16 files passed all 115 MAIN stage identities, Recorder/USB continuation checks and exact R013 MAIN, expanded MAIN, runtime, DSP and SysEx identities.",
-      "Eight focused source tests passed, including two-input validation for R012/R013, rejection of private sample banks for both, and historical hash-profile preservation.",
-      "Browser backend reconstructed and packaged the two official OS inputs into the exact 2,565,664-byte R013 SysEx with SHA-256 06466301ed3642ee104a15cb603609294ab9433a0ac4b4d50c8bb5837e5a8e01; DSP recipe operations remain unchanged from R012."
+      "FUNC TUNE snapping: 200 native parameter edits and ten original-failure reproductions passed; normal and encoder-pressed changes and stock controls remain unchanged.",
+      "SYN clear/undo: all six sampler Machines and both views reset visible controls to native defaults and restore the original Sound on undo; exact R013 reproduced all 12 failures.",
+      "Held SLICE marker isolation: original DT2 producer updates live DSP boundaries on held blocks; saved slice descriptors and other Machine packing remain unchanged.",
+      "Repeated SAMP browser open/cancel passed 48 native ownership cases without manually clearing weak references; this did not reproduce the reported intermittent fault.",
+      "All three behavioral checks passed on the combined candidate. Exact allowed-diff projection to R013 and firmware container integrity checks passed.",
+      "Native early-startup checks passed both loader staging addresses, 0x40200000 and 0x40400000, including exact decompression/copies, register and stack preservation, SRAM setup and BSS clearing.",
+      "Fresh public-source build from only the two pinned official OS files completed all 115 MAIN stage identities and Recorder/USB continuations, then reproduced exact R014 MAIN, expanded MAIN, runtime, DSP and SysEx hashes.",
+      "Browser backend independently reconstructed and packaged the two official OS inputs into the same 2,565,792-byte R014 SysEx; DSP recipe operations remain unchanged.",
+      "41 public source tests, six browser-exporter tests and JavaScript recipe boundary checks passed; changed public files passed text/type, private-path and artifact checks."
     ],
     "pending": [
-      "Complete sample-library restoration and broader R013 endurance testing"
+      "Hardware confirmation of the three fixes",
+      "Intermittent SAMP browser opening and sporadic hung-note reproduction",
+      "Long-duration playback and USB endurance"
     ],
-    "notes": "Candidate with hardware-verified explicit sample-storage setup and independently matching native-source and browser builds; not yet designated stable."
+    "notes": "Candidate with offline native execution evidence; the three new fixes have not been confirmed on hardware. R012 remains stable."
   },
   "source_reproduction": {
     "verified_on": "2026-11-04",
     "exact_main_dsp_and_sysex": true,
     "baseline_rebuilt_this_run": true,
     "private_sample_bank_required": false,
-    "notes": "Complete fresh public-source build using the two pinned official OS files and existing pinned toolchain. Silent compatibility bank generated from source. No historical firmware build or recorded sample asset was used as a build input."
+    "notes": "Complete fresh public-source build using only the two pinned official OS files and existing pinned toolchain. Silent compatibility bank generated from source. Browser backend independently reproduced the exact package. No historical firmware build or recorded sample asset used as build input."
   },
   "sample_storage_setup": {
     "automatic_format": false,
@@ -102,6 +103,9 @@
     "existing_working_storage_needs_format": false
   },
   "known_issues": [
+    "Intermittent SAMP browser popup not reproduced.",
+    "Sporadic hung notes on stock and sampler Machines remain under investigation.",
     "Bulk sample uploads and restoration can interrupt playback. Stop playback during transfers and wait until they finish; report problems that persist afterward."
-  ]
+  ],
+  "previous_candidate": "R013"
 }
