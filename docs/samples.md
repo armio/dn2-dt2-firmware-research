@@ -55,6 +55,12 @@ required for playback. R013 and R012 build using only the two
 5. Drag your sample files or folders into the desired device folder. Using
    EXPLORE lets you choose their destination. Wait for the transfer to finish.
 
+**Playing during bulk transfers:** audio may stutter, notes may be missed, or
+playback may go quiet. Stop playback before large uploads or restores and wait
+until they finish before playing again. After formatting, restore the sample
+files required by existing projects, then reload the project. If the problem
+continues after transfers finish, report it.
+
 This stores files on +Drive. It does not automatically load them into the active
 project or assign them to a track. Use ordinary audio files such as WAV.
 Transfer handles its own audio-format

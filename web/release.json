@@ -100,5 +100,8 @@
     "requires_restart_after_format": true,
     "erases_existing_samples": true,
     "existing_working_storage_needs_format": false
-  }
+  },
+  "known_issues": [
+    "Bulk sample uploads and restoration can interrupt playback. Stop playback during transfers and wait until they finish; report problems that persist afterward."
+  ]
 }

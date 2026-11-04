@@ -61,6 +61,11 @@ playable samples through Transfer after installation.
 8. Choose a sample Machine with **FUNC + SYN**, assign the loaded sample with
    **SYN → SAMP**, and play it. **Save the project** to retain its assignments.
 
+**During bulk transfers:** playback may stutter, miss notes or go quiet. Stop
+playback before large uploads or restores and wait for completion before playing.
+After formatting, restore the samples required by existing projects, then reload
+the project. If audio problems continue after transfers finish, report them.
+
 The [sample guide](docs/samples.md) covers backups, confirmation, loading,
 preview and troubleshooting in detail.
 
