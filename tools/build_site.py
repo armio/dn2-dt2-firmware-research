@@ -13,7 +13,7 @@ FILES = ('index.html', 'style.css', 'app.js', 'build-worker.js', 'recipe.js',
 
 
 def build(output):
-    release = json.loads((ROOT/'releases/r012.json').read_text())
+    release = json.loads((ROOT/'releases/r013.json').read_text())
     recipe = json.loads((ROOT/'web/recipe.json').read_text())
     if (recipe.get('release') != release['build'] or recipe.get('schema') != 1 or
             recipe.get('inputs') != release['inputs']):

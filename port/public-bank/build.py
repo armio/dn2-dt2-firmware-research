@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R012: two official inputs, generated silence, exact reviewed stage hashes."""
+"""R012/R013: two official inputs, generated silence, exact reviewed hashes."""
 import copy
 import hashlib
 import importlib
@@ -155,8 +155,8 @@ def stage_identity(parent, out, source):
 
 def build(args):
     from tools.check_inputs import inputs, verify
-    private = inputs(args.dn2, args.dt2, args.sample_bank, target='R012')
-    release = json.loads((ROOT/'releases/r012.json').read_text())
+    private = inputs(args.dn2, args.dt2, args.sample_bank, target=args.target)
+    release = json.loads((ROOT/'releases'/f'{args.target.lower()}.json').read_text())
     profile = load_profile()
     paths = json.loads(args.toolchain.read_text())
     out = args.out.resolve()
@@ -170,7 +170,7 @@ def build(args):
             raise ValueError('--work must be outside the source repository')
         work.mkdir(parents=True, exist_ok=False)
     else:
-        work = Path(tempfile.mkdtemp(prefix='dn2-r012-'))
+        work = Path(tempfile.mkdtemp(prefix=f'dn2-{args.target.lower()}-'))
     print(f'Private build directory: {work}', flush=True)
     source = work/'source'
     count = materialize(ROOT, source, profile)
@@ -188,26 +188,45 @@ def build(args):
     parent = work/'rebuild/usb-research/main'
     print('Staging R012 identity', flush=True)
     doc = stage_identity(parent, work/'main', source)
+    main = work/'main'
+    if args.target == 'R013':
+        print('Adding explicit sample-storage setup', flush=True)
+        workspace = work/'rebuild/usb-research'
+        for path in (source/'port/sample-storage/tree').rglob('*'):
+            if path.is_file():
+                destination = workspace/path.relative_to(source/'port/sample-storage/tree')
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(path, destination)
+        env = {**os.environ, 'PYTHONDONTWRITEBYTECODE':'1',
+               'PYTHONPATH':os.pathsep.join(map(str, [source/'research/audits',
+                    source/'port/dsp/support', source/'port/tools/dnfw/src']))}
+        with (work/'sample-storage.log').open('w') as log:
+            subprocess.run([sys.executable, '-B',
+                str(workspace/'scripts/build_dn2_sample_storage_setup.py'),
+                '--parent', str(main), '--out', str(work/'sample-storage')],
+                cwd=workspace, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
+        main = work/'sample-storage'
+        doc = json.loads((main/'build-receipt.json').read_text())
     dsp = work/'rebuild/usb-research/dsp/section_7.bin'
     expected = release['outputs']
-    for path, digest in ((work/'main/main-os.bin', expected['main_sha256']),
-                         (work/'main/runtime.bin', expected['runtime_sha256']),
-                         (work/'main/expanded/main-os.bin', expected['expanded_main_sha256']),
+    for path, digest in ((main/'main-os.bin', expected['main_sha256']),
+                         (main/'runtime.bin', expected['runtime_sha256']),
+                         (main/'expanded/main-os.bin', expected['expanded_main_sha256']),
                          (dsp, expected['dsp_sha256'])):
         if SHA(path.read_bytes()) != digest:
-            raise ValueError(f'R012 output hash mismatch: {path}')
-    result = work/'R012.syx'
+            raise ValueError(f'{args.target} output hash mismatch: {path}')
+    result = work/f'{args.target}.syx'
     with (work/'packaging.log').open('w') as log:
         subprocess.run([paths['container_tool'], '-i', str(private['dn2']),
-                        '-c', '3', str(work/'main/main-os.bin'), '-c', '7', str(dsp),
+                        '-c', '3', str(main/'main-os.bin'), '-c', '7', str(dsp),
                         '-o', str(result)], stdout=log, stderr=subprocess.STDOUT, check=True)
-    verify(result, {'bytes':expected['sysex_bytes'], 'sha256':expected['sysex_sha256']}, 'R012 output')
+    verify(result, {'bytes':expected['sysex_bytes'], 'sha256':expected['sysex_sha256']}, f'{args.target} output')
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open('xb') as target, result.open('rb') as original:
         shutil.copyfileobj(original, target)
-    (work/'rebuild.json').write_text(json.dumps(dict(build='R012',
+    (work/'rebuild.json').write_text(json.dumps(dict(build=args.target,
         official_inputs={name:SHA(path.read_bytes()) for name,path in private.items()},
         generated_bank_sha256=SHA(bank.read_bytes()), main_sha256=doc['main_sha256'],
         dsp_sha256=expected['dsp_sha256'], sysex_sha256=expected['sysex_sha256'],
         hardware_access=False, private_sample_bank_required=False), indent=2)+'\n')
-    print(f'Exact R012 verified: {out}\nSHA-256: {expected["sysex_sha256"]}')
+    print(f'Exact {args.target} verified: {out}\nSHA-256: {expected["sysex_sha256"]}')

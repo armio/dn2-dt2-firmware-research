@@ -7,8 +7,9 @@ different project. Repeated instrumented project-change testing and endurance
 remain pending.
 
 R012 carries this USB implementation forward unchanged and removes the private
-sample-bank build dependency. Use the [two-file R012 build](../README.md#build)
-for the current stable release. Owner testing confirmed stock audio, samples,
+sample-bank build dependency. R013 preserves this DSP implementation and adds
+explicit sample-storage setup. Use the [two-file R013 build](../README.md#build)
+for the current candidate. Owner testing confirmed stock audio, samples,
 Recorder and USB audio on R012, including after changing projects.
 
 ## Reproduce historical R011

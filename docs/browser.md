@@ -1,6 +1,6 @@
 # Browser patcher
 
-Build R012 in a current desktop browser without installing the native toolchain.
+Build R013 in a current desktop browser without installing the native toolchain.
 You need the original Digitone II OS 1.11 and Digitakt II OS 1.16 `.syx` files.
 No sample bank or factory sample library is required.
 
@@ -9,14 +9,16 @@ No sample bank or factory sample library is required.
 3. When verification finishes, download the `.syx` file.
 
 Files stay on your device. The page checks exact OS versions, builds locally
-and verifies the result against the [R012 release hash](../releases/r012.json).
+and verifies the result against the [R013 release hash](../releases/r013.json).
 It does not upload files, store them between visits or flash your instrument.
 Cancel closes the build worker; selected files can be reused for another attempt.
 
-R012 is the current stable release. Owner testing confirmed stock audio, samples,
-Recorder and USB audio, including after changing projects.
-Back up projects and keep an official recovery OS before installing with
-Elektron Transfer. Add playable samples using the [sample-loading guide](samples.md).
+R013 is a candidate with hardware-tested sample-storage setup. It preserves
+R012's sample Machines, Recorder and USB audio; the DSP code is unchanged.
+Back up projects and samples and keep an official recovery OS before installing
+with Elektron Transfer. For first-time sample storage, follow the
+[setup and sample-loading guide](samples.md#sample-storage-setup). Formatting is
+explicit and destructive; working sample storage does not need reformatting.
 
 ## Run the patcher locally
 

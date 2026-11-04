@@ -1,6 +1,6 @@
 # Source-only publication
 
-R012 builds from two privately supplied official OS files identified in its
+R013 builds from two privately supplied official OS files identified in its
 `releases/` manifest. It generates silent compatibility data from source and
 requires no private sample bank. Historical exact R011, R008, R003 and T1E2
 recipes retain their original private-bank requirement. No input firmware,
@@ -10,9 +10,10 @@ for importing playable samples after installation.
 Publish validation summaries with their limits, not private hardware captures
 or raw build receipts. Reviewed offline fixture summaries may be included when
 bound to exact output hashes and stripped of private paths and binary payloads.
-R012 was designated stable after owner-confirmed stock audio, sample playback,
+R013 is the current candidate and adds explicit sample-storage setup; its
+DSP code remains unchanged. R012 was designated stable after owner-confirmed stock audio, sample playback,
 Recorder and USB audio, including after changing projects. R011 remains the
-previous stable release. Neither designation claims completed long-duration
+previous stable release. These designations do not claim completed long-duration
 endurance testing. Historical R003/R008 manifests retain their original
 validation scope; their experimental status is not changed retroactively.
 

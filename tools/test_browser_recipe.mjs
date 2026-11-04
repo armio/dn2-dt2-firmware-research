@@ -18,6 +18,8 @@ const fixture = {
 };
 const decoded = { dn2: { sections: { 3: input } } };
 assert.deepEqual((await applyRecipe(fixture, decoded)).main, output);
+assert.deepEqual((await applyRecipe({ ...fixture, release: 'R013' }, decoded)).main, output);
+await assert.rejects(applyRecipe({ ...fixture, release: 'R999' }, decoded), /Unsupported build recipe/);
 const wrongInput = { dn2: { sections: { 3: Uint8Array.of(0, 0, 0, 0) } } };
 await assert.rejects(applyRecipe(fixture, wrongInput), /identity mismatch/);
 const badCopy = structuredClone(fixture);

@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "inputs": {
+    "dn2": {
+      "description": "Official Digitone II OS 1.11 SysEx",
+      "bytes": 2389280,
+      "sha256": "2af43e65e3d8390b41c9f66222620f8cce027d73ed87db00c80b440f628472e0"
+    },
+    "dt2": {
+      "description": "Official Digitakt II OS 1.16 SysEx",
+      "bytes": 1880864,
+      "sha256": "278541e466edcd77d6b3e018a91fb90185932d3c7de224dd3e68294dddf3a9ec"
+    }
+  },
+  "machines": [
+    "ONESHOT",
+    "WERP",
+    "STRETCH",
+    "REPITCH",
+    "GRID",
+    "SLICE"
+  ],
+  "usb": {
+    "capture_channels": 42,
+    "return_channels": 2,
+    "sample_rate": 48000,
+    "valid_bits": 24,
+    "stereo_pairs": [
+      "MAIN",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15",
+      "T16",
+      "DELAY",
+      "REVERB",
+      "CHORUS",
+      "INPUT"
+    ]
+  },
+  "build": "R013",
+  "status": "candidate",
+  "date": "2026-11-04",
+  "stable_baseline": "T1E2",
+  "previous_stable": "R012",
+  "outputs": {
+    "main_sha256": "cd61af42d601faa24b18245ddaeba15724776df2f327be12b5f19751a1c70173",
+    "expanded_main_sha256": "c928d2b30522dbd5c4bb385d883ac3149d44d0decb4ab64f5b455a1c1e36b684",
+    "runtime_sha256": "88bd465ee60339fb6f55746db71103a9a4132863c4479f8332543fcf3f743137",
+    "dsp_sha256": "495a2de2cee75d5c7c9f61e2fb28daed3a40cadf0223de3f57ff24238664f58e",
+    "sysex_sha256": "06466301ed3642ee104a15cb603609294ab9433a0ac4b4d50c8bb5837e5a8e01",
+    "sysex_bytes": 2565664
+  },
+  "changes": [
+    "Adds SYSTEM > FORMAT SAMPLES with explicit erase confirmation for first-time sample-storage setup.",
+    "Formatting checks card geometry, open files and filesystem status before writing; no automatic format occurs at boot.",
+    "Formatting leaves sample storage unavailable until restart, then the existing startup mount enables it.",
+    "Retains R012 sample Machines, browsing, Recorder, USB audio and two-official-OS build; DSP remains byte-identical to R012."
+  ],
+  "validation": {
+    "hardware_confirmed": [
+      "Opening FORMAT SAMPLES and cancelling with NO preserved stock audio and sample playback.",
+      "Owner confirmed SAMPLES FORMATTED; after a cold restart the sample root was empty and capacity reported 21,474,967,552 bytes free of 21,479,030,784 bytes total.",
+      "Elektron Transfer displayed 100% free / 20 GB after formatting and restart.",
+      "Two post-format sample uploads were verified by device readback."
+    ],
+    "offline_checked": [
+      "Native ColdFire tests covered blank and corrupt media, cancellation without writes, geometry and open-file rejection, explicit formatting, verification failure and preservation before confirmation.",
+      "Native first-transfer regression formatted blank sector-backed media, cold-mounted it, queried nonzero capacity, uploaded a sample through native RPC handlers and verified persistence after another cold mount.",
+      "Fresh complete public-source build from only the pinned official DN2 OS 1.11 and DT2 OS 1.16 files passed all 115 MAIN stage identities, Recorder/USB continuation checks and exact R013 MAIN, expanded MAIN, runtime, DSP and SysEx identities.",
+      "Eight focused source tests passed, including two-input validation for R012/R013, rejection of private sample banks for both, and historical hash-profile preservation.",
+      "Browser backend reconstructed and packaged the two official OS inputs into the exact 2,565,664-byte R013 SysEx with SHA-256 06466301ed3642ee104a15cb603609294ab9433a0ac4b4d50c8bb5837e5a8e01; DSP recipe operations remain unchanged from R012."
+    ],
+    "pending": [
+      "Complete sample-library restoration and broader R013 endurance testing"
+    ],
+    "notes": "Candidate with hardware-verified explicit sample-storage setup and independently matching native-source and browser builds; not yet designated stable."
+  },
+  "source_reproduction": {
+    "verified_on": "2026-11-04",
+    "exact_main_dsp_and_sysex": true,
+    "baseline_rebuilt_this_run": true,
+    "private_sample_bank_required": false,
+    "notes": "Complete fresh public-source build using the two pinned official OS files and existing pinned toolchain. Silent compatibility bank generated from source. No historical firmware build or recorded sample asset was used as a build input."
+  },
+  "sample_storage_setup": {
+    "automatic_format": false,
+    "explicit_confirmation": true,
+    "requires_restart_after_format": true,
+    "erases_existing_samples": true,
+    "existing_working_storage_needs_format": false
+  }
+}

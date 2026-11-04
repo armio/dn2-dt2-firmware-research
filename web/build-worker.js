@@ -12,7 +12,7 @@ async function readJSON(name) {
 
 async function build(inputs) {
   const release = await readJSON('release.json');
-  if (release.build !== 'R012') throw new Error('Unsupported browser release');
+  if (release.build !== 'R013') throw new Error('Unsupported browser release');
   const files = {}, decoded = {};
   for (const [index, name] of ['dn2', 'dt2'].entries()) {
     if (!(inputs?.[name] instanceof ArrayBuffer)) throw new Error(`Select the ${name.toUpperCase()} OS file`);
@@ -23,6 +23,7 @@ async function build(inputs) {
   }
   update('Reading reviewed build recipe', 25);
   const recipe = await readJSON('recipe.json');
+  if (recipe.release !== release.build) throw new Error('Recipe release differs from manifest');
   for (const name of ['dn2', 'dt2']) {
     if (recipe.inputs[name]?.sha256 !== release.inputs[name].sha256 ||
         recipe.inputs[name]?.bytes !== release.inputs[name].bytes) throw new Error('Recipe input identity differs from release');

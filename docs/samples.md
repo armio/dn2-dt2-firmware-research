@@ -1,31 +1,47 @@
 # Loading your own samples
 
-## First-time installation warning
+## Sample-storage setup
 
-**2026-11-03: new users should wait for the sample-storage setup fix.** R012
-mounts an existing sample filesystem but does not create it on a previously
-unprepared DN2. Our owner testing used storage initialized during development;
-it missed this first-install case.
+**R013 adds SETTINGS → SYSTEM → FORMAT SAMPLES.** This explicitly prepares
+sample storage on a DN2 that has not used these sample Machines before. R012
+could mount existing storage but could not create it. If sample uploads already
+work, **leave the storage intact; no format is needed**.
 
-Symptoms can include **0% Free / 0 bytes** in Transfer, an empty Samples root,
-uploads stuck at zero speed, and **Connection failed**. These symptoms alone
-do not establish whether storage is uninitialized, damaged, or occupied by
-another mod. A zero-capacity display is not proof that the physical drive is full.
+The DN2 already contains the physical flash capacity. Stock firmware does not
+expose this area as sample storage. R013 initializes a sample filesystem there;
+Elektron Transfer reported about **20 GB** available on the tested DN2.
 
-Do **not** use the stock **FORMAT +DRIVE**, EMPTY RESET or FACTORY RESET as a
-workaround. They can erase projects or presets and do not provide the missing
-sample-filesystem setup. If sample uploads already work, leave the storage intact.
+Transfer showing **0% Free / 0 bytes**, an empty Samples root or uploads stuck
+at zero speed can indicate unavailable storage. Those symptoms do not prove
+the area is empty; it may contain samples or data from another mod.
 
-An explicit on-device sample-storage formatter with erase confirmation is in
-development. It has not yet passed hardware validation or been released. The
-candidate will be tested on our DN2 before publication. No automatic formatting
-is being added on a failed mount.
+**FORMAT SAMPLES erases the sample-storage area, including existing samples and
+other mods' data in that area.** Back up your projects, Sounds and sample files
+first, and retain the original audio files. Projects referencing erased samples
+will need those files restored. This is separate from stock **FORMAT +DRIVE**;
+do not use that command, EMPTY RESET or FACTORY RESET for sample setup.
 
-The loading instructions below require initialized, working sample storage.
+1. Stop playback and transfers. Close Transfer on the computer.
+2. On R013, open **SETTINGS → SYSTEM → FORMAT SAMPLES**.
+3. Read **ERASE SAMPLE AREA? / INCL. OTHER MODS. Y/N**. **NO** cancels without
+   formatting. Press **YES** only when you intend to erase this area.
+4. Keep power connected while **FORMATTING SAMPLES** is displayed.
+5. When **SAMPLES FORMATTED / SWITCH OFF / ON DN2** appears, switch the DN2 off
+   and back on. Sample storage remains unavailable until this restart.
+6. Reconnect Transfer and check that Samples reports nonzero capacity. Then
+   upload your files and load them into the project using the steps below.
 
-These instructions apply to R012, R011 and T1E2 custom firmware. Use your own
-mono or stereo samples; the Digitakt II factory library is not required for
-playback. R012 also builds without a private sample bank, using only the two
+If **FORMAT NOT STARTED** appears, address the accompanying reason before
+retrying. If **FORMAT INCOMPLETE** appears, restart and report the error; do not
+assume your previous samples remain intact. There is no automatic formatting
+at boot or after a failed mount.
+
+R013 is a candidate. On-device confirmation/cancellation, formatting, cold-start
+mounting, Transfer capacity and subsequent sample uploads have been tested on
+one DN2. Broader endurance testing remains pending.
+
+Use your own mono or stereo samples; the Digitakt II factory library is not
+required for playback. R013 and R012 build using only the two
 [official OS inputs](../README.md#private-inputs).
 
 ## 1. Transfer samples to +Drive
@@ -91,10 +107,10 @@ specific to this port; Elektron's DT2 manual uses SAMPLING/SRC for those pages.
 
 ## Do I need the DT2 factory samples?
 
-No. R012 needs only the official DN2 and DT2 OS files to build. After installing,
+No. R013 needs only the official DN2 and DT2 OS files to build. After installing,
 upload your own samples using the steps above. A DT2 factory library is optional
 playable content and is not a build input.
 
 Older exact-build targets retain a private test-bank requirement. That bank was
 created for this project; it cannot be obtained by exporting DT2 factory content.
-Use R012 to avoid that historical dependency.
+Use R013 to avoid that historical dependency.

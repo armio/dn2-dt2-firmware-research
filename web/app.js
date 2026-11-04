@@ -139,7 +139,7 @@ try {
   $('release-name').textContent = release.build;
   const stable = release.status === 'stable';
   const storageWarning = Boolean(release.first_install_warning);
-  $('release-status').textContent = storageWarning ? 'R012 · First-time storage setup missing. New users should wait.' : stable ? 'Stable release.' : 'R012 candidate · Hardware testing pending.';
+  $('release-status').textContent = storageWarning ? `${release.build} · First-time storage setup missing. New users should wait.` : stable ? 'Stable release.' : `${release.build} candidate · Sample-storage setup tested on hardware.`;
   $('release-status').classList.toggle('candidate', !stable || storageWarning);
   $('release-notes').href = `https://github.com/armio/dn2-dt2-firmware-research/blob/main/releases/${release.build.toLowerCase()}.json`;
   $('inputs').disabled = false;

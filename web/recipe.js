@@ -43,7 +43,7 @@ function reconstruct(spec, sources) {
 }
 
 export async function applyRecipe(recipe, decoded, progress = () => {}) {
-  if (recipe.schema !== 1 || recipe.release !== 'R012') throw new Error('Unsupported build recipe');
+  if (recipe.schema !== 1 || !['R012', 'R013'].includes(recipe.release)) throw new Error('Unsupported build recipe');
   const sources = new Map();
   for (const [name, spec] of Object.entries(recipe.sources)) {
     let bytes;
