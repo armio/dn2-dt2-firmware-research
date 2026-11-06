@@ -1,6 +1,6 @@
 # Source-only publication
 
-R020 builds from two privately supplied official OS files identified in its
+R022 builds from two privately supplied official OS files identified in its
 `releases/` manifest. It generates silent compatibility data from source and
 requires no private sample bank. Historical exact R011, R008, R003 and T1E2
 recipes retain their original private-bank requirement. No input firmware,
@@ -10,16 +10,19 @@ for importing playable samples after installation.
 Publish validation summaries with their limits, not private hardware captures
 or raw build receipts. Reviewed offline fixture summaries may be included when
 bound to exact output hashes and stripped of private paths and binary payloads.
-R020 is the current candidate. It includes R015–R019's sampler, MIDI, storage and
-boundary fixes, plus a ColdFire startup guard. R020 itself leaves DSP and USB
-ownership/order behavior unchanged from R019. Its owner-confirmed cold boot is
-a targeted result, not a new stable designation. R012 was designated stable after owner-confirmed stock audio, sample playback,
+R022 is the current candidate. It includes the earlier sampler, MIDI, storage,
+boundary and cold-start fixes, plus SYN-page reconciliation and working-state
+sample autosave. Its new fixes have native-code replay coverage but no hardware
+confirmation yet. DSP and USB ownership/order behavior are unchanged from R020.
+The R020 owner-confirmed cold boot remains a targeted predecessor result. R012 was designated stable after owner-confirmed stock audio, sample playback,
 Recorder and USB audio, including after changing projects. R011 remains the
 previous stable release. These designations do not claim completed long-duration
 endurance testing. Historical R003/R008 manifests retain their original
 validation scope; their experimental status is not changed retroactively.
 The [November 6 update](research/2026-11-06.md) separates offline assertions,
-instrumented hardware comparisons and owner observations.
+instrumented hardware comparisons and owner observations. The
+[R021/R022 update](research/2026-11-06-autosave.md) documents the new matching
+code defects without attributing an uncaptured physical freeze to them.
 
 Publish original build/adaptor source, extraction and relocation recipes,
 factual address metadata, dependency pins, synthetic tests and research notes.

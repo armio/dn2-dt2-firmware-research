@@ -189,7 +189,7 @@ def build(args):
     print('Staging R012 identity', flush=True)
     doc = stage_identity(parent, work/'main', source)
     main = work/'main'
-    if args.target in ('R013', 'R014', 'R020'):
+    if args.target in ('R013', 'R014', 'R020', 'R022'):
         print('Adding explicit sample-storage setup', flush=True)
         workspace = work/'rebuild/usb-research'
         for path in (source/'port/sample-storage/tree').rglob('*'):
@@ -207,7 +207,7 @@ def build(args):
                 cwd=workspace, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
         main = work/'sample-storage'
         doc = json.loads((main/'build-receipt.json').read_text())
-    if args.target in ('R014', 'R020'):
+    if args.target in ('R014', 'R020', 'R022'):
         print('Adding checked sampler control fixes', flush=True)
         for path in (source/'port/sampler-fixes/tree').rglob('*'):
             if path.is_file():
@@ -240,14 +240,18 @@ def build(args):
         main = work/'sampler-fixes'
         doc = json.loads((main/'build-receipt.json').read_text())
     dsp = work/'rebuild/usb-research/dsp/section_7.bin'
-    if args.target == 'R020':
+    if args.target in ('R020', 'R022'):
         for revision, script in (
                 ('r015', 'build_dn2_audit_fixes_r015.py'),
                 ('r016', 'build_dn2_function_fixes_r016.py'),
                 ('r017', 'build_dn2_manual_fixes_r017.py'),
                 ('r018', 'build_dn2_manual_fixes_r018.py'),
                 ('r019', 'build_dn2_emulator_fixes_r019.py'),
-                ('r020', 'build_dn2_cold_boot_guard_r020.py')):
+                ('r020', 'build_dn2_cold_boot_guard_r020.py'),
+                ('r021', 'build_dn2_sample_popup_r021.py'),
+                ('r022', 'build_dn2_sample_autosave_r022.py')):
+            if args.target == 'R020' and revision == 'r021':
+                break
             print(f'Applying checked {revision.upper()} changes', flush=True)
             destination = work/'revisions'/revision
             with (work/(revision+'.log')).open('w') as log:

@@ -14,14 +14,14 @@ audio for Digitone II—alongside its stock synth Machines.**
 Play stereo samples chromatically, stretch and slice loops, record the main mix,
 and send individual tracks and effect returns to your DAW.
 
-**R020 is the current candidate; R012 remains the stable target.** R020 includes
-sampler editing and MIDI-control fixes, safer sample replacement, short-sample
-STRETCH bounds, and SLICE-grid save/reload. Its new startup guard defers grid
-restoration until sample storage is initialized. The owner confirmed normal UI,
-stock audio and the saved 16-slice grid after a cold boot. This is targeted
-validation, not a new stable designation. [Changes and test scope](docs/research/2026-11-06.md).
+**R022 is the current candidate; R012 remains the stable target.** R022 fixes
+working-project sample autosave and includes R021's sample-menu repair after
+switching from a stock synth to a sampler. Native-code replay and startup checks
+pass; R021/R022 hardware confirmation is pending. The reported iPhone USB freeze
+remains unresolved. [Changes and test scope](docs/research/2026-11-06-autosave.md).
 
-R020 retains R013's explicit sample-storage setup. Formatting, restart, Transfer
+R022 retains the earlier sampler, MIDI-control, SLICE persistence and cold-start
+fixes, plus R013's explicit sample-storage setup. Formatting, restart, Transfer
 capacity and post-format sample uploads passed on-device checks on R013.
 Supply your own official Digitone II OS 1.11 and Digitakt II OS 1.16 files;
 no private sample bank or factory sample library is needed.
@@ -32,7 +32,7 @@ Elektron Transfer reported about **20 GB** available on the tested DN2.
 
 R012 was tested with sample storage already initialized during development;
 that missed the first-install case fixed by R013. R012 remains the stable target;
-R014, R013, R011 and T1E2 remain available as older builds. R012 and earlier targets
+R020, R014, R013, R011 and T1E2 remain available as older builds. R012 and earlier targets
 are not workarounds for missing storage setup.
 
 This repository distributes **source, build recipes and research only**. Firmware
@@ -44,14 +44,14 @@ playable samples through Transfer after installation.
 
 [Sample loading](docs/samples.md) · [Recorder](docs/recorder.md) ·
 [USB audio](#usb-audio-routing) · [Build](#build) ·
-[Release manifest](releases/r020.json)
+[Release manifest](releases/r022.json)
 
 ## First installation, step by step
 
 1. Back up projects, Sounds and samples. Keep the official DN2 recovery OS.
 2. Open the [browser patcher](https://armio.github.io/dn2-dt2-firmware-research/),
    select your official **DN2 OS 1.11** and **DT2 OS 1.16** files, choose
-   **Build firmware**, then download the verified **R020** `.syx`.
+   **Build firmware**, then download the verified **R022** `.syx`.
 3. Install that file with Elektron Transfer using its OS update workflow.
    Let installation finish, then boot the DN2 into normal playing mode.
 4. If sample uploads already work, skip formatting. If sample storage needs
@@ -65,9 +65,12 @@ playable samples through Transfer after installation.
 7. On the DN2, press **VOICE twice** from a track page to open Sample Manager.
    Browse **+DRIVE**, select the file and choose **LOAD TO PROJECT**.
 8. Choose a sample Machine with **FUNC + SYN**, assign the loaded sample with
-   **SYN → SAMP**, and play it. **Save the project** to retain its assignments.
+   **SYN → SAMP**, and play it. **Save the project** to preserve that checkpoint
+   for explicit reload.
 
-Save after editing slice grids too. Wait for saves, sample loading and transfers
+R022 also includes loaded samples in the unsaved working-state backup used at
+boot; an explicit project reload still returns to the saved checkpoint. Save
+after editing slice grids too. Wait for saves, sample loading and transfers
 to finish before switching power off. The startup guard does not make an
 interrupted write safe.
 
@@ -214,7 +217,8 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 | Target | Status | Scope |
 | --- | --- | --- |
-| **R020** | Default build / candidate | Accumulated sampler fixes, MIDI controls, SLICE persistence and startup guard; targeted owner cold-boot check passed |
+| **R022** | Default build / candidate | Working-state sample autosave and SYN sample-menu repair; offline checks pass, hardware confirmation pending |
+| **R020** | Earlier candidate / exact build | Accumulated sampler fixes, MIDI controls, SLICE persistence and startup guard; targeted owner cold-boot check passed |
 | **R014** | Earlier candidate / exact build | Initial FUNC + TUNE, SYN clear/undo and held SLICE boundary fixes |
 | **R013** | Earlier candidate / exact build | Adds confirmed sample-storage formatting; hardware setup and uploads verified |
 | **R012** | Stable; first-install limitation | Requires sample storage already initialized; lacks FORMAT SAMPLES |
@@ -225,6 +229,12 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 Current limits:
 
+- **R022 working-state recovery:** native replay preserves sample identities
+  through incremental backup and a fresh emulated boot. Physical reboot
+  confirmation is pending; a freeze or interrupted write can still lose queued
+  changes. Previously lost assignments cannot be reconstructed by this fix.
+- **iPhone USB freeze:** unresolved. R021/R022 do not change USB teardown or
+  controller-reset behavior.
 - **SLICE-grid export/import:** grids are stored in
   separate `/.slc_<content key>` files on +Drive. Native Sound/project exports
   contain only references, so they are not complete backups of slice edits.
@@ -251,8 +261,8 @@ recovery image privately.
 
 ## Private inputs
 
-R020 requires these two exact local inputs. The builder verifies their sizes
-and SHA-256 hashes against the [release manifest](releases/r020.json).
+R022 requires these two exact local inputs. The builder verifies their sizes
+and SHA-256 hashes against the [release manifest](releases/r022.json).
 
 | Input | Purpose |
 | --- | --- |
@@ -263,13 +273,13 @@ Obtain official firmware from Elektron and retain your own copies locally.
 The DT2 input is its **OS firmware**, not its factory sample library. These are
 build inputs for one DN2 update; a second instrument is not involved in building.
 
-**R020 needs no private sample bank.** It generates silent compatibility data for
+**R022 needs no private sample bank.** It generates silent compatibility data for
 an unused legacy bank region. Load playable samples through Transfer after
 installation; see [sample loading](docs/samples.md).
 
 Exact historical targets R011, R008, R003 and T1E2 still require their original
 47,104-byte private test bank. That asset is not distributed and is not DT2
-factory content. Choose R020 for the current two-file candidate, or R012 for the
+factory content. Choose R022 for the current two-file candidate, or R012 for the
 stable two-file build when sample storage is already initialized.
 
 ## Build
@@ -302,37 +312,37 @@ python tools/check_inputs.py \
 Resolve any missing-input or hash error before continuing. This check does not
 change the input files.
 
-### 3. Build the toolchain and R020
+### 3. Build the toolchain and R022
 
 ```sh
 python port/tools/bootstrap.py --prefix .toolchain --jobs 4
 python build.py \
   --dn2 /path/to/Digitone_II_OS1.11.syx \
   --dt2 /path/to/Digitakt_II_OS1.16.syx \
-  --out /private/builds/R020.syx
+  --out /private/builds/R022.syx
 ```
 
 The output must be **outside this repository**. Existing outputs are never
 overwritten. Intermediate firmware and diagnostic logs stay in the private
 temporary directory printed by the builder. Nothing is flashed automatically.
 
-Expected R020 output: **2,570,912 bytes**, SHA-256:
+Expected R022 output: **2,571,552 bytes**, SHA-256:
 
 ```text
-77528d1c65f8101a597beccd4e619a0bcc3fe18a56147de1ddbf4b8b1e238413
+26b86845969df2ffb7fb0c5a7854b357ba68e8d105eb4074b060c9ceeaa855d1
 ```
 
 The builder verifies MAIN, DSP and complete SysEx identities. The
-[R020 manifest](releases/r020.json) records the current output identity,
+[R022 manifest](releases/r022.json) records the current output identity,
 source-reproduction results and hardware
 validation limits.
 
-Use `--target R012` for the stable two-file build, or `--target R014` and
-`--target R013` to reproduce earlier candidates.
+Use `--target R012` for the stable two-file build, or `--target R020`,
+`--target R014` and `--target R013` to reproduce earlier candidates.
 Use `--target R011`, `--target R008`, `--target R003` or `--target T1E2` only for
 historical exact reproduction. Those targets additionally require
-`--sample-bank /private/path/to/sample-bank.bin`. R020, R014, R013 and R012 reject that option so a
-private bank cannot accidentally enter the new build.
+`--sample-bank /private/path/to/sample-bank.bin`. R022, R020, R014, R013 and R012
+reject that option so a private bank cannot accidentally enter the new build.
 
 ## Documentation and contributions
 
@@ -343,6 +353,7 @@ private bank cannot accidentally enter the new build.
 | [USB audio](docs/usb-research.md) | R011 publication fix and validation limits |
 | [Build tools](port/tools/README.md) | Pinned toolchain and local setup |
 | [Audit guide](docs/research-audits.md) | Offline checks and synthetic tests |
+| [Working-state and popup fixes](docs/research/2026-11-06-autosave.md) | R021/R022 defects, fixes, native-code evidence and hardware limits |
 | [November 6 update](docs/research/2026-11-06.md) | R015–R020 fixes, cold-start regression, hardware results and remaining gaps |
 | [November 3 update](docs/research/2026-11-03.md) | Stable designation, project-change results and resolved sample report |
 | [Publication boundaries](docs/publication.md) | What belongs in this source-only repository |
@@ -351,8 +362,9 @@ Useful contributions include reproducible bug reports, synthetic regression
 cases, clearer workflow documentation and improvements to the local
 build workflow. For a bug report, include the firmware target, Machine,
 steps to reproduce, USB mode/host buffer size where relevant, and whether the
-fault affects headphones, USB or both. For sample reload issues, state whether
-the project was saved after assignment.
+fault affects headphones, USB or both. For sample persistence issues, distinguish
+a reboot from explicitly loading a saved project, state whether loading had
+finished and the project was saved, and say whether +Drive files remain visible.
 
 Keep firmware, samples, generated disassemblies and raw device captures out of
 commits, issues, pull requests and releases. The repository contains original

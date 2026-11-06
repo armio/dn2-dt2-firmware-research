@@ -1,14 +1,16 @@
 # Recording and resampling
 
-R020 includes source selection, recording, normalization, trimming, auditioning,
+R022 includes source selection, recording, normalization, trimming, auditioning,
 saving to +Drive and optional track assignment. VOICE cycles through Voice Setup,
 Sample Manager and Recorder. Sample Machines and 42-channel USB audio remain
 available alongside it.
 
-**R020 is the current candidate; R012 remains stable.** R020 includes the R016
+**R022 is the current candidate; R012 remains stable.** R022 includes the R016
 assignment fix: a failed assignment preserves the original Sound and SAMP value.
 A successful assignment on a stock synth track converts it to ONESHOT when
-requested. See the [R020 manifest](../releases/r020.json).
+requested. R022 also snapshots Recorder preferences during incremental working
+updates without rebuilding unchanged sample identities. This new path has native
+replay coverage, not hardware confirmation. See the [R022 manifest](../releases/r022.json).
 
 Owner testing on R012 confirmed Recorder operation, stock audio, samples and USB
 audio, including after changing projects. MAIN recording, saving and reopening
@@ -22,7 +24,7 @@ trimmed-file comparison and long-duration USB stress remain incomplete. See
 
 Follow the [tool setup](../port/tools/README.md) and [private input
 requirements](../README.md#private-inputs), or use the [browser patcher](browser.md).
-The [default R020 build](../README.md#build) needs only the two official OS files;
+The [default R022 build](../README.md#build) needs only the two official OS files;
 no sample bank is required. The builder verifies section and SysEx hashes and
 does not access MIDI or flash a device.
 
@@ -42,7 +44,8 @@ does not access MIDI or flash a device.
    assign the sample or press **NO** to decline.
 6. Close Recorder and reopen it through the VOICE pages. The retained take's
    waveform and trim range should be available. Saving audio and assigning it
-   to a track are separate actions; save the project to retain assignments.
+   to a track are separate actions; save the project to retain assignments in
+   its explicit saved checkpoint. See [working-state persistence](samples.md#working-state-saved-projects-and-sample-files).
 
 Use a new filename for a trimmed copy when preserving the original. Wait for the
 save to finish before closing Recorder or switching off. The trim/save path
@@ -62,7 +65,7 @@ closed-mode diagnostic replies as the take length.
 R003 also repairs a confirmed MAIN-loader input overlap by restoring a
 separately compressed tail before original startup. Protected loader sections,
 panel firmware and flash writer remain unchanged. R003 excludes later USB
-queues, scheduling and timing changes; R011 through R020 include the
+queues, scheduling and timing changes; R011 through R022 include the
 [USB publication changes](usb-research.md).
 
 Historical R003 reproduction and its private-bank requirement remain documented

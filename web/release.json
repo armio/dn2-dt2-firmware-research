@@ -49,18 +49,18 @@
       "INPUT"
     ]
   },
-  "build": "R020",
+  "build": "R022",
   "status": "candidate",
   "date": "2026-11-06",
   "stable_baseline": "T1E2",
   "previous_stable": "R012",
   "outputs": {
-    "main_sha256": "63ee355380d98ef9123a4e8051f705bfe76cf29d86571d44a53f23e01a824e2c",
-    "expanded_main_sha256": "d8f327c07b4930d4e062feba5d9914d2777e33c68b5a7f3e8165fb4a9f3e4311",
-    "runtime_sha256": "3c2002eabc0f6fbdd4ea860cd954950c92805f5c310da800d6c56c33e45bb064",
+    "main_sha256": "c9bc78c9f6d32e7fcbfa8d38aa8f01235d15b7b85831d803252677e2cebec949",
+    "expanded_main_sha256": "54284e835c74c36a0e2a34289ca45e5dbd226620b551b777baf15c3b2d862d71",
+    "runtime_sha256": "8bbb4f17fd4acc5b3a59b4c71d7e52af35ac1d6e16b7eb1f0c0d83d501c9609b",
     "dsp_sha256": "2b05931155bb097798e3f3926b1667f97629356baf78ee1c2efa294ce3a50c0e",
-    "sysex_sha256": "77528d1c65f8101a597beccd4e619a0bcc3fe18a56147de1ddbf4b8b1e238413",
-    "sysex_bytes": 2570912
+    "sysex_sha256": "26b86845969df2ffb7fb0c5a7854b357ba68e8d105eb4074b060c9ceeaa855d1",
+    "sysex_bytes": 2571552
   },
   "changes": [
     "Retains six sampler Machines, Recorder, explicit FORMAT SAMPLES setup and 42-channel USB audio.",
@@ -71,7 +71,10 @@
     "All six samplers use CC 40\u201347 and NRPN 1:73\u201380 for SYN controls. SAMP CC43 selects within the current bank; NRPN1:76 selects absolute positions 0\u20131023.",
     "Bounds and failure handling for kit SysEx, song row counts, Euclidean rests and final timed outbound MIDI note release.",
     "SLICE grids survive native same-device Sound/project save and reload via content-addressed companion files. Save failures propagate; failed new writes can retry; deferred restoration covers active tracks and preset-pool Sounds.",
-    "R020 fixes the R019 cold-start readiness defect: slice companion allocation/I/O waits for initialized filesystem startup status and mounted flag. DSP, USB ownership checks and control-frame ordering are unchanged from R019."
+    "R020 fixes the R019 cold-start readiness defect: slice companion allocation/I/O waits for initialized filesystem startup status and mounted flag. DSP, USB ownership checks and control-frame ordering are unchanged from R019.",
+    "R021 reconciles the exposed SYN page after switching between stock synth and sampler Machines, restoring the SAMP knob popup through native view ownership and selection.",
+    "R022 includes sample identities in incremental working-project settings snapshots. Normal reboot recovery no longer depends on an explicit SAVE PROJECT to refresh this companion table.",
+    "The autosave hook reuses the project lock, checks current ownership and project identity, preserves explicit saved snapshots, and skips sample copy/CRC when unchanged. Recorder preferences sharing the companion header are refreshed separately."
   ],
   "validation": {
     "hardware_confirmed": [
@@ -88,21 +91,29 @@
       "Independent startup-order/retry/ColdFire ABI review and package integrity checks pass; R020 DSP and protected sections match R019.",
       "Fresh end-to-end public source build matches the pinned MAIN, expanded MAIN, runtime, DSP and SysEx identities; all 41 public unit tests pass.",
       "Browser backend and actual browser UI/Worker/download each produce the pinned 2,570,912-byte SysEx; six Python recipe tests and JavaScript recipe boundary tests pass.",
-      "Independent publication review verifies authored adapter provenance, source-only payload boundaries and exclusion of private data."
+      "Independent publication review verifies authored adapter provenance, source-only payload boundaries and exclusion of private data.",
+      "R020 baseline reproduced: native sample load and queued settings update leave the sample mirror empty; a fresh-emulator backup restore loses the identity.",
+      "R022 native replay passes load, incremental snapshot, prepared power-off block and fresh-emulator restore; unload updates the snapshot. Explicit saved-cache contents remain unchanged.",
+      "Eight owner/UID/destination/failure cases preserve the existing companion. Unchanged identities skip full record rebuild; Recorder-only edits update their header.",
+      "R022 includes the R021 popup regression: ten Machine transitions, nine view-routing guards, native modal ownership and register/stack checks.",
+      "R022 package integrity, transport round trip and native early-startup replay pass both staging addresses. DSP remains byte-identical to R020.",
+      "R022 fresh two-input public-source build matches all pinned section/runtime/output hashes. All 41 public unit tests, six Python recipe tests and JavaScript boundary tests pass.",
+      "R022 browser backend and actual UI/Worker/download match the pinned 2,571,552-byte SysEx. Independent source/privacy/provenance review passes."
     ],
     "pending": [
+      "R021/R022 hardware confirmation: first-knob-D popup after a Machine switch and normal power-switch recovery of unsaved sample-pool edits.",
       "Repeated cold-boot endurance and power-loss behavior during writes.",
       "Intermittent internal-sequencer stuck-note reproduction and long-duration audio/USB validation.",
       "Full physical DT2 manual workflow coverage, real-time DMA/deadline guarantees and analog-output verification."
     ],
-    "notes": "R020 is a candidate with targeted owner-reported cold-boot success. R012 remains stable. The premature-I/O defect is proven in native-code fixtures; the exact original physical black-screen cause was not captured. R019 is held and is not offered by the online builder."
+    "notes": "R022 is a hardware-unconfirmed candidate. Earlier R020 cold-boot observations do not validate R022. R012 remains stable. Native replay reproduces the autosave gap, but the reported iPhone freeze and its interrupted shutdown were not captured."
   },
   "source_reproduction": {
     "verified_on": "2026-11-06",
     "exact_main_dsp_and_sysex": true,
     "baseline_rebuilt_this_run": true,
     "private_sample_bank_required": false,
-    "notes": "Fresh public-source reconstruction rebuilt all required MAIN/DSP stages from the two official OS inputs and generated silence. Source, browser backend and actual browser Worker/download independently produced the pinned R020 SysEx. No private bank, historical custom firmware or device capture was used as a build input.",
+    "notes": "Fresh public-source reconstruction rebuilt the full baseline and R014\u2013R022 continuation from the two official OS inputs and generated silence. Native build, browser backend and actual browser UI/Worker/download produced the exact pinned R022 SysEx. No private sample bank, historical custom firmware or device capture was a build input.",
     "browser_backend_verified": true,
     "browser_ui_worker_download_verified": true
   },
@@ -116,19 +127,23 @@
   "known_issues": [
     "Native Sound/project exports carry slice-grid keys, not the companion files. They are incomplete backups of slice edits; cross-device restore or formatting requires the companion files. Automatic bundling/restoration is not implemented.",
     "Intermittent internal audio-track hung notes remain unresolved; the outbound MIDI expiry fix is a separate path.",
-    "Intermittent SAMP browser failures and physical USB/input artifacts have not been comprehensively resolved or attributed.",
     "Bulk sample uploads/restoration can interrupt playback. Stop playback during transfers and wait until they finish; report problems that persist afterward.",
     "A DSP transfer timeout can require restart even when the host retains the original sample binding.",
-    "Emulator instruction/model limits and filesystem/scheduler fixtures prevent treating offline results as complete hardware or manual compliance."
+    "Emulator instruction/model limits and filesystem/scheduler fixtures prevent treating offline results as complete hardware or manual compliance.",
+    "An iPhone USB freeze was reported; its cause remains unconfirmed. R022 is not a USB-freeze fix.",
+    "Abrupt power loss or a frozen task may prevent queued backup work from finishing. Sample companion writes are not atomic crash recovery; already-lost assignments cannot be reconstructed by this fix.",
+    "The targeted first-D popup routing defect is fixed in native replay; broader physical UI timing remains unverified."
   ],
-  "previous_candidate": "R014",
+  "previous_candidate": "R020",
   "incorporated_local_revisions": [
     "R015",
     "R016",
     "R017",
     "R018",
     "R019",
-    "R020"
+    "R020",
+    "R021",
+    "R022"
   ],
   "slice_persistence": {
     "companion_path": "/.slc_<content key>",

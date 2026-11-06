@@ -9,7 +9,9 @@ The [November 6 research update](research/2026-11-06.md) summarizes the wider
 R015–R020 native-instruction and hardware work, including the cold-start
 readiness regression. Those research fixtures have additional private OS and
 emulator-state dependencies; this standalone audit directory does not claim
-to reproduce the entire development test suite.
+to reproduce the entire development test suite. The
+[R021/R022 follow-up](research/2026-11-06-autosave.md) adds native UI-transition
+and incremental sample-backup regressions with their fixture boundaries.
 
 ## Recovery and container checks
 

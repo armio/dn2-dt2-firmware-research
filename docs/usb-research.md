@@ -9,11 +9,13 @@ remain pending.
 R012 carries this USB implementation forward unchanged and removes the private
 sample-bank build dependency. Owner testing confirmed stock audio, samples,
 Recorder and USB audio on R012, including after changing projects; it remains
-the stable target. Use the [two-file R020 build](../README.md#build) for the current
-candidate. R020 includes later sampler fixes while retaining the established
-USB publication and buffer-ownership rules. Its cold-start guard does not
-change DSP, USB queues or control-frame ordering. See the
-[November 6 update](research/2026-11-06.md) for targeted test results and limits.
+the stable target. Use the [two-file R022 build](../README.md#build) for the current
+candidate. It retains the established USB publication and buffer-ownership
+rules. R021/R022 change sampler UI routing and working-state autosave, not DSP,
+USB queues or control-frame ordering. A reported freeze while connected to an
+iPhone remains unresolved; no fault-state capture establishes its cause. See the
+[November 6 update](research/2026-11-06.md) and
+[autosave update](research/2026-11-06-autosave.md) for test results and limits.
 
 ## Reproduce historical R011
 

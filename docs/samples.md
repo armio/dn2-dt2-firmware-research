@@ -2,7 +2,7 @@
 
 ## Sample-storage setup
 
-**R013 introduced SETTINGS → SYSTEM → FORMAT SAMPLES; R020 retains it.** This prepares
+**R013 introduced SETTINGS → SYSTEM → FORMAT SAMPLES; R022 retains it.** This prepares
 sample storage on a DN2 that has not used these sample Machines before. R012
 could mount existing storage but could not create it. If sample uploads already
 work, **leave the storage intact; no format is needed**.
@@ -22,7 +22,7 @@ will need those files restored. This is separate from stock **FORMAT +DRIVE**;
 do not use that command, EMPTY RESET or FACTORY RESET for sample setup.
 
 1. Stop playback and transfers. Close Transfer on the computer.
-2. On R020, open **SETTINGS → SYSTEM → FORMAT SAMPLES**.
+2. On R022, open **SETTINGS → SYSTEM → FORMAT SAMPLES**.
 3. Read **ERASE SAMPLE AREA? / INCL. OTHER MODS. Y/N**. **NO** cancels without
    formatting. Press **YES** only when you intend to erase this area.
 4. Keep power connected while **FORMATTING SAMPLES** is displayed.
@@ -40,13 +40,15 @@ On R013, on-device confirmation/cancellation, formatting, cold-start
 mounting, Transfer capacity and subsequent sample uploads have been tested on
 one DN2. Broader endurance testing remains pending.
 
-R020 is the current candidate; R012 remains stable. The owner confirmed R020
-cold boot, stock audio and a saved SLICE grid. This is not a power-loss or
-storage-endurance qualification. See the [R020 manifest](../releases/r020.json)
-and [validation scope](research/2026-11-06.md).
+R022 is the current candidate; R012 remains stable. R022's working-state sample
+autosave and SYN menu fixes pass native-code replay; hardware confirmation is
+pending. The earlier R020 cold boot, stock audio and saved SLICE grid were
+owner-confirmed. These results do not establish power-loss or storage endurance.
+See the [R022 manifest](../releases/r022.json) and
+[validation scope](research/2026-11-06-autosave.md).
 
 Use your own mono or stereo samples; the Digitakt II factory library is not
-required for playback. R020, R014, R013 and R012 build using only the two
+required for playback. R022, R020, R014, R013 and R012 build using only the two
 [official OS inputs](../README.md#private-inputs).
 
 ## 1. Transfer samples to +Drive
@@ -97,9 +99,30 @@ The quick-assign route is also available: from the SYN SAMP list, press
 **FUNC + YES** to browse +Drive, find a sample, then press **YES** to load it into
 the project and assign it to the active track.
 
+## Working state, saved projects and sample files
+
+These are separate layers:
+
+- **+Drive files** are the uploaded or recorded audio. Loading a file into a
+  project does not move or delete it.
+- **Working state** is the active project restored at boot. R022 fixes a gap
+  where normal settings updates left its sample-identity backup stale. Loaded
+  sample identities now follow that incremental backup path; a normal reboot
+  should not require SAVE PROJECT first. This passes native replay, including
+  fresh-emulator restoration; physical reboot confirmation is still pending.
+- **Saved project** is the checkpoint created by SAVE PROJECT. Explicitly
+  loading it restores that checkpoint, so save after changing assignments when
+  you want those changes included in a later project reload.
+
+Wait for loading, saves and transfers to finish before using the power switch.
+A frozen task or interrupted write can still lose unfinished working-state
+changes. R022 cannot reconstruct assignments already missing from a backup and
+does not fix the reported iPhone USB freeze. See the
+[autosave investigation](research/2026-11-06-autosave.md).
+
 ## Slice-grid persistence
 
-Create or edit the grid on a SLICE track, then **save the project**. R020 stores
+Create or edit the grid on a SLICE track, then **save the project**. R022 stores
 the marker data in immutable `/.slc_<content key>` companion files on +Drive;
 the native Sound/project stores the matching key. Same-device project reload
 restores the grid while that companion is available.
@@ -122,7 +145,7 @@ workflow; the startup guard does not provide atomic or power-loss-safe saves.
 
 ## Replacing a loaded sample
 
-R020 stages replacement audio before releasing the resident sample. Invalid
+R022 stages replacement audio before releasing the resident sample. Invalid
 headers, incomplete reads and insufficient staging RAM leave the original slot
 available. Slots sharing PCM retain independent display names. If a new sample
 is shorter than a held voice's old sample, that voice stops; retrigger it to play
@@ -135,13 +158,17 @@ before trying another transfer.
 
 ## If a sample is missing or silent
 
-Save the project after loading and assigning samples. A successful transfer
-alone does not save project assignments; retain the original files on +Drive.
+A successful transfer stores +Drive files; it does not assign them to the
+project. Save assignments before explicitly reloading a saved project. For
+reboots, see the working-state distinction above.
 
 - **Visible in Transfer, absent from SAMP:** check +Drive in Sample Manager and
   load the file into the project first.
-- **Assignment missing after reload:** confirm the project was saved after
-  loading and assigning the sample.
+- **Assignment missing after explicit project reload:** confirm the project
+  was saved after loading and assigning the sample.
+- **Assignment missing after reboot:** report the build, whether loading had
+  finished, and whether shutdown followed a freeze. Check whether the original
+  +Drive files remain visible; pool loss is not evidence of file deletion.
 - **Transfer cannot see DN2:** check both MIDI port selections, USB mode and the
   data cable. Reconnect to a working computer USB port if necessary.
 - **Loaded but silent:** check track mute, selected sample slot, sample level,
@@ -154,10 +181,10 @@ specific to this port; Elektron's DT2 manual uses SAMPLING/SRC for those pages.
 
 ## Do I need the DT2 factory samples?
 
-No. R020 needs only the official DN2 and DT2 OS files to build. After installing,
+No. R022 needs only the official DN2 and DT2 OS files to build. After installing,
 upload your own samples using the steps above. A DT2 factory library is optional
 playable content and is not a build input.
 
 Older exact-build targets retain a private test-bank requirement. That bank was
 created for this project; it cannot be obtained by exporting DT2 factory content.
-R020, R014, R013 and R012 avoid that historical dependency.
+R022, R020, R014, R013 and R012 avoid that historical dependency.

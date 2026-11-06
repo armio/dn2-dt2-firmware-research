@@ -45,7 +45,7 @@ def expand_verified(raw, doc):
     expected = dict(schema='dn2-main-tail-1', cutoff=hex(CUT), entry=hex(CAVE),
         original_entry=hex(ENTRY), depacker=hex(DEPACK), scratch=hex(SCRATCH),
         parent_main_sha256=PARENT_SHA)
-    if doc.get('build') in ('R014', 'R015', 'R016', 'R017', 'R018', 'R019', 'R020'):
+    if doc.get('build') in ('R014', 'R015', 'R016', 'R017', 'R018', 'R019', 'R020', 'R021', 'R022'):
         from build_dn2_sampler_fixes_r014 import BANK_FREE_TAIL_PARENT
         expected['parent_main_sha256'] = BANK_FREE_TAIL_PARENT
     if any(m.get(k) != v for k,v in expected.items()) or sha(raw) != doc['main_sha256']:
@@ -101,6 +101,12 @@ def expand_verified(raw, doc):
         verify_projection(expanded,doc)
     elif doc.get('build') == 'R020':
         from build_dn2_cold_boot_guard_r020 import verify_projection
+        verify_projection(expanded,doc)
+    elif doc.get('build') == 'R021':
+        from build_dn2_sample_popup_r021 import verify_projection
+        verify_projection(expanded,doc)
+    elif doc.get('build') == 'R022':
+        from build_dn2_sample_autosave_r022 import verify_projection
         verify_projection(expanded,doc)
     return expanded
 
