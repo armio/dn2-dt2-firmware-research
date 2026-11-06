@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R012/R013/R014: two official inputs, generated silence, exact reviewed hashes."""
+"""R012 onward: two official inputs, generated silence, exact reviewed hashes."""
 import copy
 import hashlib
 import importlib
@@ -189,7 +189,7 @@ def build(args):
     print('Staging R012 identity', flush=True)
     doc = stage_identity(parent, work/'main', source)
     main = work/'main'
-    if args.target in ('R013', 'R014'):
+    if args.target in ('R013', 'R014', 'R020'):
         print('Adding explicit sample-storage setup', flush=True)
         workspace = work/'rebuild/usb-research'
         for path in (source/'port/sample-storage/tree').rglob('*'):
@@ -207,7 +207,7 @@ def build(args):
                 cwd=workspace, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
         main = work/'sample-storage'
         doc = json.loads((main/'build-receipt.json').read_text())
-    if args.target == 'R014':
+    if args.target in ('R014', 'R020'):
         print('Adding checked sampler control fixes', flush=True)
         for path in (source/'port/sampler-fixes/tree').rglob('*'):
             if path.is_file():
@@ -240,6 +240,34 @@ def build(args):
         main = work/'sampler-fixes'
         doc = json.loads((main/'build-receipt.json').read_text())
     dsp = work/'rebuild/usb-research/dsp/section_7.bin'
+    if args.target == 'R020':
+        for revision, script in (
+                ('r015', 'build_dn2_audit_fixes_r015.py'),
+                ('r016', 'build_dn2_function_fixes_r016.py'),
+                ('r017', 'build_dn2_manual_fixes_r017.py'),
+                ('r018', 'build_dn2_manual_fixes_r018.py'),
+                ('r019', 'build_dn2_emulator_fixes_r019.py'),
+                ('r020', 'build_dn2_cold_boot_guard_r020.py')):
+            print(f'Applying checked {revision.upper()} changes', flush=True)
+            destination = work/'revisions'/revision
+            with (work/(revision+'.log')).open('w') as log:
+                subprocess.run([sys.executable, '-B', str(workspace/'scripts'/script),
+                    '--parent', str(main), '--out', str(destination)], cwd=workspace,
+                    env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
+            main = destination
+        dsp_env = {**env, 'DIGIKIT':paths['digikit'], 'SELAS':paths['selas'],
+                   'DSP_RELEASE_SELAS':paths['selas']}
+        for revision, script in (('r017', 'r017_dsp_rebind.py'),
+                                 ('r018', 'r018_dsp_stretch.py')):
+            destination = work/'revisions'/revision/'dsp'
+            arguments = (['--parent', str(dsp), '--out', str(destination)]
+                         if revision == 'r017' else [str(dsp), str(destination)])
+            with (work/(revision+'-dsp.log')).open('w') as log:
+                subprocess.run([sys.executable, '-B', str(workspace/'scripts'/script),
+                    *arguments], cwd=workspace, env=dsp_env, stdout=log,
+                    stderr=subprocess.STDOUT, check=True)
+            dsp = destination/'section_7.bin'
+        doc = json.loads((main/'build-receipt.json').read_text())
     expected = release['outputs']
     for path, digest in ((main/'main-os.bin', expected['main_sha256']),
                          (main/'runtime.bin', expected['runtime_sha256']),

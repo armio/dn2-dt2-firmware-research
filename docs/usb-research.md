@@ -1,4 +1,4 @@
-# R011 USB audio
+# USB audio and the R011 publication fix
 
 R011 is the previous stable target. It includes the six sample Machines,
 Recorder and 42-channel USB capture, with a fix for USB publication stalling
@@ -7,10 +7,13 @@ different project. Repeated instrumented project-change testing and endurance
 remain pending.
 
 R012 carries this USB implementation forward unchanged and removes the private
-sample-bank build dependency. R013 preserves this DSP implementation and adds
-explicit sample-storage setup. Use the [two-file R013 build](../README.md#build)
-for the current candidate. Owner testing confirmed stock audio, samples,
-Recorder and USB audio on R012, including after changing projects.
+sample-bank build dependency. Owner testing confirmed stock audio, samples,
+Recorder and USB audio on R012, including after changing projects; it remains
+the stable target. Use the [two-file R020 build](../README.md#build) for the current
+candidate. R020 includes later sampler fixes while retaining the established
+USB publication and buffer-ownership rules. Its cold-start guard does not
+change DSP, USB queues or control-frame ordering. See the
+[November 6 update](research/2026-11-06.md) for targeted test results and limits.
 
 ## Reproduce historical R011
 
@@ -73,7 +76,7 @@ matched capture. Treat each project as a separate condition. Diagnostic reads
 still consume time and can affect timing.
 
 The published [read-only diagnostic tools](../research/diagnostics/README.md)
-target historical R007/R008 layouts; they are not an R011 capture command.
+target historical R007/R008 layouts; they are not an R020 capture command.
 Do not compare counters from different windows
 as though they were simultaneous. An incomplete or conflicting snapshot is
 unavailable evidence, not a zero count. Keep raw captures private: they can

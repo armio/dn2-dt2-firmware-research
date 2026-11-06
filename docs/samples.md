@@ -2,7 +2,7 @@
 
 ## Sample-storage setup
 
-**R013 introduced SETTINGS → SYSTEM → FORMAT SAMPLES; R014 retains it.** This prepares
+**R013 introduced SETTINGS → SYSTEM → FORMAT SAMPLES; R020 retains it.** This prepares
 sample storage on a DN2 that has not used these sample Machines before. R012
 could mount existing storage but could not create it. If sample uploads already
 work, **leave the storage intact; no format is needed**.
@@ -15,14 +15,14 @@ Transfer showing **0% Free / 0 bytes**, an empty Samples root or uploads stuck
 at zero speed can indicate unavailable storage. Those symptoms do not prove
 the area is empty; it may contain samples or data from another mod.
 
-**FORMAT SAMPLES erases the sample-storage area, including existing samples and
-other mods' data in that area.** Back up your projects, Sounds and sample files
+**FORMAT SAMPLES erases the sample-storage area, including existing samples,
+SLICE-grid companion files and other mods' data in that area.** Back up your projects, Sounds and sample files
 first, and retain the original audio files. Projects referencing erased samples
 will need those files restored. This is separate from stock **FORMAT +DRIVE**;
 do not use that command, EMPTY RESET or FACTORY RESET for sample setup.
 
 1. Stop playback and transfers. Close Transfer on the computer.
-2. On R014 or R013, open **SETTINGS → SYSTEM → FORMAT SAMPLES**.
+2. On R020, open **SETTINGS → SYSTEM → FORMAT SAMPLES**.
 3. Read **ERASE SAMPLE AREA? / INCL. OTHER MODS. Y/N**. **NO** cancels without
    formatting. Press **YES** only when you intend to erase this area.
 4. Keep power connected while **FORMATTING SAMPLES** is displayed.
@@ -40,12 +40,13 @@ On R013, on-device confirmation/cancellation, formatting, cold-start
 mounting, Transfer capacity and subsequent sample uploads have been tested on
 one DN2. Broader endurance testing remains pending.
 
-R014 is the current candidate; hardware validation is pending. R012 remains
-stable, and R013 remains available. See the [R014 manifest](../releases/r014.json)
-for changes and limits.
+R020 is the current candidate; R012 remains stable. The owner confirmed R020
+cold boot, stock audio and a saved SLICE grid. This is not a power-loss or
+storage-endurance qualification. See the [R020 manifest](../releases/r020.json)
+and [validation scope](research/2026-11-06.md).
 
 Use your own mono or stereo samples; the Digitakt II factory library is not
-required for playback. R014, R013 and R012 build using only the two
+required for playback. R020, R014, R013 and R012 build using only the two
 [official OS inputs](../README.md#private-inputs).
 
 ## 1. Transfer samples to +Drive
@@ -96,6 +97,42 @@ The quick-assign route is also available: from the SYN SAMP list, press
 **FUNC + YES** to browse +Drive, find a sample, then press **YES** to load it into
 the project and assign it to the active track.
 
+## Slice-grid persistence
+
+Create or edit the grid on a SLICE track, then **save the project**. R020 stores
+the marker data in immutable `/.slc_<content key>` companion files on +Drive;
+the native Sound/project stores the matching key. Same-device project reload
+restores the grid while that companion is available.
+
+**Exporting a Sound or project does not include its SLICE companion files.**
+Moving to another DN2 or restoring after formatting needs those files as well.
+Automatic bundling and restoration are not implemented. A native export alone
+is therefore not a complete backup of slice edits; formatting removes the
+companions, and missing grids may need to be recreated. Older projects whose
+grids were never saved by this mechanism cannot recover them automatically.
+
+An exact hardware save/reload comparison preserved all 772 grid bytes and the
+sample binding on R019. The owner subsequently confirmed an R020 power-switch
+cycle preserved the saved 16-slice grid and normal audio. The R020 startup guard
+waits for filesystem initialization before resolving saved grid keys.
+
+Save changes and wait for saves, sample loading and transfers to finish before
+using the power switch. Power removal during a write is outside the validated
+workflow; the startup guard does not provide atomic or power-loss-safe saves.
+
+## Replacing a loaded sample
+
+R020 stages replacement audio before releasing the resident sample. Invalid
+headers, incomplete reads and insufficient staging RAM leave the original slot
+available. Slots sharing PCM retain independent display names. If a new sample
+is shorter than a held voice's old sample, that voice stops; retrigger it to play
+the replacement.
+
+A DSP transport timeout blocks further transfers until restart. The host can
+retain the original PCM and project identity, but an interrupted link cannot
+establish which descriptor the DSP received. Report the timeout and restart
+before trying another transfer.
+
 ## If a sample is missing or silent
 
 Save the project after loading and assigning samples. A successful transfer
@@ -117,10 +154,10 @@ specific to this port; Elektron's DT2 manual uses SAMPLING/SRC for those pages.
 
 ## Do I need the DT2 factory samples?
 
-No. R014 needs only the official DN2 and DT2 OS files to build. After installing,
+No. R020 needs only the official DN2 and DT2 OS files to build. After installing,
 upload your own samples using the steps above. A DT2 factory library is optional
 playable content and is not a build input.
 
 Older exact-build targets retain a private test-bank requirement. That bank was
 created for this project; it cannot be obtained by exporting DT2 factory content.
-R014, R013 and R012 avoid that historical dependency.
+R020, R014, R013 and R012 avoid that historical dependency.

@@ -5,6 +5,12 @@ accessing MIDI, USB or the device. They do not change the selected firmware buil
 certify a candidate as safe to flash. No vendor firmware, disassembly, samples
 or hardware captures accompany them.
 
+The [November 6 research update](research/2026-11-06.md) summarizes the wider
+R015–R020 native-instruction and hardware work, including the cold-start
+readiness regression. Those research fixtures have additional private OS and
+emulator-state dependencies; this standalone audit directory does not claim
+to reproduce the entire development test suite.
+
 ## Recovery and container checks
 
 `audit_dn2_recovery.py` uses the repository's existing `dnfw` parser and codec.

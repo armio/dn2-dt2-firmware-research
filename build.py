@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build R012/R013/R014 from two official OS files, or reproduce an earlier release."""
+"""Build R020 from two official OS files, or reproduce an earlier release."""
 import argparse
 import hashlib
 import importlib.util
@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent
 
 
 def build(args):
-    if args.target in ('R012', 'R013', 'R014'):
+    if args.target in ('R012', 'R013', 'R014', 'R020'):
         spec = importlib.util.spec_from_file_location('public_bank_build', ROOT/'port/public-bank/build.py')
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
@@ -124,8 +124,8 @@ def main():
     for name in ('dn2', 'dt2', 'out'):
         parser.add_argument('--'+name, type=Path, required=True)
     parser.add_argument('--sample-bank', type=Path, help='Required only to reproduce historical targets')
-    parser.add_argument('--target', choices=('T1E2', 'R003', 'R008', 'R011', 'R012', 'R013', 'R014'), default='R014',
-                        help='R014 sampler-fix candidate (default), R013 or R012, two OS files; historical R011/T1E2/R003/R008')
+    parser.add_argument('--target', choices=('T1E2', 'R003', 'R008', 'R011', 'R012', 'R013', 'R014', 'R020'), default='R020',
+                        help='R020 candidate (default) or R012/R013/R014 from two OS files; historical R011/T1E2/R003/R008')
     parser.add_argument('--toolchain', type=Path, default=ROOT/'.toolchain/paths.json')
     parser.add_argument('--work', type=Path, help='Fresh directory outside the source tree; default: system temporary directory')
     args = parser.parse_args()

@@ -1,57 +1,38 @@
 # Recording and resampling
 
-R014, R013, R012 and R011 include the Recorder introduced by R003 alongside the sample Machines
-and 42-channel USB audio. The workflow includes source selection, recording, normalization,
-trim and audition controls, saving to +Drive, and optional track assignment.
-VOICE cycles through Voice Setup, Sample Manager and Recorder.
+R020 includes source selection, recording, normalization, trimming, auditioning,
+saving to +Drive and optional track assignment. VOICE cycles through Voice Setup,
+Sample Manager and Recorder. Sample Machines and 42-channel USB audio remain
+available alongside it.
 
-**R014 is the current candidate and preserves the R012 Recorder.** Hardware
-validation is pending. R012 remains stable, and R013 remains available. See the
-[R014 manifest](../releases/r014.json) for changes and limits.
-Owner testing on R012 confirmed Recorder operation,
-stock audio, samples and USB audio, including after changing projects.
-R003 remains a historical experimental target.
-R003 hardware boot, stock audio, MAIN recording, saving and Recorder reopening have passed. Hardware
-trimmed-file comparison, power-cycle persistence and long-duration USB stress
-testing remain pending. See [R003 evidence and limits](research/2026-10-31.md).
+**R020 is the current candidate; R012 remains stable.** R020 includes the R016
+assignment fix: a failed assignment preserves the original Sound and SAMP value.
+A successful assignment on a stock synth track converts it to ONESHOT when
+requested. See the [R020 manifest](../releases/r020.json).
+
+Owner testing on R012 confirmed Recorder operation, stock audio, samples and USB
+audio, including after changing projects. MAIN recording, saving and reopening
+also passed earlier hardware checks. The combined offline workflow now covers
+normalization, mono/stereo trimming, save/reopen, file download and project
+identity restoration. Physical input acquisition, every source, exact hardware
+trimmed-file comparison and long-duration USB stress remain incomplete. See
+[current test scope](research/2026-11-06.md).
 
 ## Build locally
 
 Follow the [tool setup](../port/tools/README.md) and [private input
-requirements](../README.md#private-inputs) first. For R014, follow the
-[default two-file build](../README.md#build); no sample bank is required.
-The command below reproduces historical R003 and requires its original private
-test bank, which is not DT2 factory content.
-
-```sh
-python build.py --target R003 \
-  --dn2 /path/to/Digitone_II_OS1.11.syx \
-  --dt2 /path/to/Digitakt_II_OS1.16.syx \
-  --sample-bank /private/path/to/sample-bank.bin \
-  --out /private/builds/R003.syx
-```
-
-The builder reconstructs T1E2, applies the Recorder stages, packs the MAIN tail,
-and verifies the final section and SysEx hashes. Outputs must remain outside
-the source repository. Existing outputs are never overwritten; the builder
+requirements](../README.md#private-inputs), or use the [browser patcher](browser.md).
+The [default R020 build](../README.md#build) needs only the two official OS files;
+no sample bank is required. The builder verifies section and SysEx hashes and
 does not access MIDI or flash a device.
-
-Expected output: **2,585,376 bytes**, SHA-256
-`eb3030563bb863df771980cbba46f981511935ccf5e89fb2ae668ff90edbd169`.
-The [R003 manifest](../releases/r003.json) records identities and validation scope.
-
-Verified on October 31, 2026: a clean export of the public source rebuilt the
-complete T1E2 baseline and R003 extension with the pinned toolchain and three
-private inputs. Final MAIN, DSP and SysEx matched exactly. No prior Recorder
-firmware or private research checkout was required.
 
 ## Record, trim and save
 
 1. From a track page, press plain **VOICE** three times to open Recorder.
    **FUNC + VOICE** remains the unison shortcut.
 2. Choose **SRC MAIN** to record the main mix. **IN** selects the physical
-   inputs; USB and individual tracks are also available. MAIN is the source
-   verified on hardware in this round.
+   inputs; USB and individual tracks are also available. MAIN has prior hardware
+   confirmation; the R020 cold-boot check did not retest every Recorder source.
 3. Set recording length and threshold as needed. Arm using **H/ARM**, then
    press **YES** to start. Play the material to record; press **YES** to stop.
 4. On the trim page, use **E** for start and **H** for end. **F** controls zoom
@@ -63,10 +44,11 @@ firmware or private research checkout was required.
    waveform and trim range should be available. Saving audio and assigning it
    to a track are separate actions; save the project to retain assignments.
 
-Use a new filename for a trimmed copy when preserving the original. The trim
-and save path passed native instruction checks; the current hardware test has
-not yet completed the trimmed-file comparison. A successful source build does
-not certify every Recorder source or real-time workload.
+Use a new filename for a trimmed copy when preserving the original. Wait for the
+save to finish before closing Recorder or switching off. The trim/save path
+passed native instruction checks; an exact hardware trimmed-file comparison
+remains incomplete. A successful source build does not certify every Recorder
+source or real-time workload.
 
 ## What changed from T1E2
 
@@ -80,5 +62,8 @@ closed-mode diagnostic replies as the take length.
 R003 also repairs a confirmed MAIN-loader input overlap by restoring a
 separately compressed tail before original startup. Protected loader sections,
 panel firmware and flash writer remain unchanged. R003 excludes later USB
-queues, scheduling and timing changes; R011 through R014 include the
+queues, scheduling and timing changes; R011 through R020 include the
 [USB publication changes](usb-research.md).
+
+Historical R003 reproduction and its private-bank requirement remain documented
+in the [R003 manifest](../releases/r003.json) and [October 31 update](research/2026-10-31.md).

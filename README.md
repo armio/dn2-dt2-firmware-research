@@ -1,10 +1,10 @@
 # DN2 DT2 firmware research
 
 > [!WARNING]
-> **R013 adds first-time sample-storage setup.** If Transfer shows zero capacity
+> **First-time sample storage may need setup.** If Transfer shows zero capacity
 > or cannot upload samples, see [sample-storage setup](docs/samples.md#sample-storage-setup).
-> **SYSTEM → FORMAT SAMPLES erases the sample area**, including existing samples
-> and other mods' data there. Back up first and restart after formatting.
+> **SYSTEM → FORMAT SAMPLES erases the sample area**, including existing samples,
+> SLICE-grid companion files and other mods' data there. Back up first and restart after formatting.
 > Existing users with working sample storage do not need to format it. Do not
 > substitute stock FORMAT +DRIVE or a reset command.
 
@@ -14,13 +14,14 @@ audio for Digitone II—alongside its stock synth Machines.**
 Play stereo samples chromatically, stretch and slice loops, record the main mix,
 and send individual tracks and effect returns to your DAW.
 
-**R014 is the current candidate; hardware validation is pending.** It restores
-**FUNC + TUNE** octave snapping, **SYN + PLAY** page clear/undo for all six sample
-Machines on both SYN pages, and held SLICE boundary updates. Intermittent sample
-browser failures and hung notes remain unresolved. Recorder, DSP and USB audio
-code are unchanged.
+**R020 is the current candidate; R012 remains the stable target.** R020 includes
+sampler editing and MIDI-control fixes, safer sample replacement, short-sample
+STRETCH bounds, and SLICE-grid save/reload. Its new startup guard defers grid
+restoration until sample storage is initialized. The owner confirmed normal UI,
+stock audio and the saved 16-slice grid after a cold boot. This is targeted
+validation, not a new stable designation. [Changes and test scope](docs/research/2026-11-06.md).
 
-R014 retains R013's explicit sample-storage setup. Formatting, restart, Transfer
+R020 retains R013's explicit sample-storage setup. Formatting, restart, Transfer
 capacity and post-format sample uploads passed on-device checks on R013.
 Supply your own official Digitone II OS 1.11 and Digitakt II OS 1.16 files;
 no private sample bank or factory sample library is needed.
@@ -31,7 +32,7 @@ Elektron Transfer reported about **20 GB** available on the tested DN2.
 
 R012 was tested with sample storage already initialized during development;
 that missed the first-install case fixed by R013. R012 remains the stable target;
-R013, R011 and T1E2 remain available as older builds. R012 and earlier targets
+R014, R013, R011 and T1E2 remain available as older builds. R012 and earlier targets
 are not workarounds for missing storage setup.
 
 This repository distributes **source, build recipes and research only**. Firmware
@@ -43,14 +44,14 @@ playable samples through Transfer after installation.
 
 [Sample loading](docs/samples.md) · [Recorder](docs/recorder.md) ·
 [USB audio](#usb-audio-routing) · [Build](#build) ·
-[Release manifest](releases/r014.json)
+[Release manifest](releases/r020.json)
 
 ## First installation, step by step
 
 1. Back up projects, Sounds and samples. Keep the official DN2 recovery OS.
 2. Open the [browser patcher](https://armio.github.io/dn2-dt2-firmware-research/),
    select your official **DN2 OS 1.11** and **DT2 OS 1.16** files, choose
-   **Build firmware**, then download the verified **R014** `.syx`.
+   **Build firmware**, then download the verified **R020** `.syx`.
 3. Install that file with Elektron Transfer using its OS update workflow.
    Let installation finish, then boot the DN2 into normal playing mode.
 4. If sample uploads already work, skip formatting. If sample storage needs
@@ -65,6 +66,10 @@ playable samples through Transfer after installation.
    Browse **+DRIVE**, select the file and choose **LOAD TO PROJECT**.
 8. Choose a sample Machine with **FUNC + SYN**, assign the loaded sample with
    **SYN → SAMP**, and play it. **Save the project** to retain its assignments.
+
+Save after editing slice grids too. Wait for saves, sample loading and transfers
+to finish before switching power off. The startup guard does not make an
+interrupted write safe.
 
 **During bulk transfers:** playback may stutter, miss notes or go quiet. Stop
 playback before large uploads or restores and wait for completion before playing.
@@ -143,6 +148,22 @@ For tempo-following loops, set BARS to the sample's actual bar length.
 See [loading your own samples](docs/samples.md) for folder navigation, preview,
 assignment and troubleshooting.
 
+### Sampler controls and slice grids
+
+Both SYN pages support native copy, paste, clear/undo and randomize actions.
+**FUNC + TUNE** snaps by octaves. Held-trig edits use each target Machine's own
+parameter range, including mixed sampler Sound locks.
+
+The eight SYN controls on sample Machines use **CC 40–47**, or
+**NRPN MSB 1 / LSB 73–80**, on the track's MIDI channel. **SAMP CC 43** selects a
+slot within its current bank; **NRPN 1:76** selects absolute project position
+0–1023. Stock Machine mappings remain unchanged.
+
+Save the project after creating or editing a SLICE grid. Grids survive reload
+on the same DN2 using companion files on +Drive. **Native Sound/project exports
+do not include those files**, so an export alone is not a complete backup of
+slice edits. See [slice-grid persistence](docs/samples.md#slice-grid-persistence).
+
 ### Record, trim and save
 
 Open Recorder on the third VOICE page. Select **SRC MAIN** to resample the main
@@ -193,7 +214,8 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 | Target | Status | Scope |
 | --- | --- | --- |
-| **R014** | Default build / candidate | FUNC + TUNE snapping, SYN page clear/undo and held SLICE boundary updates; hardware validation pending |
+| **R020** | Default build / candidate | Accumulated sampler fixes, MIDI controls, SLICE persistence and startup guard; targeted owner cold-boot check passed |
+| **R014** | Earlier candidate / exact build | Initial FUNC + TUNE, SYN clear/undo and held SLICE boundary fixes |
 | **R013** | Earlier candidate / exact build | Adds confirmed sample-storage formatting; hardware setup and uploads verified |
 | **R012** | Stable; first-install limitation | Requires sample storage already initialized; lacks FORMAT SAMPLES |
 | **R011** | Previous stable / historical exact build | Sample Machines, browsing, Recorder and latest USB publication fix |
@@ -203,14 +225,24 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 Current limits:
 
-- **R014 controls:** offline checks pass; on-device validation remains pending.
-  Intermittent sample browser failures and hung notes remain unresolved.
+- **SLICE-grid export/import:** grids are stored in
+  separate `/.slc_<content key>` files on +Drive. Native Sound/project exports
+  contain only references, so they are not complete backups of slice edits.
+  Moving to another DN2 or restoring after formatting also requires those
+  companion files; automatic bundling and restoration are not implemented.
+  Same-device save/reload passed exact hardware comparison on R019. The owner
+  confirmed the saved grid survived an R020 cold boot; repeated-cycle endurance
+  and power loss during writes remain untested.
+- **Intermittent internal-sequencer hung notes:** still under investigation.
+  A bounded external-MIDI playback test did not reproduce them; it does not
+  establish internal-sequencer reliability.
 - **Recorder coverage:** MAIN recording/save/reopen has hardware confirmation;
   not every input source, trimming case or power-cycle workflow is verified.
 - **USB endurance:** repeated instrumented project changes, long-running dense
   workloads and exact end-to-end latency remain to be characterized.
-- **External parameter control:** a complete DN2-compatible CC/NRPN map for the
-  added sampler parameters is not implemented.
+- **Coverage:** combined emulator cases cover controls, storage, voice allocation
+  and DSP rendering, with explicit fixtures. They do not establish full DT2
+  parity, real-time DSP headroom or every physical UI workflow.
 
 This port targets **Digitone II OS 1.11**, using **Digitakt II OS 1.16** as donor.
 It is version-specific; these recipes do not support the original Digitone or
@@ -219,8 +251,8 @@ recovery image privately.
 
 ## Private inputs
 
-R014 requires these two exact local inputs. The builder verifies their sizes
-and SHA-256 hashes against the [release manifest](releases/r014.json).
+R020 requires these two exact local inputs. The builder verifies their sizes
+and SHA-256 hashes against the [release manifest](releases/r020.json).
 
 | Input | Purpose |
 | --- | --- |
@@ -231,13 +263,13 @@ Obtain official firmware from Elektron and retain your own copies locally.
 The DT2 input is its **OS firmware**, not its factory sample library. These are
 build inputs for one DN2 update; a second instrument is not involved in building.
 
-**R014 needs no private sample bank.** It generates silent compatibility data for
+**R020 needs no private sample bank.** It generates silent compatibility data for
 an unused legacy bank region. Load playable samples through Transfer after
 installation; see [sample loading](docs/samples.md).
 
 Exact historical targets R011, R008, R003 and T1E2 still require their original
 47,104-byte private test bank. That asset is not distributed and is not DT2
-factory content. Choose R014 for the current two-file candidate, or R012 for the
+factory content. Choose R020 for the current two-file candidate, or R012 for the
 stable two-file build when sample storage is already initialized.
 
 ## Build
@@ -270,36 +302,36 @@ python tools/check_inputs.py \
 Resolve any missing-input or hash error before continuing. This check does not
 change the input files.
 
-### 3. Build the toolchain and R014
+### 3. Build the toolchain and R020
 
 ```sh
 python port/tools/bootstrap.py --prefix .toolchain --jobs 4
 python build.py \
   --dn2 /path/to/Digitone_II_OS1.11.syx \
   --dt2 /path/to/Digitakt_II_OS1.16.syx \
-  --out /private/builds/R014.syx
+  --out /private/builds/R020.syx
 ```
 
 The output must be **outside this repository**. Existing outputs are never
 overwritten. Intermediate firmware and diagnostic logs stay in the private
 temporary directory printed by the builder. Nothing is flashed automatically.
 
-Expected R014 output: **2,565,792 bytes**, SHA-256:
+Expected R020 output: **2,570,912 bytes**, SHA-256:
 
 ```text
-a6f51887aa651d4c23ff4d79ce9ec458df72f20b9129a9316de0dd4fb3f5000e
+77528d1c65f8101a597beccd4e619a0bcc3fe18a56147de1ddbf4b8b1e238413
 ```
 
 The builder verifies MAIN, DSP and complete SysEx identities. The
-[R014 manifest](releases/r014.json) records the current output identity,
+[R020 manifest](releases/r020.json) records the current output identity,
 source-reproduction results and hardware
 validation limits.
 
-Use `--target R012` for the stable two-file build, or `--target R013` to reproduce
-the earlier sample-storage setup build.
+Use `--target R012` for the stable two-file build, or `--target R014` and
+`--target R013` to reproduce earlier candidates.
 Use `--target R011`, `--target R008`, `--target R003` or `--target T1E2` only for
 historical exact reproduction. Those targets additionally require
-`--sample-bank /private/path/to/sample-bank.bin`. R014, R013 and R012 reject that option so a
+`--sample-bank /private/path/to/sample-bank.bin`. R020, R014, R013 and R012 reject that option so a
 private bank cannot accidentally enter the new build.
 
 ## Documentation and contributions
@@ -311,6 +343,7 @@ private bank cannot accidentally enter the new build.
 | [USB audio](docs/usb-research.md) | R011 publication fix and validation limits |
 | [Build tools](port/tools/README.md) | Pinned toolchain and local setup |
 | [Audit guide](docs/research-audits.md) | Offline checks and synthetic tests |
+| [November 6 update](docs/research/2026-11-06.md) | R015–R020 fixes, cold-start regression, hardware results and remaining gaps |
 | [November 3 update](docs/research/2026-11-03.md) | Stable designation, project-change results and resolved sample report |
 | [Publication boundaries](docs/publication.md) | What belongs in this source-only repository |
 

@@ -5,7 +5,7 @@ on:
     paths:
       - 'web/**'
       - 'port/**'
-      - 'releases/r014.json'
+      - 'releases/r020.json'
       - 'tools/build_site.py'
       - '.github/workflows/pages.yml'
   workflow_dispatch:

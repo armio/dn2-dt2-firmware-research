@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "inputs": {
+    "dn2": {
+      "description": "Official Digitone II OS 1.11 SysEx",
+      "bytes": 2389280,
+      "sha256": "2af43e65e3d8390b41c9f66222620f8cce027d73ed87db00c80b440f628472e0"
+    },
+    "dt2": {
+      "description": "Official Digitakt II OS 1.16 SysEx",
+      "bytes": 1880864,
+      "sha256": "278541e466edcd77d6b3e018a91fb90185932d3c7de224dd3e68294dddf3a9ec"
+    }
+  },
+  "machines": [
+    "ONESHOT",
+    "WERP",
+    "STRETCH",
+    "REPITCH",
+    "GRID",
+    "SLICE"
+  ],
+  "usb": {
+    "capture_channels": 42,
+    "return_channels": 2,
+    "sample_rate": 48000,
+    "valid_bits": 24,
+    "stereo_pairs": [
+      "MAIN",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15",
+      "T16",
+      "DELAY",
+      "REVERB",
+      "CHORUS",
+      "INPUT"
+    ]
+  },
+  "build": "R020",
+  "status": "candidate",
+  "date": "2026-11-06",
+  "stable_baseline": "T1E2",
+  "previous_stable": "R012",
+  "outputs": {
+    "main_sha256": "63ee355380d98ef9123a4e8051f705bfe76cf29d86571d44a53f23e01a824e2c",
+    "expanded_main_sha256": "d8f327c07b4930d4e062feba5d9914d2777e33c68b5a7f3e8165fb4a9f3e4311",
+    "runtime_sha256": "3c2002eabc0f6fbdd4ea860cd954950c92805f5c310da800d6c56c33e45bb064",
+    "dsp_sha256": "2b05931155bb097798e3f3926b1667f97629356baf78ee1c2efa294ce3a50c0e",
+    "sysex_sha256": "77528d1c65f8101a597beccd4e619a0bcc3fe18a56147de1ddbf4b8b1e238413",
+    "sysex_bytes": 2570912
+  },
+  "changes": [
+    "Retains six sampler Machines, Recorder, explicit FORMAT SAMPLES setup and 42-channel USB audio.",
+    "Sound-lock-aware sample usage and restoration references; per-Machine held-trig edits; rejected slice splits preserve markers.",
+    "Native sampler SYN copy/paste/clear/undo/randomize and FUNC controls; held-trig sample bank display; occupied-slot sample selection.",
+    "Stricter sample header/read validation and staged replacement preserve resident audio on rejected replacements; Recorder assignment failures preserve the original Sound.",
+    "SLICE note/span and reverse-loop bounds; held voices retire safely when a replacement sample becomes shorter; short-sample STRETCH grain offsets remain within the asset.",
+    "All six samplers use CC 40\u201347 and NRPN 1:73\u201380 for SYN controls. SAMP CC43 selects within the current bank; NRPN1:76 selects absolute positions 0\u20131023.",
+    "Bounds and failure handling for kit SysEx, song row counts, Euclidean rests and final timed outbound MIDI note release.",
+    "SLICE grids survive native same-device Sound/project save and reload via content-addressed companion files. Save failures propagate; failed new writes can retry; deferred restoration covers active tracks and preset-pool Sounds.",
+    "R020 fixes the R019 cold-start readiness defect: slice companion allocation/I/O waits for initialized filesystem startup status and mounted flag. DSP, USB ownership checks and control-frame ordering are unchanged from R019."
+  ],
+  "validation": {
+    "hardware_confirmed": [
+      "Owner reports R020 cold boot with USB disconnected, saved 16-slice grid intact, normal UI and stock audio working.",
+      "On the R019 predecessor, read-only MIDI verified all 772 grid bytes, content key and sample identity after native project save, a different-project load and reload. Those warm tests did not cover cold boot.",
+      "Five bounded external-MIDI cases on R019 sent 48 note-ons across SLICE, FM TONE and mixed overlaps. USB MAIN and tested dry pairs settled to exact silence after release; no persistent note reproduced in that run. This does not establish internal-sequencer reliability."
+    ],
+    "offline_checked": [
+      "Accumulated native-code regressions cover sampler UI controls, mixed Sound locks, sample references, staged replacements, slice/short-sample bounds, MIDI control maps and selected sequencer/SysEx paths. Detailed scope is documented in docs/research/2026-11-06.md.",
+      "R019 premature companion-file access reproduced with unstarted, mounting and failed startup states plus stale filesystem-ready memory.",
+      "R020 passes eight native Sound readiness cases: no heap allocation or file I/O before initialization, keys preserved, ready UI polling restores every grid byte, mounted save/load unchanged.",
+      "R020 fresh whole-project decode with poisoned readiness defers active/pool grids safely; post-mount restoration and re-save preserve the 12,890,116-byte serialized project exactly. Deferred aggregate save fails cleanly and retries successfully.",
+      "Native unpacking and early-startup checks pass both loader staging addresses with exact memory copies and preserved registers, stack and boot flags.",
+      "Independent startup-order/retry/ColdFire ABI review and package integrity checks pass; R020 DSP and protected sections match R019.",
+      "Fresh end-to-end public source build matches the pinned MAIN, expanded MAIN, runtime, DSP and SysEx identities; all 41 public unit tests pass.",
+      "Browser backend and actual browser UI/Worker/download each produce the pinned 2,570,912-byte SysEx; six Python recipe tests and JavaScript recipe boundary tests pass.",
+      "Independent publication review verifies authored adapter provenance, source-only payload boundaries and exclusion of private data."
+    ],
+    "pending": [
+      "Repeated cold-boot endurance and power-loss behavior during writes.",
+      "Intermittent internal-sequencer stuck-note reproduction and long-duration audio/USB validation.",
+      "Full physical DT2 manual workflow coverage, real-time DMA/deadline guarantees and analog-output verification."
+    ],
+    "notes": "R020 is a candidate with targeted owner-reported cold-boot success. R012 remains stable. The premature-I/O defect is proven in native-code fixtures; the exact original physical black-screen cause was not captured. R019 is held and is not offered by the online builder."
+  },
+  "source_reproduction": {
+    "verified_on": "2026-11-06",
+    "exact_main_dsp_and_sysex": true,
+    "baseline_rebuilt_this_run": true,
+    "private_sample_bank_required": false,
+    "notes": "Fresh public-source reconstruction rebuilt all required MAIN/DSP stages from the two official OS inputs and generated silence. Source, browser backend and actual browser Worker/download independently produced the pinned R020 SysEx. No private bank, historical custom firmware or device capture was used as a build input.",
+    "browser_backend_verified": true,
+    "browser_ui_worker_download_verified": true
+  },
+  "sample_storage_setup": {
+    "automatic_format": false,
+    "explicit_confirmation": true,
+    "requires_restart_after_format": true,
+    "erases_existing_samples": true,
+    "existing_working_storage_needs_format": false
+  },
+  "known_issues": [
+    "Native Sound/project exports carry slice-grid keys, not the companion files. They are incomplete backups of slice edits; cross-device restore or formatting requires the companion files. Automatic bundling/restoration is not implemented.",
+    "Intermittent internal audio-track hung notes remain unresolved; the outbound MIDI expiry fix is a separate path.",
+    "Intermittent SAMP browser failures and physical USB/input artifacts have not been comprehensively resolved or attributed.",
+    "Bulk sample uploads/restoration can interrupt playback. Stop playback during transfers and wait until they finish; report problems that persist afterward.",
+    "A DSP transfer timeout can require restart even when the host retains the original sample binding.",
+    "Emulator instruction/model limits and filesystem/scheduler fixtures prevent treating offline results as complete hardware or manual compliance."
+  ],
+  "previous_candidate": "R014",
+  "incorporated_local_revisions": [
+    "R015",
+    "R016",
+    "R017",
+    "R018",
+    "R019",
+    "R020"
+  ],
+  "slice_persistence": {
+    "companion_path": "/.slc_<content key>",
+    "same_device_save_reload": true,
+    "native_exports_include_grid": false,
+    "automatic_companion_bundle": false,
+    "requires_companions_after_format_or_device_move": true
+  }
+}

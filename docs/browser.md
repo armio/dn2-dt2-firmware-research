@@ -1,6 +1,6 @@
 # Browser patcher
 
-Build R014 in a current desktop browser without installing the native toolchain.
+Build R020 in a current desktop browser without installing the native toolchain.
 You need the original Digitone II OS 1.11 and Digitakt II OS 1.16 `.syx` files.
 No sample bank or factory sample library is required.
 
@@ -9,17 +9,21 @@ No sample bank or factory sample library is required.
 3. When verification finishes, download the `.syx` file.
 
 Files stay on your device. The page checks exact OS versions, builds locally
-and verifies the result against the [R014 release hash](../releases/r014.json).
+and verifies the result against the [R020 release hash](../releases/r020.json).
 It does not upload files, store them between visits or flash your instrument.
 Cancel closes the build worker; selected files can be reused for another attempt.
 
-R014 is a candidate; hardware validation is pending. See the
-[release manifest](../releases/r014.json) for changes and limits. R012 remains
-stable, and R013 remains available through the [native builder](../README.md#build).
+R020 is a candidate. The owner confirmed a cold boot with normal UI, stock audio
+and the saved slice grid. See the [release manifest](../releases/r020.json) and
+[research update](research/2026-11-06.md) for changes and limits. R012 remains
+stable; earlier targets remain available through the [native builder](../README.md#build).
 Back up projects and samples and keep an official recovery OS before installing
 with Elektron Transfer. For first-time sample storage, follow the
 [setup and sample-loading guide](samples.md#sample-storage-setup). Formatting is
 explicit and destructive; working sample storage does not need reformatting.
+Save projects after assigning samples or editing slice grids, and let saves and
+transfers finish before switching off. Native project exports do not include
+[SLICE-grid companion files](samples.md#slice-grid-persistence).
 
 ## Run the patcher locally
 
