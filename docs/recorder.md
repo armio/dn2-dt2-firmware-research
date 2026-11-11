@@ -1,16 +1,16 @@
 # Recording and resampling
 
-R022 includes source selection, recording, normalization, trimming, auditioning,
+R027 includes source selection, recording, normalization, trimming, auditioning,
 saving to +Drive and optional track assignment. VOICE cycles through Voice Setup,
-Sample Manager and Recorder. Sample Machines and 42-channel USB audio remain
-available alongside it.
+Sample Manager and Recorder. Sample Machines and 42-channel USB audio (untested
+on R027) remain available alongside it.
 
-**R022 is the current candidate; R012 remains stable.** R022 includes the R016
+**R027 is the current candidate; R012 remains stable.** It includes the R016
 assignment fix: a failed assignment preserves the original Sound and SAMP value.
 A successful assignment on a stock synth track converts it to ONESHOT when
 requested. R022 also snapshots Recorder preferences during incremental working
 updates without rebuilding unchanged sample identities. This new path has native
-replay coverage, not hardware confirmation. See the [R022 manifest](../releases/r022.json).
+replay coverage, not hardware confirmation. See the [R027 manifest](../releases/r027.json).
 
 Owner testing on R012 confirmed Recorder operation, stock audio, samples and USB
 audio, including after changing projects. MAIN recording, saving and reopening
@@ -24,7 +24,7 @@ trimmed-file comparison and long-duration USB stress remain incomplete. See
 
 Follow the [tool setup](../port/tools/README.md) and [private input
 requirements](../README.md#private-inputs), or use the [browser patcher](browser.md).
-The [default R022 build](../README.md#build) needs only the two official OS files;
+The default R027 build ([browser](browser.md)) or the [native R022 build](../README.md#build) needs only the two official OS files;
 no sample bank is required. The builder verifies section and SysEx hashes and
 does not access MIDI or flash a device.
 

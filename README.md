@@ -14,13 +14,22 @@ audio for Digitone II—alongside its stock synth Machines.**
 Play stereo samples chromatically, stretch and slice loops, record the main mix,
 and send individual tracks and effect returns to your DAW.
 
-**R022 is the current candidate; R012 remains the stable target.** R022 fixes
-working-project sample autosave and includes R021's sample-menu repair after
-switching from a stock synth to a sampler. Native-code replay and startup checks
-pass; R021/R022 hardware confirmation is pending. The reported iPhone USB freeze
-remains unresolved. [Changes and test scope](docs/research/2026-11-06-autosave.md).
+**R027 is the current candidate; R012 remains the stable target.** R027 adds a
+**SEM filter**: a seventh filter type based on Faust's Oberheim state-variable
+model, sweeping low-pass → notch → high-pass with band-pass at TYPE 127. The
+FILTER page shows its computed response and LP · NOTCH · HP icons.
+[SEM filter guide](docs/sem-filter.md).
 
-R022 retains the earlier sampler, MIDI-control, SLICE persistence and cold-start
+> [!IMPORTANT]
+> **USB audio is untested on R027.** It was reported broken on the unpublished
+> R023/R024 SEM builds, which overloaded the DSP. R025 changed the DSP to avoid
+> that overload, but USB audio has not been checked since. If you rely on USB
+> audio, stay on R012 until it is confirmed.
+
+R027 is owner-tested, not instrumented: the owner reports R025's audio working
+(no timing capture yet) and R026/R027's SEM displays matching their previews. It retains R022's sample
+autosave and SYN sample-menu fixes, whose hardware confirmation is still pending,
+and the earlier sampler, MIDI-control, SLICE persistence and cold-start
 fixes, plus R013's explicit sample-storage setup. Formatting, restart, Transfer
 capacity and post-format sample uploads passed on-device checks on R013.
 Supply your own official Digitone II OS 1.11 and Digitakt II OS 1.16 files;
@@ -51,9 +60,10 @@ playable samples through Transfer after installation.
 1. Back up projects, Sounds and samples. Keep the official DN2 recovery OS.
 2. Open the [browser patcher](https://armio.github.io/dn2-dt2-firmware-research/),
    select your official **DN2 OS 1.11** and **DT2 OS 1.16** files, choose
-   **Build firmware**, then download the verified **R022** `.syx`.
+   **Build firmware**, then download the verified **R027** `.syx`.
 3. Install that file with Elektron Transfer using its OS update workflow.
-   Let installation finish, then boot the DN2 into normal playing mode.
+   Let installation finish, then boot the DN2 into normal playing mode. If the
+   DN2 stays on **SUCCESS! REBOOTING**, switch it off and on.
 4. If sample uploads already work, skip formatting. If sample storage needs
    setup, stop playback/transfers, close Transfer, and open
    **SETTINGS → SYSTEM → FORMAT SAMPLES**. **YES erases the sample area,
@@ -110,6 +120,15 @@ SWARMER**, using the instrument's existing voice-allocation controls.
   auditioning, saving to +Drive and optional track assignment.
 - **Class-compliant USB audio:** the main mix, all 16 stereo tracks, three stereo
   effect returns and physical inputs available to the computer separately.
+
+### SEM filter
+
+R027 adds **SEM** to every track's filter list, next to the stock filters. It
+follows Faust's Oberheim SEM-style state-variable model: **TYPE 0** low-pass,
+**63** notch, **126** high-pass, smooth blends in between, and **127** band-pass.
+FREQ, RESO, the filter envelope, keytracking and modulation work as on the stock
+filters. SEM is available on every Machine. The FILTER page draws SEM's computed response and shows LP · NOTCH · HP
+on the TYPE control. See the [SEM filter guide](docs/sem-filter.md).
 
 Explicitly switching another Machine to ONESHOT initializes FLTR, AMP, track FX
 and all three LFO pages. Loading a saved Sound or project preserves its settings;
@@ -217,7 +236,8 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 | Target | Status | Scope |
 | --- | --- | --- |
-| **R022** | Default build / candidate | Working-state sample autosave and SYN sample-menu repair; offline checks pass, hardware confirmation pending |
+| **R027** | Browser build / candidate | SEM filter with response graph and TYPE icons; right effects chain runs only for sampler voices; owner-tested, USB audio untested; browser build |
+| **R022** | Earlier candidate / exact build | Working-state sample autosave and SYN sample-menu repair; offline checks pass, hardware confirmation pending |
 | **R020** | Earlier candidate / exact build | Accumulated sampler fixes, MIDI controls, SLICE persistence and startup guard; targeted owner cold-boot check passed |
 | **R014** | Earlier candidate / exact build | Initial FUNC + TUNE, SYN clear/undo and held SLICE boundary fixes |
 | **R013** | Earlier candidate / exact build | Adds confirmed sample-storage formatting; hardware setup and uploads verified |
@@ -229,6 +249,16 @@ not a claim of complete DT2 feature parity or exhaustive hardware validation.
 
 Current limits:
 
+- **USB audio on R027:** untested. It was reported broken on the unpublished
+  R023/R024 SEM builds during their DSP overload and has not been rechecked
+  since R025.
+- **SEM DSP load:** SEM costs more DSP time than the stock filters. The emulator
+  attributes the R023/R024 overload to the duplicated right effects chain; with
+  R025's gating it predicts about 81.7% of the audio block on 16 voices. That
+  model excludes interrupts, cache, DMA and USB, and no hardware timing capture
+  has been taken yet.
+- **Transfer may stop on "SUCCESS! REBOOTING":** seen while installing R026. If
+  that screen stays up, switch the DN2 off and on; it then boots the new OS.
 - **R022 working-state recovery:** native replay preserves sample identities
   through incremental backup and a fresh emulated boot. Physical reboot
   confirmation is pending; a freeze or interrupted write can still lose queued
@@ -261,8 +291,9 @@ recovery image privately.
 
 ## Private inputs
 
-R022 requires these two exact local inputs. The builder verifies their sizes
-and SHA-256 hashes against the [release manifest](releases/r022.json).
+R027 and R022 require these two exact local inputs. The builders verify their
+sizes and SHA-256 hashes against the release manifest ([R027](releases/r027.json),
+[R022](releases/r022.json)).
 
 | Input | Purpose |
 | --- | --- |
@@ -273,16 +304,21 @@ Obtain official firmware from Elektron and retain your own copies locally.
 The DT2 input is its **OS firmware**, not its factory sample library. These are
 build inputs for one DN2 update; a second instrument is not involved in building.
 
-**R022 needs no private sample bank.** It generates silent compatibility data for
+**R027 and R022 need no private sample bank.** They generate silent compatibility data for
 an unused legacy bank region. Load playable samples through Transfer after
 installation; see [sample loading](docs/samples.md).
 
 Exact historical targets R011, R008, R003 and T1E2 still require their original
 47,104-byte private test bank. That asset is not distributed and is not DT2
-factory content. Choose R022 for the current two-file candidate, or R012 for the
+factory content. Choose R027 for the current two-file candidate, or R012 for the
 stable two-file build when sample storage is already initialized.
 
 ## Build
+
+**R027 builds in the [browser patcher](https://armio.github.io/dn2-dt2-firmware-research/).**
+The command-line builder below reproduces targets up to R022. R023–R027 sources
+(SEM kernel, SHARC adapters and ColdFire revisions) are in
+[port/sem-filter](port/sem-filter/README.md) but are not yet wired into `build.py`.
 
 Use macOS or Linux with Python 3.12+, Git, curl, Rust/Cargo, GNU Make, a host C
 compiler, Clang's preprocessor and zlib development headers. See
@@ -348,6 +384,7 @@ reject that option so a private bank cannot accidentally enter the new build.
 
 | Guide | Contents |
 | --- | --- |
+| [SEM filter](docs/sem-filter.md) | R027's SEM filter: sound, controls, display, sources and limits |
 | [Sample loading](docs/samples.md) | Transfer, +Drive, project slots, assignment and preview |
 | [Recorder](docs/recorder.md) | Recording, trimming, auditioning, saving and reopening |
 | [USB audio](docs/usb-research.md) | R011 publication fix and validation limits |

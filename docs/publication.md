@@ -1,7 +1,7 @@
 # Source-only publication
 
-R022 builds from two privately supplied official OS files identified in its
-`releases/` manifest. It generates silent compatibility data from source and
+R027 and R022 build from two privately supplied official OS files identified in
+their `releases/` manifests. They generate silent compatibility data from source and
 requires no private sample bank. Historical exact R011, R008, R003 and T1E2
 recipes retain their original private-bank requirement. No input firmware,
 generated firmware or sample audio is distributed. See [sample loading](samples.md)
@@ -10,10 +10,11 @@ for importing playable samples after installation.
 Publish validation summaries with their limits, not private hardware captures
 or raw build receipts. Reviewed offline fixture summaries may be included when
 bound to exact output hashes and stripped of private paths and binary payloads.
-R022 is the current candidate. It includes the earlier sampler, MIDI, storage,
+R027 is the current candidate: R022 plus the SEM filter (R023–R027), owner-tested
+and not instrumented, with USB audio untested. R022 includes the earlier sampler, MIDI, storage,
 boundary and cold-start fixes, plus SYN-page reconciliation and working-state
 sample autosave. Its new fixes have native-code replay coverage but no hardware
-confirmation yet. DSP and USB ownership/order behavior are unchanged from R020.
+confirmation yet. In R022, DSP and USB ownership/order behavior are unchanged from R020.
 The R020 owner-confirmed cold boot remains a targeted predecessor result. R012 was designated stable after owner-confirmed stock audio, sample playback,
 Recorder and USB audio, including after changing projects. R011 remains the
 previous stable release. These designations do not claim completed long-duration
@@ -49,7 +50,9 @@ The site contains original patcher code, a release recipe and compiled original
 adapter fragments tied to their source hashes. Donor bytes are excluded from
 those fragments; their reserved holes are filled from the user's OS files.
 The recipe copies vendor code and graphics from those local inputs and applies
-explicit relocation operations. An unexplained output byte blocks export;
+explicit relocation operations. Values that must be transformed from vendor data
+(R027's SEM graph table and TYPE icons) are `computed` sources: the recipe names
+a published formula and an input range of an official OS section, never the values. An unexplained output byte blocks export;
 there is no generic binary-diff payload fallback.
 
 GitHub Pages compiles the vendored MIT container tool to WebAssembly and stages

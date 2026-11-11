@@ -17,6 +17,16 @@ repository. Those inputs and generated firmware remain outside the public tree.
   fetched at the pinned revision, not bundled.
 * [js216/selache](https://github.com/js216/selache): GPL-3.0-only, with MIT
   `libsel`; fetched at the pinned revision, not bundled.
+* [grame-cncm/faustlibraries](https://github.com/grame-cncm/faustlibraries/blob/b0e363a602a48eaced21e3838ba3f742dfd54c94/vaeffects.lib):
+  `oberheim` by Eric Tarr and cubic soft clipping by Julius O. Smith III, MIT-style
+  STK-4.3 licence. The adapted SEM kernel and the full STK notice are in
+  `port/sem-filter/tree/src/sem_filter`.
+* [SpotlightKid/faustfilters](https://github.com/SpotlightKid/faustfilters/tree/00cb332796b57487e5e0f384cb624345ca938561):
+  generated `Oberheim.cpp`/`.hpp` by Christopher Arndt, used unchanged as a host
+  comparison reference. Their headers declare the MIT-style STK-4.3 licence; the
+  repository's ISC notice is retained in
+  `port/sem-filter/tree/src/sem_filter/reference/LICENSE`. The compiled SEM kernel
+  served in the browser recipe carries `sem-kernel-LICENSE.txt` on the site.
 * GNU binutils: GPL-3.0-or-later and component notices; fetched from GNU and
   verified by archive hash, not bundled.
 * [naturarum/dn2-cfw](https://github.com/naturarum/dn2-cfw): GPL-2.0-or-later.

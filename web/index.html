@@ -17,9 +17,9 @@
   </header>
   <main>
     <section class="installation-warning" role="alert" aria-labelledby="installation-warning-title">
-      <p class="warning-label">R022 CANDIDATE · SAMPLE STORAGE SETUP</p>
+      <p class="warning-label">R027 CANDIDATE · SAMPLE STORAGE SETUP</p>
       <h2 id="installation-warning-title">First-time sample storage needs setup.</h2>
-      <p>R022 retains <strong>SYSTEM → FORMAT SAMPLES</strong> for uninitialized sample storage. The setup and subsequent uploads have been tested on a DN2.</p>
+      <p>R027 retains <strong>SYSTEM → FORMAT SAMPLES</strong> for uninitialized sample storage. The setup and subsequent uploads have been tested on a DN2.</p>
       <p>The DN2 already contains the physical flash capacity; stock firmware does not expose this area as sample storage. FORMAT SAMPLES initializes a sample filesystem there. Transfer reported about <strong>20 GB</strong> available on the tested DN2.</p>
       <p><strong>Formatting erases the sample area, including other mods' data there.</strong> Back up first and restart afterward. If sample uploads already work, leave storage intact.</p>
       <p>Use FORMAT SAMPLES only. Do not substitute stock FORMAT +DRIVE or reset commands.</p>
@@ -27,9 +27,29 @@
     </section>
     <section class="intro" aria-labelledby="title">
       <h1 id="title">Build your<br>DN2 firmware.</h1>
-      <p class="lead">Six sample Machines, recording and 42-channel USB audio. Built locally from your two Elektron OS files.</p>
-      <p>R022 fixes the working-project sample backup and a missing sample menu after changing Machines. Native-code tests pass; R022 hardware confirmation is pending. The reported iPhone USB freeze remains unresolved. R012 remains stable.</p>
+      <p class="lead">Six sample Machines, a new SEM filter, recording and 42-channel USB audio (untested on R027). Built locally from your two Elektron OS files.</p>
+      <p>R027 adds the SEM filter and keeps R022's sample-backup and sample-menu fixes. It is owner-tested, not instrumented. USB audio has not been checked on R027. R012 remains stable.</p>
       <div class="machine-list" aria-label="Included sample Machines"><span>ONESHOT</span><span>WERP</span><span>STRETCH</span><span>REPITCH</span><span>GRID</span><span>SLICE</span></div>
+    </section>
+    <section class="feature" aria-labelledby="sem-title">
+      <p class="feature-label">NEW IN R027 · SEM FILTER</p>
+      <h2 id="sem-title">A SEM-style multimode filter on every track.</h2>
+      <p>SEM joins the stock filters in each track's FILTER selection menu and is available on every Machine, synth or sampler. It follows the Oberheim SEM-style state-variable filter in Faust's vaeffects.lib by Eric Tarr, with soft-clipping integrators. It is a SEM-family model, not a measured copy of a particular instrument.</p>
+      <table>
+        <thead><tr><th scope="col">TYPE</th><th scope="col">Response</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td>Low-pass</td></tr>
+          <tr><td>1–62</td><td>Low-pass blending into notch</td></tr>
+          <tr><td>63</td><td>Notch</td></tr>
+          <tr><td>64–125</td><td>Notch blending into high-pass</td></tr>
+          <tr><td>126</td><td>High-pass</td></tr>
+          <tr><td>127</td><td>Band-pass</td></tr>
+        </tbody>
+      </table>
+      <p>FREQ, RESO (Q 0.5 to 10), the filter envelope, keytracking, LFOs and parameter locks drive it as on the stock filters. The FILTER page draws SEM's computed response, and the TYPE control shows LP · NOTCH · HP, with the band-pass icon alone at TYPE 127.</p>
+      <p>The first SEM builds overloaded the DSP and were never published. R025 runs the right effects chain only for sampler voices, which the emulator identifies as the cause; the owner reports R025 working (no timing capture yet) and the R026/R027 displays matching their previews.</p>
+      <p class="notice candidate"><strong>USB audio is untested on R027.</strong> It was reported broken during that overload and has not been checked since. If you rely on USB audio, stay on R012 until it is confirmed.</p>
+      <a href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/docs/sem-filter.md">SEM filter guide, limits and credits →</a>
     </section>
     <div class="workspace">
       <section class="builder" aria-labelledby="builder-title">
@@ -72,6 +92,7 @@
           <h2>For Digitone II</h2>
           <p>Stock synths stay available. Sample uploads require initialized sample storage; read the warning above before installing.</p>
           <p>Requires DN2 OS 1.11 and DT2 OS 1.16.</p>
+          <p>USB audio is untested on R027; stay on R012 if you rely on it.</p>
         </section>
         <section>
           <h2>Files stay on your device</h2>
@@ -81,7 +102,7 @@
           <h2>Before installing</h2>
           <p>Keep project backups and an official recovery OS.</p>
           <p><strong>SLICE backup limitation:</strong> Sound and project exports do not include their slice-grid companion files. Keep those files with your backup; formatting sample storage removes them.</p>
-          <p><a id="release-notes" href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/releases/r022.json">Release notes</a></p>
+          <p><a id="release-notes" href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/releases/r027.json">Release notes</a></p>
         </section>
       </aside>
     </div>
@@ -89,8 +110,8 @@
       <h2 id="setup-steps-title">Install and load your first sample</h2>
       <ol>
         <li>Back up projects, Sounds and samples; keep an official recovery OS.</li>
-        <li>Select official DN2 OS 1.11 and DT2 OS 1.16 above. Build and download the verified R022 file.</li>
-        <li>Install with Elektron Transfer's OS update workflow. Let it finish and boot normally.</li>
+        <li>Select official DN2 OS 1.11 and DT2 OS 1.16 above. Build and download the verified R027 file.</li>
+        <li>Install with Elektron Transfer's OS update workflow. Let it finish and boot normally. If the DN2 stays on SUCCESS! REBOOTING, switch it off and on.</li>
         <li>If uploads already work, skip formatting. Otherwise, after backing up, stop playback and transfers, close Transfer, then open SETTINGS → SYSTEM → FORMAT SAMPLES. YES erases the sample area, including other mods' data; NO cancels. Never substitute FORMAT +DRIVE.</li>
         <li>If you formatted, keep power connected until SAMPLES FORMATTED / SWITCH OFF / ON DN2 appears, then switch off and on. Reconnect Transfer and verify nonzero Samples capacity.</li>
         <li>Upload a WAV through Transfer's EXPLORE → Samples view.</li>
@@ -100,7 +121,7 @@
       <p><strong>During bulk transfers:</strong> playback may stutter, miss notes or go quiet. Stop playback before large uploads or restores and wait for completion before playing. After formatting, restore the samples required by existing projects, then reload the project. Report audio problems that continue after transfers finish.</p>
       <a href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/docs/samples.md">Full sample-loading instructions →</a>
     </section>
-    <footer><span>Independent research. Not affiliated with Elektron.</span><a href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/THIRD_PARTY.md">Source and credits</a></footer>
+    <footer><span>Independent research. Not affiliated with Elektron.</span><a href="https://github.com/armio/dn2-dt2-firmware-research/blob/main/THIRD_PARTY.md">Source and credits</a><a href="sem-kernel-LICENSE.txt">SEM kernel licence</a></footer>
   </main>
 </body>
 </html>

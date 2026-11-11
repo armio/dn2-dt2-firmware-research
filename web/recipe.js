@@ -1,5 +1,5 @@
 // Reconstruct only checked source ranges and explicitly reviewed writes.
-import { generateOriginal } from './generated.js';
+import { generateOriginal, computeFromFirmware } from './generated.js';
 export async function sha256(bytes) {
   const digest = await crypto.subtle.digest('SHA-256', bytes);
   return [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, '0')).join('');
@@ -43,7 +43,7 @@ function reconstruct(spec, sources) {
 }
 
 export async function applyRecipe(recipe, decoded, progress = () => {}) {
-  if (recipe.schema !== 1 || !['R012', 'R013', 'R014', 'R020', 'R022'].includes(recipe.release)) throw new Error('Unsupported build recipe');
+  if (recipe.schema !== 1 || !['R012', 'R013', 'R014', 'R020', 'R022', 'R027'].includes(recipe.release)) throw new Error('Unsupported build recipe');
   const sources = new Map();
   for (const [name, spec] of Object.entries(recipe.sources)) {
     let bytes;
@@ -59,6 +59,12 @@ export async function applyRecipe(recipe, decoded, progress = () => {}) {
       }
     } else if (spec.kind === 'generated' && spec.provenance?.length) {
       bytes = generateOriginal(spec.generator);
+    } else if (spec.kind === 'computed' && spec.provenance?.length) {
+      if (recipe.sources[spec.input?.source]?.kind !== 'firmware') throw new Error('Computed input must be an official OS section');
+      const input = sources.get(spec.input?.source);
+      const offset = integer(spec.input?.offset, 'computed offset'), size = integer(spec.input?.bytes, 'computed size');
+      if (!input || !size || offset + size > input.length) throw new Error('Computed input exceeds source bounds');
+      bytes = computeFromFirmware(spec.generator, input.subarray(offset, offset + size));
     } else if (spec.kind === 'derived' && spec.provenance?.length) {
       bytes = reconstruct(spec, sources);
     } else throw new Error(`Unsupported recipe source: ${name}`);

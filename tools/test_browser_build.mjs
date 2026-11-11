@@ -7,7 +7,7 @@ import { applyRecipe, verify } from '../web/recipe.js';
 
 if (process.argv.length !== 4) throw new Error('Supply official DN2 and DT2 OS file paths');
 const started = performance.now();
-const release = JSON.parse(await readFile(new URL('../releases/r022.json', import.meta.url)));
+const release = JSON.parse(await readFile(new URL('../releases/r027.json', import.meta.url)));
 const recipe = JSON.parse(await readFile(new URL('../web/recipe.json', import.meta.url)));
 if (recipe.release !== release.build) throw new Error('Recipe release differs from manifest');
 const files = {}, decoded = {};

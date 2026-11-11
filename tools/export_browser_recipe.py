@@ -50,6 +50,33 @@ def original_data(name):
     return bytes(cache)
 
 
+def computed_data(name, data):
+    """Values derived from the user's own OS input during the build; the recipe names only the formula."""
+    if name == 'sem-graph-log-cutoff' and len(data) == 4096:
+        # R026: Q8 log2 of the native cutoff coefficient at 129 FREQ steps (kernel bound applied)
+        # and at the 49 graph columns. Matches port/sem-filter/tree/scripts/sem_graph_reference.py.
+        g = struct.unpack('<1024f', data)
+
+        def at(raw):
+            pos = min(1023.0, raw / 32)
+            i = int(pos)
+            return g[i] if i >= 1023 else g[i] + (pos - i) * (g[i + 1] - g[i])
+        lt = [round(256 * math.log2(min(6.3137515, at(k * 256)))) for k in range(129)]
+        lx = [round(256 * math.log2(at((x - 22) * 32768 / 48))) for x in range(22, 71)]
+        return struct.pack('>178h', *lt, *lx)
+    if name == 'sem-type-planes' and len(data) == 76:
+        # R027: TYPE icon planes; the middle icon flipped vertically, then the middle icon alone.
+        words = struct.unpack('>19I', data)
+        sem, bp = list(words), [0] * 19
+        for c in range(7, 12):
+            keep = sum(words[c] & 1 << (31 - r) for r in range(4, 9))
+            flipped = sum(1 << (31 - (12 - r)) for r in range(4, 9) if words[c] & 1 << (31 - r))
+            sem[c] = words[c] & ~keep & 0xffffffff | flipped
+            bp[c] = keep
+        return struct.pack('>38I', *sem, *bp)
+    raise ValueError(f'Unsupported computed source: {name}')
+
+
 def provenance(value, root):
     """Require a source file identity, not a reviewer boolean or a local path."""
     if not isinstance(value, dict) or set(value) != {'source', 'sha256', 'reason'}:
@@ -129,6 +156,22 @@ def export(plan, root):
                 raise ValueError(f'Generated source differs: {identity}')
             sources[identity] = {
                 'kind': 'generated', 'generator': spec['generator'],
+                'sha256': spec['sha256'], 'bytes': spec['bytes'],
+                'provenance': [provenance(p, root) for p in spec['provenance']],
+            }
+        elif spec['kind'] == 'computed':
+            source = spec['input']
+            if (set(source) != {'source', 'offset', 'bytes'} or source['source'] not in private or
+                    sources[source['source']]['kind'] != 'firmware'):
+                raise ValueError(f'Computed input must name an earlier official OS section: {identity}')
+            start, size = source['offset'], source['bytes']
+            parent = private[source['source']]
+            if start < 0 or size < 1 or start + size > len(parent):
+                raise ValueError(f'Computed input outside source: {identity}')
+            if computed_data(spec['generator'], parent[start:start + size]) != data:
+                raise ValueError(f'Computed source differs: {identity}')
+            sources[identity] = {
+                'kind': 'computed', 'generator': spec['generator'], 'input': dict(source),
                 'sha256': spec['sha256'], 'bytes': spec['bytes'],
                 'provenance': [provenance(p, root) for p in spec['provenance']],
             }

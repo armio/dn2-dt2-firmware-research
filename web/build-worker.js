@@ -12,7 +12,7 @@ async function readJSON(name) {
 
 async function build(inputs) {
   const release = await readJSON('release.json');
-  if (release.build !== 'R022') throw new Error('Unsupported browser release');
+  if (release.build !== 'R027') throw new Error('Unsupported browser release');
   const files = {}, decoded = {};
   for (const [index, name] of ['dn2', 'dt2'].entries()) {
     if (!(inputs?.[name] instanceof ArrayBuffer)) throw new Error(`Select the ${name.toUpperCase()} OS file`);

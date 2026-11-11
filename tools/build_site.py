@@ -9,11 +9,11 @@ import shutil
 ROOT = Path(__file__).resolve().parents[1]
 FILES = ('index.html', 'style.css', 'app.js', 'build-worker.js', 'recipe.js',
          'firmware-codec.js', 'generated.js', 'codec-native.mjs', 'codec-native.wasm',
-         'codec-LICENSE.txt', 'recipe.json')
+         'codec-LICENSE.txt', 'recipe.json', 'sem-kernel-LICENSE.txt')
 
 
 def build(output):
-    release = json.loads((ROOT/'releases/r022.json').read_text())
+    release = json.loads((ROOT/'releases/r027.json').read_text())
     recipe = json.loads((ROOT/'web/recipe.json').read_text())
     if (recipe.get('release') != release['build'] or recipe.get('schema') != 1 or
             recipe.get('inputs') != release['inputs']):
@@ -26,7 +26,7 @@ def build(output):
             raise ValueError(f'{image}: incomplete recipe')
     proofs = []
     for spec in recipe['sources'].values():
-        if spec['kind'] in ('adapter', 'generated', 'derived'):
+        if spec['kind'] in ('adapter', 'generated', 'computed', 'derived'):
             proofs.extend(spec['provenance'])
     for image in [*recipe['images'].values(),
                   *(spec for spec in recipe['sources'].values() if spec['kind'] == 'derived')]:

@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SUFFIXES = {'.py', '.S', '.s', '.asm', '.c', '.h', '.inc', '.java', '.md', '.json',
+SUFFIXES = {'.py', '.S', '.s', '.asm', '.c', '.h', '.cpp', '.hpp', '.inc', '.java', '.md', '.json',
             '.txt', '.map', '.log', '.patch', '.yml', '.yaml', '.html', '.css', '.js', '.mjs', '.sh'}
 NAMES = {'.gitignore', 'LICENSE', 'Makefile'}
 PRIVATE_DIRS = {'build', 'private', 'inputs', 'artifacts', '.toolchain', '.venv',

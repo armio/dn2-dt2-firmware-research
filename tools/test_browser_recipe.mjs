@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { webcrypto } from 'node:crypto';
 import { applyRecipe, sha256 } from '../web/recipe.js';
-import { generateOriginal } from '../web/generated.js';
+import { generateOriginal, computeFromFirmware } from '../web/generated.js';
 
 globalThis.crypto ??= webcrypto;
 const input = Uint8Array.of(10, 20, 30, 40);
@@ -39,4 +39,27 @@ for (const [name, expected] of [
   ['pitch-table', '2c78d0c1681a9f0cc45e29274d7fd96db3cb4e80d71a9387d2829a96afcedf5c'],
   ['chirp-cache', 'be72b422fc399b0732083d734902013a4fd2c52c78e64254fa353e21ac64c074'],
 ]) assert.equal(await sha256(generateOriginal(name)), expected);
+// Computed sources: same bytes as tools/export_browser_recipe.py computed_data() on synthetic inputs.
+const table = new Uint8Array(4096), words = new Uint8Array(76);
+for (let i = 0; i < 1024; i++) new DataView(table.buffer).setFloat32(i * 4, 2 ** (i / 128 - 3), true);
+for (let c = 0; c < 19; c++) new DataView(words.buffer).setUint32(c * 4, (0x9f800000 + c * 0x00810000) >>> 0, false);
+assert.equal(await sha256(computeFromFirmware('sem-graph-log-cutoff', table)),
+  '004870c97070d426388b184713cf6562c469e5544533898ac86d62584fde73f0');
+assert.equal(await sha256(computeFromFirmware('sem-type-planes', words)),
+  '801abcd479ffa554346779fdf34c08579a7c55e7738aad3e5148c10fff0b22a7');
+assert.throws(() => computeFromFirmware('sem-type-planes', table), /Unsupported computed source/);
+const planes = computeFromFirmware('sem-type-planes', words);
+const computed = structuredClone(fixture);
+computed.sources.planes_input = { kind: 'firmware', input: 'dn2', section: 7, ...await identity(words) };
+computed.sources.planes = { kind: 'computed', generator: 'sem-type-planes', provenance: [{ source: 'synthetic' }],
+  input: { source: 'planes_input', offset: 0, bytes: 76 }, ...await identity(planes) };
+const computedInput = { dn2: { sections: { 3: input, 7: words } } };
+assert.deepEqual((await applyRecipe(computed, computedInput)).main, output);
+computed.sources.planes.input.offset = 4;
+await assert.rejects(applyRecipe(computed, computedInput), /Computed input exceeds/);
+const fromAdapter = structuredClone(computed);
+fromAdapter.sources.planes_input = { kind: 'adapter', base64: Buffer.from(words).toString('base64'),
+  provenance: [{ source: 'synthetic' }], toolchain_sha256: 'synthetic', ...await identity(words) };
+fromAdapter.sources.planes.input.offset = 0;
+await assert.rejects(applyRecipe(fromAdapter, computedInput), /Computed input must be an official OS section/);
 console.log('Browser recipe input, bounds, provenance-bound operation and generator checks passed');

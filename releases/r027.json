@@ -1,0 +1,200 @@
+{
+  "schema": 1,
+  "inputs": {
+    "dn2": {
+      "description": "Official Digitone II OS 1.11 SysEx",
+      "bytes": 2389280,
+      "sha256": "2af43e65e3d8390b41c9f66222620f8cce027d73ed87db00c80b440f628472e0"
+    },
+    "dt2": {
+      "description": "Official Digitakt II OS 1.16 SysEx",
+      "bytes": 1880864,
+      "sha256": "278541e466edcd77d6b3e018a91fb90185932d3c7de224dd3e68294dddf3a9ec"
+    }
+  },
+  "machines": [
+    "ONESHOT",
+    "WERP",
+    "STRETCH",
+    "REPITCH",
+    "GRID",
+    "SLICE"
+  ],
+  "usb": {
+    "capture_channels": 42,
+    "return_channels": 2,
+    "sample_rate": 48000,
+    "valid_bits": 24,
+    "stereo_pairs": [
+      "MAIN",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11",
+      "T12",
+      "T13",
+      "T14",
+      "T15",
+      "T16",
+      "DELAY",
+      "REVERB",
+      "CHORUS",
+      "INPUT"
+    ]
+  },
+  "build": "R027",
+  "status": "candidate",
+  "date": "2026-11-11",
+  "stable_baseline": "T1E2",
+  "previous_stable": "R012",
+  "outputs": {
+    "main_sha256": "6117176f393840da29454cf5bbe4ece964f7d1716701d39644d4b13cc90a6982",
+    "expanded_main_sha256": "779d7f396a4eea26cc5cbac84e13c127cae127de76811ed370da7a083877d824",
+    "runtime_sha256": "c2467fab321661dc12d08140f2a34f87e414f08b3c8d919358968fd26e6f3da0",
+    "dsp_sha256": "1b858714c2ef1322bdfa44b7c8ce2fff14204967a1845e6f81c4b019a52d724f",
+    "sysex_sha256": "d7894e04bf5b211274c636def37d1ec98ac2c5dbacbf786e1b1fb9edc92baea2",
+    "sysex_bytes": 2578720
+  },
+  "changes": [
+    "Retains six sampler Machines, Recorder, explicit FORMAT SAMPLES setup and 42-channel USB audio (USB audio untested on R027).",
+    "R023 adds SEM as a seventh filter: Faust's Oberheim state-variable model (vaeffects.lib `oberheim`, Eric Tarr, STK-4.3). TYPE 0 low-pass, 63 notch, 126 high-pass, 127 band-pass, with smooth blends between. FREQ, RESO (Q 0.5–10), filter envelope, keytracking and modulation drive it; every voice keeps independent left/right state.",
+    "R024 keeps SEM's equations but runs its block loop from SHARC registers with a hardware loop and saves 34 instead of 99 registers per call (settled 32-sample loop: 5,390 → 1,755 emulated instructions).",
+    "R025 runs the relocated right effects chain only for sampler voices. The emulator attributes the R023/R024 overload to that duplicated chain and predicts about 81.7% of the DSP block with SEM on 16 slots (R024: 100.3%); the model excludes interrupts, cache, DMA and USB. Left-lane audio and sampler right-lane audio are unchanged, except that R024's one block of leftover right-channel audio after a sampler takes over an FM slot is gone.",
+    "R026 draws SEM's computed response on the FILTER page (log magnitude from FREQ, RESO and TYPE), replacing R023's schematic.",
+    "R027 shows LP · NOTCH · HP on the SEM TYPE widget for TYPE 0–126 and the band-pass icon alone at 127. Other filters keep the stock widget.",
+    "Sound-lock-aware sample usage and restoration references; per-Machine held-trig edits; rejected slice splits preserve markers.",
+    "Native sampler SYN copy/paste/clear/undo/randomize and FUNC controls; held-trig sample bank display; occupied-slot sample selection.",
+    "Stricter sample header/read validation and staged replacement preserve resident audio on rejected replacements; Recorder assignment failures preserve the original Sound.",
+    "SLICE note/span and reverse-loop bounds; held voices retire safely when a replacement sample becomes shorter; short-sample STRETCH grain offsets remain within the asset.",
+    "All six samplers use CC 40–47 and NRPN 1:73–80 for SYN controls. SAMP CC43 selects within the current bank; NRPN1:76 selects absolute positions 0–1023.",
+    "Bounds and failure handling for kit SysEx, song row counts, Euclidean rests and final timed outbound MIDI note release.",
+    "SLICE grids survive native same-device Sound/project save and reload via content-addressed companion files. Save failures propagate; failed new writes can retry; deferred restoration covers active tracks and preset-pool Sounds.",
+    "R020 fixes the R019 cold-start readiness defect: slice companion allocation/I/O waits for initialized filesystem startup status and mounted flag. DSP, USB ownership checks and control-frame ordering are unchanged from R019.",
+    "R021 reconciles the exposed SYN page after switching between stock synth and sampler Machines, restoring the SAMP knob popup through native view ownership and selection.",
+    "R022 includes sample identities in incremental working-project settings snapshots. Normal reboot recovery no longer depends on an explicit SAVE PROJECT to refresh this companion table.",
+    "The autosave hook reuses the project lock, checks current ownership and project identity, preserves explicit saved snapshots, and skips sample copy/CRC when unchanged. Recorder preferences sharing the companion header are refreshed separately."
+  ],
+  "validation": {
+    "hardware_confirmed": [
+      "Owner report 2026-11-10: R025 'working perfectly' after the R023/R024 SEM overload builds. Not instrumented; no timing capture, LOWPASS 4 check or USB recording.",
+      "Owner report 2026-11-10: R026 SEM response graph matches the emulator previews (no photos).",
+      "Owner report 2026-11-11: R027 SEM TYPE widget matches the preview. Machine/track switching and trig-lock display were not separately reported."
+    ],
+    "offline_checked": [
+      "SEM host comparison: 144 settled-control cases against the unchanged generated Faust reference, maximum absolute error about 3.70e-6; modulation, hot-input, reset and stereo-isolation checks.",
+      "R025 block-load gate: worst filter type on 16 slots, FM-heavy and sampler-heavy frames, 81.7% of the 666,667-cycle block (limit 90%).",
+      "R026 graph check: 168 stock graph draws unchanged; the firmware draws exactly the integer model on 11,520 settings, and the model stays within ±1 row of the float reference on 92,416 settings (the forced notch/cutoff column may move by one).",
+      "R027 widget check: 768 flag-clear draws equal stock, 768 SEM draws equal the approved design, 216 simulated FILTER-page cases agree with the firmware's own filter decision; only the TYPE widget changes among 313 widgets.",
+      "R027 browser recipe rebuilds the exact 2,578,720-byte SysEx from the two official OS files; every MAIN and DSP byte is a copy from those inputs, a published authored object, a reviewed literal or a value computed locally from the user's OS.",
+      "R027 SEM sources rebuild the shipped kernel (b55266440e4e…) and R024/R025 DSP (b5ba74131db8…, 1b858714c2ef…) byte for byte; the R027 ColdFire builder rebuilds the expanded MAIN 779d7f396a4e….",
+      "Independent pre-publication review (2026-11-11): no private data; no vendor tables or graphics in published bytes; every recipe byte accounted for. Its wording, licence-notice and input-validation fixes are applied."
+    ],
+    "predecessor_results": [
+      "Owner reports R020 cold boot with USB disconnected, saved 16-slice grid intact, normal UI and stock audio working.",
+      "R019: On the R019 predecessor, read-only MIDI verified all 772 grid bytes, content key and sample identity after native project save, a different-project load and reload. Those warm tests did not cover cold boot.",
+      "R019: Five bounded external-MIDI cases on R019 sent 48 note-ons across SLICE, FM TONE and mixed overlaps. USB MAIN and tested dry pairs settled to exact silence after release; no persistent note reproduced in that run. This does not establish internal-sequencer reliability.",
+      "R015–R022: Accumulated native-code regressions cover sampler UI controls, mixed Sound locks, sample references, staged replacements, slice/short-sample bounds, MIDI control maps and selected sequencer/SysEx paths. Detailed scope is documented in docs/research/2026-11-06.md.",
+      "R019 premature companion-file access reproduced with unstarted, mounting and failed startup states plus stale filesystem-ready memory.",
+      "R020 passes eight native Sound readiness cases: no heap allocation or file I/O before initialization, keys preserved, ready UI polling restores every grid byte, mounted save/load unchanged.",
+      "R020 fresh whole-project decode with poisoned readiness defers active/pool grids safely; post-mount restoration and re-save preserve the 12,890,116-byte serialized project exactly. Deferred aggregate save fails cleanly and retries successfully.",
+      "R020: Native unpacking and early-startup checks pass both loader staging addresses with exact memory copies and preserved registers, stack and boot flags.",
+      "R020: Independent startup-order/retry/ColdFire ABI review and package integrity checks pass; R020 DSP and protected sections match R019.",
+      "R020: Fresh end-to-end public source build matches the pinned MAIN, expanded MAIN, runtime, DSP and SysEx identities; all 41 public unit tests pass.",
+      "R020: Browser backend and actual browser UI/Worker/download each produce the pinned 2,570,912-byte SysEx; six Python recipe tests and JavaScript recipe boundary tests pass.",
+      "R022: R020 baseline reproduced: native sample load and queued settings update leave the sample mirror empty; a fresh-emulator backup restore loses the identity.",
+      "R022 native replay passes load, incremental snapshot, prepared power-off block and fresh-emulator restore; unload updates the snapshot. Explicit saved-cache contents remain unchanged.",
+      "R022: Eight owner/UID/destination/failure cases preserve the existing companion. Unchanged identities skip full record rebuild; Recorder-only edits update their header.",
+      "R022 includes the R021 popup regression: ten Machine transitions, nine view-routing guards, native modal ownership and register/stack checks.",
+      "R022 package integrity, transport round trip and native early-startup replay pass both staging addresses. DSP remains byte-identical to R020.",
+      "R022 fresh two-input public-source build matches all pinned section/runtime/output hashes. All 41 public unit tests, six Python recipe tests and JavaScript boundary tests pass.",
+      "R022 browser backend and actual UI/Worker/download match the pinned 2,571,552-byte SysEx. Independent source/privacy/provenance review passes."
+    ],
+    "pending": [
+      "USB audio on SEM builds: reported broken on R023/R024 (2026-11-09) and not re-tested on R025–R027.",
+      "SEM listening, long-duration and full-polyphony checks on hardware; SEM TYPE widget during Machine/track switching and trig locks.",
+      "R021/R022 hardware confirmation: first-knob-D popup after a Machine switch and normal power-switch recovery of unsaved sample-pool edits.",
+      "Repeated cold-boot endurance and power-loss behavior during writes.",
+      "Intermittent internal-sequencer stuck-note reproduction and long-duration audio/USB validation.",
+      "Full physical DT2 manual workflow coverage, real-time DMA/deadline guarantees and analog-output verification."
+    ],
+    "notes": "R027 is an owner-tested candidate (owner reports, not instrumented). R012 remains stable. R023 and R024 failed on hardware (DSP overload) and are not published."
+  },
+  "source_reproduction": {
+    "verified_on": "2026-11-11",
+    "exact_main_dsp_and_sysex": true,
+    "private_sample_bank_required": false,
+    "browser_backend_verified": true,
+    "notes": "The browser recipe reproduces the exact R027 MAIN, DSP and SysEx from the two official OS files. Current R023–R027 DSP sources rebuild the shipped kernel and R024/R025 DSP byte for byte. `build.py` still stops at R022; R023–R027 sources are in port/sem-filter."
+  },
+  "sample_storage_setup": {
+    "automatic_format": false,
+    "explicit_confirmation": true,
+    "requires_restart_after_format": true,
+    "erases_existing_samples": true,
+    "existing_working_storage_needs_format": false
+  },
+  "known_issues": [
+    "USB audio is untested on R027. It was reported broken on R023/R024 during their DSP overload. If you depend on USB audio, keep R012 until it is confirmed.",
+    "SEM costs more DSP time than the stock filters. R025's gate keeps the predicted worst case at 81.7% of the block; heavy use alongside many sampler voices is not yet measured on hardware.",
+    "The SEM TYPE widget appears only on the FILTER page; anywhere else the stock TYPE icons are shown.",
+    "Transfer can stop on the stock 'SUCCESS! REBOOTING' screen after installing (seen with R026). Switch the DN2 off and on; it then boots the new OS.",
+    "Native Sound/project exports carry slice-grid keys, not the companion files. They are incomplete backups of slice edits; cross-device restore or formatting requires the companion files. Automatic bundling/restoration is not implemented.",
+    "Intermittent internal audio-track hung notes remain unresolved; the outbound MIDI expiry fix is a separate path.",
+    "Bulk sample uploads/restoration can interrupt playback. Stop playback during transfers and wait until they finish; report problems that persist afterward.",
+    "A DSP transfer timeout can require restart even when the host retains the original sample binding.",
+    "Emulator instruction/model limits and filesystem/scheduler fixtures prevent treating offline results as complete hardware or manual compliance.",
+    "An iPhone USB freeze was reported; its cause remains unconfirmed. R022 is not a USB-freeze fix.",
+    "Abrupt power loss or a frozen task may prevent queued backup work from finishing. Sample companion writes are not atomic crash recovery; already-lost assignments cannot be reconstructed by this fix.",
+    "The targeted first-D popup routing defect is fixed in native replay; broader physical UI timing remains unverified."
+  ],
+  "previous_candidate": "R022",
+  "incorporated_local_revisions": [
+    "R015",
+    "R016",
+    "R017",
+    "R018",
+    "R019",
+    "R020",
+    "R021",
+    "R022",
+    "R023",
+    "R024",
+    "R025",
+    "R026",
+    "R027"
+  ],
+  "slice_persistence": {
+    "companion_path": "/.slc_<content key>",
+    "same_device_save_reload": true,
+    "native_exports_include_grid": false,
+    "automatic_companion_bundle": false,
+    "requires_companions_after_format_or_device_move": true
+  },
+  "sem_filter": {
+    "filter_name": "SEM",
+    "sound_filter_id": 6,
+    "model": "Faust vaeffects.lib oberheim (Eric Tarr), STK-4.3 licence; a SEM-family state-variable model, not a measurement of a particular instrument",
+    "type_map": {
+      "0": "low-pass",
+      "1-62": "low-pass toward notch",
+      "63": "notch",
+      "64-125": "notch toward high-pass",
+      "126": "high-pass",
+      "127": "band-pass"
+    },
+    "resonance_q": [
+      0.5,
+      10
+    ],
+    "controls": "FREQ, RESO, TYPE, filter envelope, keytracking and modulation",
+    "display": "FILTER page response curve (R026) and LP / NOTCH / HP TYPE widget, band-pass alone at 127 (R027)",
+    "source": "port/sem-filter"
+  }
+}
